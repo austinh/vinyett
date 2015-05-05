@@ -1,0 +1,280 @@
+<?php
+
+namespace Vinyett\PhotoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Vinyett\PhotoBundle\Entity\Collection
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class Collection
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="\Vinyett\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
+     */
+    private $owner;
+
+    /**
+     * @var integer $total_photos
+     *
+     * @ORM\Column(name="total_photos", type="integer")
+     */
+    private $total_photos = 0;
+
+    /**
+     * @var integer $total_comments
+     *
+     * @ORM\Column(name="total_comments", type="integer")
+     */
+    private $total_comments = 0;
+
+    /**
+     * @var datetime $date_created
+     *
+     * @ORM\Column(name="date_created", type="datetime")
+     */
+    private $date_created;
+
+    /**
+     * @var datetime $date_updated
+     *
+     * @ORM\Column(name="date_updated", type="datetime")
+     */
+    private $date_updated;
+
+    /**
+     * @var text $description
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string $title
+     *
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
+     */
+    private $title;
+
+    /**
+     * @var integer $cover_photo_id
+     *
+     * @ORM\Column(name="cover_photo_id", type="integer")
+     */
+    private $cover_photo_id = 0;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Photo", inversedBy="collections")
+     * @ORM\JoinTable(name="Collection_Photos")
+     */
+    private $photos;
+
+
+    public function __construct() {
+        $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->date_updated = new DateTime();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set total_photos
+     *
+     * @param integer $totalPhotos
+     */
+    public function setTotalPhotos($totalPhotos)
+    {
+        $this->total_photos = $totalPhotos;
+    }
+
+    /**
+     * Get total_photos
+     *
+     * @return integer 
+     */
+    public function getTotalPhotos()
+    {
+        return $this->total_photos;
+    }
+
+    /**
+     * Set total_comments
+     *
+     * @param integer $totalComments
+     */
+    public function setTotalComments($totalComments)
+    {
+        $this->total_comments = $totalComments;
+    }
+
+    /**
+     * Get total_comments
+     *
+     * @return integer 
+     */
+    public function getTotalComments()
+    {
+        return $this->total_comments;
+    }
+
+    /**
+     * Set date_created
+     *
+     * @param datetime $dateCreated
+     */
+    public function setDateCreated($dateCreated)
+    {
+        $this->date_created = $dateCreated;
+    }
+
+    /**
+     * Get date_created
+     *
+     * @return datetime 
+     */
+    public function getDateCreated()
+    {
+        return $this->date_created;
+    }
+
+    /**
+     * Set date_updated
+     *
+     * @param datetime $dateUpdated
+     */
+    public function setDateUpdated($dateUpdated)
+    {
+        $this->date_updated = $dateUpdated;
+    }
+
+    /**
+     * Get date_updated
+     *
+     * @return datetime 
+     */
+    public function getDateUpdated()
+    {
+        return $this->date_updated;
+    }
+
+    /**
+     * Set description
+     *
+     * @param text $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * Get description
+     *
+     * @return text 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set cover_photo_id
+     *
+     * @param integer $coverPhotoId
+     */
+    public function setCoverPhotoId($coverPhotoId)
+    {
+        $this->cover_photo_id = $coverPhotoId;
+    }
+
+    /**
+     * Get cover_photo_id
+     *
+     * @return integer 
+     */
+    public function getCoverPhotoId()
+    {
+        return $this->cover_photo_id;
+    }
+
+    /**
+     * Set owner
+     *
+     * @param Vinyett\UserBundle\Entity\User $owner
+     */
+    public function setOwner(\Vinyett\UserBundle\Entity\User $owner)
+    {
+        $this->owner = $owner;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return Vinyett\UserBundle\Entity\User 
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * Add photos
+     *
+     * @param Vinyett\PhotoBundle\Entity\Photo $photos
+     */
+    public function addPhoto(\Vinyett\PhotoBundle\Entity\Photo $photos)
+    {
+        $this->photos[] = $photos;
+    }
+
+    /**
+     * Get photos
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+}

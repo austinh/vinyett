@@ -1,0 +1,42 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+<div class="organizer_stage organizer_stage_platform batch_stage_window">
+    <div class="organizer_innertoolbar">
+        <div class="batch_toolbar">
+            <span class="organizer_toolbox">
+                <button class="organizer_button organizer_toolbox_button">
+                    {{#if collection.cover_photo}}<img src="http://photos.vinyett.com/{{collection.cover_photo.photo_path_square_50}}" class="collection_image" />{{/if}} {{ collection.title }}
+                </button>
+            </span>
+            <span class="organizer_toolbar_buttons organizer_buttons">
+                <button class="organizer_button icon_button button_batch">
+                    <img src="/images/organizer/editor_batch.png" />
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="organizer_drawer">
+        <div class="photo_cover_holder">{{#if collection.cover_photo}}<img src="http://photos.vinyett.com/{{collection.cover_photo.photo_path_square_120}}" class="collection_image" />{{/if}}</div>
+        <p class="collection_description">
+            (Drop a photo above to add a cover)
+        </p>
+         
+        <div class="drawer_content">
+                <input type="text" class="text_input collection_title" placeholder="Enter a title" value ="{{collection.title}}" />
+                <textarea class="text_input collection_desc" style="height:100px;" placeholder="Enter a description">{{collection.description}}</textarea>
+            
+                <p>
+                    <button type="submit" class="button create_new">Save</button> <button type="button" class="button cancel_new_set">Cancel</button>
+                </p>
+                
+                <input type="hidden" class="cover_photo_field" name="cover_photo" value="{{collection.cover_photo.id}}" />
+        </div>
+    </div>
+    <ul class="collection_stage stage_window" style="height:100%;">
+    
+    </ul>
+</div>
+{% endraw %}
+{% endblock %}

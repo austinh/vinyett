@@ -1,0 +1,45 @@
+{% extends '::body.html.twig' %}
+
+{% block content %}
+
+<style>
+    body { 
+        background-image: url('/images/black-linen.png');
+        background-color: #eee;    
+    }
+    .header { 
+        border-bottom: rgba(0,0,0,0.5);
+    }
+    .footer {
+        display: none;
+    }
+</style>
+
+<div class="uploader_header" style="display:none;">
+    <div class="body">
+        Header
+    </div>
+</div>
+
+<div class="uploader_container">
+    <div class="body detailed_grid">
+        
+        <div class="photo_detailer">
+            <img src="http://photos.vinyett.com/farm1/2012/06/21/07/1340287269_c4ca4238a0b923820dcc509a6_s.jpg" class="preview" />
+        
+            <div class="title">
+                Add a title
+            </div>
+            
+            <div class="description">
+                Add a description
+            </div>
+        </div>
+        
+    </div>
+    <div class="push"></div>
+</div>
+    
+{% include 'PhotoBundle:Uploader:toolbar.html.twig' %}
+    
+{% endblock %}

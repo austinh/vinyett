@@ -1,0 +1,16 @@
+{% extends "CoreServicesBundle:Mail:base.html.twig" %}
+{% block content %}
+<p>
+    <h2>Well hello there!</h2>
+</p>
+<p>
+    Our friend {{ app.user.getFirstName }} (or <a href="{{ url("photostream", { username: app.user.getUrlUsername }) }}" style="color:#4885cb;">{{ app.user.getUsername }}</a>) has invited you to join <a href="http://vinyett.com/" style="color:#4885cb;">Vinyett</a>, a growing community for taking, sharing, and discovering photos across the world.
+</p>
+<p>
+    Just <a href="{{ url("fos_user_registration_register") }}?invitation={{ code }}&email={{ email }}" style="color:#4885cb;">click here</a>, use the invite code "{{ code }}", and we'll get you started.
+</p>
+<p>
+    We can't wait to see you,
+    <br />The Vinyett Team
+</p>
+{% endblock %}

@@ -1,0 +1,42 @@
+.hello_logo 
+{
+    text-align: center;
+}
+
+.construction_unit {
+    width: 650px;
+    margin: 15px auto;
+    background-color: #eee;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    background-image: url(/images/construction_edit_stripe_pattern_square.png);
+    background-repeat: repeat-x;
+    background-position-y: -50px;
+}
+.construction_unit h2 {
+    margin: 0px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.required_invite_row { 
+    width:450px; 
+    margin: 0px auto;
+    text-align: center;
+}
+
+.required_invite_row .email_sign_up {
+    width: 100%;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+.required_invite_row .button
+{ 
+    font-size: 16px;
+    font-weight: normal;
+    margin: 10px;
+}

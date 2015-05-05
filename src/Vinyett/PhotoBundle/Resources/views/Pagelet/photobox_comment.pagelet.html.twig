@@ -1,0 +1,17 @@
+{% raw %}
+    <div class="comment_icon_column">
+        <div class="global_icon_mini" {{#if comment.owner.photo_square}}style="background-image:url({{comment.owner.photo_square}})"{{/if}}></div>
+    </div>
+    <div class="comment_comment_column">
+        <div class="commenter_overview">
+            <strong><a href="{{comment.owner.url}}">{{comment.owner.username}}</a></strong> 
+            <span class="date" data-livestamp="{{comment.created_at}}">{{comment.created_at}}</span>
+            {{#deletable comment}}
+                <span class="comment_options">
+                        &bull; <a href="#" class="remove_comment" data-comment="{{comment.id}}">Remove</a>
+                </span>
+            {{/deletable}}
+        </div>
+        {{comment.content}}
+    </div>
+{% endraw %}

@@ -1,0 +1,82 @@
+<div class="body">
+    <div class="application_bar upload_toolbar">
+        <div class="left_block title">
+            Uploader
+        </div>
+        
+        <div class="left_block clickable selected" data-tool-name="View by small grid">
+            <a href="#">
+                <img src="{{ asset('images/uploader_grid.png') }}" />
+            </a>
+        </div>
+        
+        <div class="left_block clickable"  data-tool-name="View by detailed grid">
+            <a href="#">
+                <img src="{{ asset('images/uploader_big_grid.png') }}" />
+            </a>
+        </div>
+        
+        <div class="left_block clickable" data-tool-name="View by detailed view">
+            <a href="#">
+                <img src="{{ asset('images/uploader_details.png') }}" />
+            </a>
+        </div>
+    
+        <div class="left_block spacer clickable" data-tool-name="Edit details on selected photos">
+            <a href="#">
+                <img src="{{ asset('images/uploader_edit.png') }}" />
+            </a>
+        </div>
+        
+        <div class="left_block clickable" data-tool-name="Rotate selected photos">
+            <a href="#">
+                <img src="{{ asset('images/uploader_rotate.png') }}" />
+            </a>
+        </div>
+        
+        <div class="left_block clickable" data-tool-name="Edit effects on selected photos">
+            <a href="#">
+                <img src="{{ asset('images/uploader_effects.png') }}" />
+            </a>
+        </div>
+            
+        <div class="left_block spacer clickable" data-tool-name="Add photos to queue">
+            <a href="#">
+                <img src="{{ asset('images/uploader_add.png') }}" />
+            </a>
+        </div>
+        
+        <div class="left_block clickable" data-tool-name="Remove photos from queue">
+            <a href="#">
+                <img src="{{ asset('images/uploader_remove.png') }}" />
+            </a>
+        </div>        
+        
+        <div class="right_block">
+            <button type="submit" class="button" id="test_qtip">Upload n Photos</button>
+        </div>
+        
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('.upload_toolbar .clickable').qtip({
+    	content: {
+    		attr: 'data-tool-name'
+    	},
+    	position: { 
+    	   my: 'bottom center', 
+    	   at: 'top center'
+    	},
+    	style: {
+    	   classes: 'toolbar_tip',
+    	   tip: {
+    	       width: 10
+    	   }
+    	}
+    })
+</script>
+
+
+
+

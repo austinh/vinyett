@@ -1,0 +1,31 @@
+rest_following:
+    type:       rest
+    resource:   Vinyett\RestBundle\Controller\FriendController
+    prefix:     rest
+
+rest_photos:
+    type:       rest
+    resource:   Vinyett\RestBundle\Controller\PhotoController
+    prefix:     rest
+    
+rest_collections:
+    type:       rest
+    resource:   Vinyett\RestBundle\Controller\CollectionController
+    prefix:     rest
+    
+comments:
+    type:       rest
+    parent:     rest_photos
+    resource:   Vinyett\RestBundle\Controller\CommentsController
+    
+rest_comment_post_from_photos:
+    pattern:    /rest/photos/comments
+    defaults:   { _controller: RestBundle:Comments:post }
+    requirements:
+        _method: POST
+    
+rest_collections_put_photos:
+    pattern:    /rest/collections/{collection_id}/photos
+    defaults:  { _controller: RestBundle:Collection:putPhotosCollection }
+    requirements:
+        _method:  PUT

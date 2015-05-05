@@ -1,0 +1,9 @@
+services:
+    sonata.admin.user:
+        class: Vinyett\UserBundle\Admin\InviteRequestAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Invitation", label: "Invitation Requests" }
+        arguments:
+            - ~
+            - Vinyett\UserBundle\Entity\InviteRequest
+            - 'UserBundle:InviteRequestAdmin'

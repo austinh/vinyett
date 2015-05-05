@@ -1,0 +1,59 @@
+parameters:
+    stream.activity.manager.class: Vinyett\StreamBundle\Services\ActivityManager
+    stream.aggregator.class: Vinyett\StreamBundle\Services\Aggregator
+    stream.feed.class: Vinyett\StreamBundle\Services\Feed
+    stream.congregator.class: Vinyett\StreamBundle\Services\Congregator
+    activity.cache.worker.class: Vinyett\StreamBundle\Services\ActivityCacheWorker
+    feed.twig.class: Vinyett\StreamBundle\Extension\FeedTwigExtension
+    follow.spread.class: Vinyett\StreamBundle\Spread\FollowSpread
+    feed.comment.constraint.class: Vinyett\StreamBundle\Aggregation\Constraint\PhotoCommentConstraint
+    feed.favorite.constraint.class: Vinyett\StreamBundle\Aggregation\Constraint\PhotoFavoriteConstraint
+    feed.uploaded.constraint.class: Vinyett\StreamBundle\Aggregation\Constraint\PhotoUploadedConstraint
+
+services:
+    activity.manager:
+        class: %stream.activity.manager.class%
+        arguments: [@doctrine.orm.entity_manager, @security.context]
+
+    aggregator:
+        class: %stream.aggregator.class%
+        arguments: [@doctrine.orm.entity_manager, @security.context, @activity.cache.worker]
+
+    congregator:
+        class: %stream.congregator.class%
+        arguments: [@doctrine.orm.entity_manager, @templating, @security.context, @activity.cache.worker, @service_container]
+              
+    feed:
+        class: %stream.feed.class%
+        arguments: [@doctrine.orm.entity_manager, @templating, @security.context, @congregator, @activity.cache.worker, @service_container]
+
+    activity.cache.worker: 
+        class: %activity.cache.worker.class%
+        arguments: [@doctrine.orm.entity_manager, @security.context]
+        
+    follow.spread: 
+        class: %follow.spread.class%
+        arguments: [@doctrine.orm.entity_manager, @security.context]
+        tags:
+            - { name: spy_timeline.spread }     
+            
+    feed.comment.constraint:
+        class: %feed.comment.constraint.class%
+        tags: 
+            - { name: spy_timeline.aggregation.constraint }   
+            
+    feed.favorite.constraint:
+        class: %feed.favorite.constraint.class%
+        tags: 
+            - { name: spy_timeline.aggregation.constraint }   
+            
+    feed.uploaded.constraint:
+        class: %feed.uploaded.constraint.class%
+        tags: 
+            - { name: spy_timeline.aggregation.constraint }   
+
+    feed.twig.extension:
+        class: %feed.twig.class%
+        arguments: [@security.context]
+        tags:
+            - { name: twig.extension }

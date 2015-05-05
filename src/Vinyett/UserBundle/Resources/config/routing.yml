@@ -1,0 +1,33 @@
+prepare_invites:
+    pattern:  /invite-friends
+    defaults: { _controller: UserBundle:Invite:prepare }
+
+send_invites:
+    pattern:  /invites/send
+    defaults: { _controller: UserBundle:Invite:send }
+
+account:
+    pattern:  /account
+    defaults: { _controller: UserBundle:Account:index }
+    
+account_password:
+    pattern:  /account/password
+    defaults: { _controller: UserBundle:Account:updatePassword }
+
+account_photo_crop:
+    pattern: /account/update/photo/crop
+    defaults: { _controller: UserBundle:Account:photoCropper }
+
+account_purge_photo_icon: 
+    pattern: /account/update/photo/remove
+    defaults: { _controller: UserBundle:Account:purgePhotoIcon }
+
+account_update_photo_icon:
+    pattern: /account/update/photo
+    defaults: { _controller: UserBundle:Account:cropPhotoIcon }
+    requirements:
+        _method:  POST
+
+ajax_account_update_name: 
+    pattern: /ajax/account/update/name
+    defaults: { _controller: UserBundle:Account:ajaxUpdateName }

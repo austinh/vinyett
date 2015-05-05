@@ -1,0 +1,45 @@
+{% extends "SpyTimelineBundle:Action:components.html.twig" %}
+{% block _vinyett_userbundle_entity_user_default_component %}
+    {% if avatar|default(false) == true %}
+        <div class="global_icon_medium baseboard_icon" {% if value.getPhotoSquare %}style="background-image:url({{value.getPhotoSquare}})"{% endif %}></div>
+    {% else %}
+        <a href="{{ path("photostream", { username: value.username }) }}">{{ value.username }}</a>
+    {% endif %}
+{% endblock %}
+
+{% block _vinyett_userbundle_entity_user_default_component_collection %}
+    {% set total = value|length %}
+    {% for user in value %}
+            <a href="{{ path("photostream", { username: user.getUrlUsername }) }}">{{ user.getUsername }}</a>{% if loop.index != total and loop.index != total-1 %},{% endif %}{% if loop.index == total-1 %} and{% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block _vinyett_photobundle_entity_photo_default_component %}
+    {% if stats|default(false) == true %}
+        <div class="icon_bar">
+        <ul>
+                <li>
+                    <a href="#" class="profile_favorite_button photobox_link" data-photo="{{ value.getId }}">
+                        <img src="/images/profile/starred.png" class="favorited">
+                        {{ value.getTotalFavorites }}
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="popover_comment_number photobox_link" data-photo="{{ value.getId }}">
+                        <img src="/images/profile/comments.png">
+                        {{ value.getTotalComments }}
+                    </a>
+                </li>
+                <li>
+                    
+                </li>
+        </ul>
+        </div>
+    {% elseif display|default(false) == true %}
+        <div class="activity_photo_head photobox_link" data-photo="{{ value.getId }}" class="photo" style="background-image:url({{ value.getPhotoPathWidth980 }})">
+            <img src="{{ value.getPhotoPathWidth980 }}" style="visibility: hidden" />
+        </div>
+    {% else %}
+        <a href="{{ path("photostream", { username: value.getOwner.getUrlUsername }) }}">{{ value.getOwner.username }}</a>'s <a href="{{ path('photo', { username: value.getOwner.getUrlUsername, photo_id: value.getId }) }}" class="photobox_link" data-photo="{{ value.getId }}">photo</a>.
+    {% endif %}
+{% endblock %}

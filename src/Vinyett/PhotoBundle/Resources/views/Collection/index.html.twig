@@ -1,0 +1,79 @@
+{% extends "::body.html.twig" %}
+
+{% block global_variables %}
+    {{ parent() }}
+    
+    Global.collection = new Object();
+    Global.collection = {{ collection|serialize|raw }};
+    
+{% endblock %}
+
+{% block require %}
+    require(["photo/collectionview"], function(CollectionApp) 
+    {
+        var collectionapp = new CollectionApp;
+    });
+{% endblock %}
+
+{% block content %}
+<style>
+    body { 
+        background-color:#eee;
+    }
+</style>
+
+<div class="profile collection_view">
+    <div class="body profile_header collection_header">
+        <div class="subtoolbar">
+            <div class="photo_header_toolbar">
+                <div class="icon">
+                    <div class="global_icon_mini baseboard_icon" style="background-image:url({{ asset(avatar_path(collection.getOwner)) }})"></div>
+                </div> 
+                <div class="username_title">
+                    <h2><a href="{{ path('photostream', { username: collection.getOwner.getUrlUsername }) }}">{{ collection.getOwner.getUsername }}</a></h2>
+                    {% if is_granted('ROLE_USER') %}
+                        {# include 'ProfileBundle:Profile:follow.profile.chunk.html.twig' with { 'profile': photo.getOwner, 'follow': follow } #}
+                    {% endif %}
+                </div>
+                {% if is_granted('EDIT', collection) %}
+                    <a href="{{path('organize')}}#/collection/{{collection.getId}}"><img src="{{asset('/images/account_settings/settings.png')}}" alt="Edit collection" class="collection_edit" /></a>
+                {% endif %}
+            </div>
+        </div>
+        {% if collection.getCoverPhoto %}
+        <div class="profile_header_image">
+            <div class="borders">
+                <div class="borders2"></div>
+            </div>
+            <img src="{{ collection.getCoverPhoto.getPhotoPathWidth980 }}" style="top:0px; position:absolute;" class="profile_banner collection_banner" id="profile_photo" />
+        </div>
+        {% endif %}
+        
+        <div class="body profile_header collection_header collection_body subtoolbar">
+            <div class="collection_header_strip">
+                <h2>{{ collection.getTitle }}</h2>
+                <div class="collection_body_description">
+                    {{ collection.getDescription }}
+                </div>
+            </div>
+            
+            {% for collection_photo in collection.getCollectionPhotos %}
+            <div class="photo_single collection_photo" data-photo="{{collection_photo.getPhoto.getId}}">
+                <div class="photo_wrap">
+                    <div class="borders">
+                        <div class="borders2"></div>
+                    </div>
+                    <div class="photo_image" style="background-image: url({{collection_photo.getPhoto.getPhotoPathWidth500}})"></div>
+                    <div class="title">
+                        {{collection_photo.getPhoto.getTitle}}
+                    </div>
+                </div>  
+            </div>
+            {% endfor %}
+            
+            <div class="clearfix">
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+<div class="organizer_modal_header">
+    Publisher
+</div>
+
+<div class="organizer_modal_content">
+    <!--<div class="sidebar_panel">
+        <div class="blurb">
+            The publisher gives you a chance to review your recent photos to add a bit of info!
+        </div>
+    </div>-->
+    <div class="content_editor">
+        <div class="publishing">
+        
+        </div>
+    </div>
+</div>
+
+<div class="organizer_modal_basebar">
+    <span class="tag_line">
+        <input type="checkbox" name="batch_open" class="batch_open" id="batch_open" /> <label for="batch_open" style="cursor:pointer;">Batch photos after review?</label>
+    </span>
+    <button class="button do_publishing" type="submit" style="box-shadow: none;">Finished Reviewing</button>
+    <button class="button cancel_publishing" type="cancel" style="float: left; box-shadow: none;">Cancel</button>
+</div>
+
+{% endraw %}
+{% endblock %}

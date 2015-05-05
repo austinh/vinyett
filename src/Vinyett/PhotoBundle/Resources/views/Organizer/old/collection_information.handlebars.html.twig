@@ -1,0 +1,34 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% import "PhotoBundle:Photo:collection.macro.html.twig" as collection %}
+
+{% block handlebars_body %}
+
+<div class="organizer_collection_information">
+<form id="collection_form">
+    <div class="draggable_cover">
+        {{ collection.case("/images/77px_placeholder.jpg") }}
+        <div class="contents">
+            Drag a cover photo here!
+        </div>
+    </div>
+    <p>
+        Title <br />
+        {% raw %}<input type="text" name="title" value="{{title}}" class="text_input" id="collection_title" style="width:87%;" placeholder="Add a title" />{% endraw %}
+    </p>
+
+    <p>
+        Description <br />
+        {% raw %}<textarea class="text_input" name="description" id="collection_description" style="width:87%; height:100px;" placeholder="Add a description">{{description}}</textarea>{% endraw %}        
+    </p>
+    
+    <p>
+        {% raw %}<button type="submit" class="button" onclick="save_collection();">{{#if button_title}}{{button_title}}{{else}}Save{{/if}}</button>{% endraw %} 
+        <button type="cancel" class="button" onclick="cancel_collection_to_batch(); return false;">Cancel</button>
+    </p>
+
+    <input type="hidden" id="cover_id" name="cover_id" value="" />
+    {% raw %}<input type="hidden" id="collection_id" name="collection_id" value="{{#if collection_id}}{{collection_id}}{{else}}new{{/if}}" />{% endraw %}
+</form>
+</div>
+{% endblock %}

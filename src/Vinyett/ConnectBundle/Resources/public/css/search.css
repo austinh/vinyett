@@ -1,0 +1,88 @@
+.search_header {
+    background-color: #fff;
+    padding: 25px;
+    margin-top: -3px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.search_header .search_field {
+    padding: 7px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 500px;
+}
+
+.userblock {
+    background-color: #fff;
+    height: 250px;
+    width: 800px;
+    border: 1px solid #ccc;
+    margin: 20px auto 0px auto;
+    overflow: hidden;
+    border-radius: 5px;
+    position: relative;
+}
+
+.userblock .inner {
+    height: 270px;
+    width: 820px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-filter: blur(10px);
+    margin: -10px;
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+    opacity: .3;
+}
+
+.userblock .overlay_information {
+    position: absolute;
+    top: 0px;
+    width: 800px;
+    height: 250px;
+    padding: 10px;
+}
+
+.userblock .overlay_information .search_profile_icon {
+    margin: 32px;
+    border: 8px solid rgba(255, 255, 255, 0.44);
+    border-radius: 5px;
+    height: 100px;
+}
+
+.profile_block {
+    display: inline-block;
+    vertical-align: top;
+}
+.userblock .profile_block h2 {
+    font-size: 36px;
+    font-weight: normal;
+    margin-bottom: 9px;
+}
+
+.userblock .profile_block .info_spot {
+    padding: 15px 0px;
+    font-size: 14px;
+}
+.userblock .profile_block .blurb_spot {
+    font-size: 18px;
+}
+
+.search_header .search {
+    background-color: #F3F3F3;
+    border: 1px solid #ccc;
+    padding: 8px;
+    vertical-align: top;
+    font-size: 17px;
+    border-radius: 5px;
+    margin-top: 3px;
+}
+.search_header .search:hover {
+    background-color: #ccc;
+    cursor: pointer;
+}

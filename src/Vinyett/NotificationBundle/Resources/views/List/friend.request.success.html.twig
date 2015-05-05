@@ -1,0 +1,11 @@
+<li>
+  <div class="notification">
+    <img src="{{ asset(avatar(friend)) }}" class="avatar" />
+    <span class="title">
+      <a {{ link_to_profile(friend) }}>{{ render_name(friend) }}</a> and you are now friends.
+    </span> <br />
+    <span class="time">
+      {{ notification.getCreatedAt|render_ago }}
+    </span>
+    <div class="clearfix"></div>
+</li>

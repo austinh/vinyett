@@ -1,0 +1,12 @@
+<span class="notification_center">
+    <a href="#" onclick="return false;" class="tool_icon notification_menu"><img src="{{ asset('images/toolbar_notification.png') }}" /></a>
+    {% if total > 0 %}
+    <div class="bubble">
+        {% if total > 50 %}
+            50+
+        {% else %}
+            {{ total }}
+        {% endif %}
+    </div>
+    {% endif %}
+</span>

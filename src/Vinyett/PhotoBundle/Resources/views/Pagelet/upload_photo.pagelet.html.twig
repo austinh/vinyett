@@ -1,0 +1,19 @@
+{%raw%}
+<div class="preview">
+    <a href="#" class="click_to_remove_icon" style="display:none;">
+        <img src="/images/Uploader/upload_row_cancel.png" />
+    </a>
+    <img src="/images/default100.png" id="preview" class="preview_image">
+</div>
+<div class="upload_info">
+    <strong>
+        <div class="true_title">{{#if file.name}}{{ file.name }}{{ else }}Click to add a title{{/if}}</div>
+        <div class="edit_true_title"><input type="text" name="edit_true_title_input" placeholder="Enter a title name..." value="{{ file.name }}" class="edit_true_title_input upload_title_edit" /></div>
+    </strong>
+    <div class="additional_info">{{readable_bytes file.size}}</div>
+	<div class="progressHolder">
+		<div class="progress"></div>
+	</div>
+</div>
+
+{%endraw%}

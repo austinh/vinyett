@@ -1,0 +1,8 @@
+<div class="activityitem action chunk">
+    <div class="column_icon">
+        <img src="{{ asset('images/profile/starred_full.png') }}" />
+    </div>
+    <div class="action_column">
+        <a href="{{ path('photostream', { username: resource.getOwner.getUrlUsername }) }}">{{ resource.getOwner.getUsername }}</a> starred this photo.
+    </div>
+</div>

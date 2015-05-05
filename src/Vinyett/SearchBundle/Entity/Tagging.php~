@@ -1,0 +1,9 @@
+<?php
+
+namespace Vinyett\SearchBundle\Entity;
+
+use FPN\TagBundle\Entity\Tagging as BaseTagging;
+
+class Tagging extends BaseTagging
+{
+}

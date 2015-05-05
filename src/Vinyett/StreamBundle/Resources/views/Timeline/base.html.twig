@@ -1,0 +1,23 @@
+<div class="timeline_activity_outer">
+    <div class="icon_column">
+        {{ timeline_component_render(timeline, 'subject', { "avatar": true }) }}
+    </div>
+    <div class="activity timeline_activity">
+        {% if block('title') %}
+        <div class="activity_header activity_solid photo_activity_top">
+            {% block title %}{% endblock %}
+        </div>
+        {%  endif  %}
+        {% block photo_space %}{% endblock %}
+        {% if not block('photo_space') %}
+        <div class="photo_space">
+            {{ timeline_component_render(timeline, 'directComplement', { display: true }) }}
+        </div>
+        {% endif %}
+        {% block content_space %}
+        <div class="activity_header activity_solid photo_activity_bottom">
+            {% block content %}{% endblock %}
+        </div>
+        {% endblock %}
+    </div>
+</div>

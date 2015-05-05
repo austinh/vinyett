@@ -1,0 +1,35 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+    <div class="logged_out_head">
+      <div class="body" style="position:relative;">  
+        <div class="toplinks">
+          <a href="{{ path('homepage') }}">Go back home</a>
+        </div>
+      
+        <div class="hello_logo">
+                <img src="{{ asset('images/vin_logo.png') }}" alt="Vinyett!" />
+        </div>
+        
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    
+    <style type="text/css">
+        body { 
+            background-color: #eee;
+        }
+    </style>
+    
+    <div class="body" style="width: 500px; margin: 50px auto;">
+        <h2>
+        Whoops, looks like you've got the wrong path, there's nothing here!
+        </h2>
+        <h3>
+        <a href="{{ path('homepage') }}">Go back home</a>.
+        </h3>
+    </div>
+  
+    
+    {% include "::footer.html.twig" %}
+
+{% endblock %}

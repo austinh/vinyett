@@ -1,0 +1,116 @@
+{% block toolbar %}
+<div class="header" id="main_header">
+	<div class="align_header">
+    <div class="small_logo_html">
+      <div class="push_logo_inline">
+        <a href="{{ path("homepage") }}">Vinyett</a>
+      </div>
+    </div>
+	        
+    {% if is_granted('ROLE_USER') %}
+    <div class="weightedoptions_left small_logo_html">
+      <ul class="header_list">
+      	<li class="search_field">
+        	<input type="text" name="search" placeholder="Search Vinyett" class="search" />
+        </li>
+      </ul>
+    </div>
+  
+    <div class="weightedoptions option_list">
+        <a href="#" class="upload_widget">Upload</a> | 
+        <a href="{{ path('organize') }}">Organize</a> | 
+        <!--<a href="#">Explore</a><a href="#" class="explore_more" onclick="return false;"><img src="{{ asset('images/toolbar_down_arrow.png') }}" class="more" /></a>-->
+        <a href="#" class="feedback_widget">Help shape us</a> |
+        {% spaceless %}
+        <img src="{{ asset(avatar_path(app.user)) }}" class="photo_icon" />
+        {% if not is_granted('ROLE_PREVIOUS_ADMIN') %}
+            <strong><a href="{{ path('photostream', { username: app.user.getUrlUsername }) }}">{{ app.user.getUsername }}</a></strong>
+        {% else %}
+            <span style="color:#ff0000">
+            (<strong style="color:#ff0000;"><a href="{{ path('photostream', { username: app.user.getUrlUsername }) }}" style="color:#ff0000;">{{ app.user.getUsername }}</a></strong>/<a href="?_switch_user=_exit">Exit</a>)
+            </span>
+        {% endif %}
+        <a href="#" class="user_more" onclick="return false;"><img src="{{ asset('images/toolbar_down_arrow.png') }}" class="account_icon more" /></a>
+        {% endspaceless %} | 
+        {% render "NotificationBundle:Layout:notification" %}
+    </div>
+		
+    {% else %}
+      
+    <div class="weightedoptions small_logo_html">
+      <a href="{{ path('homepage') }}">Home</a> 
+      <a href="{{ path('fos_user_registration_register') }}">Register</a>
+      <a href="{{ path('fos_user_security_login') }}">Sign in</a>
+    </div>
+    	
+    {% endif %}
+    
+	</div>
+</div>
+
+{% if is_granted('ROLE_USER') %}
+<div class="user_menu_popover" style="display:none;">
+<div class="pbody">
+    <div class="profile_card">
+        <div class="card_image">
+            <div class="card_photo">
+                <div class="borders">
+                    <div class="borders2"></div>
+                </div>
+                <img src="{{ asset(avatar_path(app.user)) }}" />
+            </div>
+        </div>
+        <div class="card_content">
+            <div class="inner_card">
+                <h4><a href="{{ path("photostream", { username: app.user.getUrlUsername }) }}">{{ app.user.getUsername }}</a></h4>
+                <span class="details">{{ app.user.getPhotoCount }} {{ pluralize(app.user.getPhotoCount, "photo") }}, {{ app.user.getCommentCount }} {{ pluralize(app.user.getCommentCount, "comment") }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="follow_list_options expanded_links" style="margin-top:4px;">
+        <ul>
+            <li>
+                <a href="{{ path("account") }}">Edit account settings</a>
+            </li>
+            {% if is_granted('ROLE_ADMIN') %}
+            <li>
+                <a href="{{ path("admin_dashboard") }}">Admin tools</a>
+            </li>
+            {% endif %}
+            <li onclick="window.location='{{ path("fos_user_security_logout") }}'">
+                Sign out
+            </li>
+        </ul>
+    </div>
+</div>
+</div>
+
+<div id="search_person_template" style="display:none;">
+{%raw%}
+    <div class="search_person_row">
+        <div class="search_outer_icon">
+            <div class="global_icon_small baseboard_icon" style="{{#if profileImageUrl}}background-image:url({{profileImageUrl}}){{/if}}"></div>
+        </div>
+        <div class="search_info" onclick="window.location='{{url}}';">
+             <h3>{{value}}</h3>
+             <div class="clearfix"></div>
+        </div>
+    </div>
+{%endraw%}
+</div>
+
+<div class="notification_menu_popover" style="display:none;">
+<div class="pbody notification_body">
+    <div class="notify_header">
+        Notifications
+    </div>
+    <div class="notify_list">
+        <div class="ajax_loading">
+            <img src="{{ asset('images/ajax-loader.gif') }}" />
+        </div>
+    </div>
+</div>
+</div>
+{% endif %}
+  
+{% endblock %}

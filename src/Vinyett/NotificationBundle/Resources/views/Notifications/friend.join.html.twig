@@ -1,0 +1,14 @@
+<li class="friend_join" onclick="window.location='{{ path("photostream", { 'username': notify_object.getSender.getUrlUsername }) }}'">
+    <div class="notification_fold">
+
+        <div class="notification_actor">
+            <div class="global_icon_small baseboard_icon" {%if notify_object.getSender.getPhotoSquare %}style="background-image:url({{ asset(avatar_path(notify_object.getSender)) }})"{%endif%}></div>
+        </div>
+        
+        <div class="notification_title">
+            Your friend <strong><a href="{{ path("photostream", { 'username': notify_object.getSender.getUrlUsername }) }}">{{ notify_object.getSender.getUsername }}</a></strong> joined Vinyett and is following <strong><a href="{{ path("photostream", { 'username': app.user.getUrlUsername }) }}">you</a></strong>! You'll also see their photos appear in your feed.
+        </div>
+        
+    </div>
+
+</li>

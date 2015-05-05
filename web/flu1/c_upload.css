@@ -1,0 +1,1022 @@
+.fieldset {padding-left:1em}
+
+.fieldset input,
+.fieldset label {
+ margin-top:5px;
+}
+
+.fieldset label {
+ line-height:20px;
+}
+
+#moderation_toggle {display:none}
+
+#moderation #moderation_settings {display:none}
+div.open#moderation #moderation_settings {display:block}
+
+#moderation .moderation_show {display:block}
+#moderation .moderation_hide {display:none}
+
+div.open#moderation .moderation_show {display:none}
+div.open#moderation .moderation_hide {display:block}
+
+/* new - upload */
+
+#Main h1 {
+ margin-bottom:0px; /* flatten for this page */
+}
+
+div.instructions {
+ background:#f7f7f7;
+ padding:1em 2em 2em 2em;
+ margin:1em 0px 0px 0px;
+}
+
+ul.instructions {
+ list-style-type:none;
+ margin:1em 0px 0px 0px;
+ padding:0px;
+}
+
+ul.instructions li {
+ margin-bottom:2.5em;
+}
+
+ul.instructions li p {
+ color:#ccc;
+ margin:0px 0px 0.5em 0px;
+ padding:0px;
+ font-weight:bold !important; /* should be optional */
+ line-height:auto;
+}
+
+ul.instructions li div {
+ font-size:2em;
+}
+
+ul.instructions li div a {
+ font-weight:bold;
+}
+
+ul.instructions li div span {
+ color:#ccc;
+}
+
+#step1.disabled .disabled a {
+ color:#ccc;
+ text-decoration:none;
+ font-weight:bold;
+}
+
+#step1.enabled .disabled,
+#step1.disabled .enabled {
+ display:none;
+}
+
+div.usage p {
+ margin:0px;
+ padding:0px;
+ line-height:auto;
+ color:#666;
+}
+
+div.usage p span {
+ font-weight:bold;
+}
+
+div.usage p span.low {
+ color:green;
+}
+
+div.usage p span.moderate {
+ color:orange;
+}
+
+div.usage p span.high {
+ color:red;
+}
+
+div.educate {
+ margin:2em;
+}
+
+div.educate p.space {
+ margin-top:1em;
+}
+
+div.educate h3 {
+ font-size:0.75em;
+ font-weight:bold;
+ color:black;
+ margin:0px;
+}
+
+div.educate p {
+ margin:0px;
+ padding:0px;
+ line-height:auto;
+}
+
+div.clear {
+ clear:both;
+ height:1px;
+ overflow:hidden;
+}
+
+#upload-table {
+ zoom:1;
+}
+
+.uploadr-messages {
+ /* pre-upload notices */
+ margin-top:1em;
+}
+
+.uploadr-messages ul {
+ list-style-type:none;
+}
+
+.uploadr-messages ul,
+.uploadr-messages ul li,
+.uploadr-messages ul li p {
+ margin:0px;
+ padding:0px;
+}
+
+.uploadr-messages li {
+ zoom:1; /* IE */
+}
+
+.uploadr-messages ul li {
+ display:none;
+}
+
+.uploadr-messages ul li img {
+ float:left;
+ display:inline;
+ margin:0px 1em 5px 0px;
+ vertical-align:middle;
+}
+
+.uploadr-messages ul li.warn {
+ background:#ffffdb;
+ padding:1em;
+}
+
+.uploadr-messages ul li.warn p {
+ 
+}
+
+.uploadr-messages ul li.note {
+ margin-top:1em;
+ text-align:center;
+}
+
+#uploadr-messages.oversize,
+#uploadr-messages.overlimit {
+ display:block;
+}
+
+#uploadr-messages.oversize .oversize,
+#uploadr-messages.overlimit .overlimit {
+ display:block;
+}
+
+#uploadr-messages .oversize p,
+#uploadr-messages .no-video p {
+ line-height:28px; /* align with image */
+}
+
+#uploadr-messages.oversize.overlimit .oversize {
+ /* when showing both, remove this color */
+ background-color:transparent;
+ margin-bottom:1em;
+}
+
+#uploadr-complete-messages li {
+ /* post-upload notices */
+ display:none;
+}
+
+#uploadr-complete-messages.ok li {
+ /* counter extra spacing */
+ margin:-4px 0px -22px 0px;
+ *margin-bottom:0px; /* except IE */
+}
+
+#uploadr-complete-messages.ok .ok,
+#uploadr-complete-messages.one-failed .one-failed,
+#uploadr-complete-messages.some-failed .some-failed,
+#uploadr-complete-messages.all-failed .all-failed {
+ display:block;
+}
+
+#uploadr-complete-messages li p {
+ font-size:1.5em;
+ padding:1em;
+}
+
+#uploadr-complete-messages li.one-failed p,
+#uploadr-complete-messages li.some-failed p,
+#uploadr-complete-messages li.all-failed p {
+ /* align with image */
+ line-height:28px;
+ padding-top:0px;
+ padding-bottom:0px;
+ padding-left:0px;
+ margin-left:0px; /* left-align image */
+ margin-bottom:8px;
+}
+
+#uploadr-complete-messages li.ok p {
+ padding-left:0px;
+ padding-top:0px; /* compensate for larger image */
+ *padding-top:0.2em; /* IE clipped content fix */
+ padding-bottom:0px; /* compensate for larger image */
+}
+
+#uploadr-complete-messages li.ok img {
+ float:none;
+ display:inline;
+ margin:0px 1em 0px 0px;
+ vertical-align:middle;
+}
+
+#uploadr-complete-messages li.one-failed img,
+#uploadr-complete-messages li.some-failed img,
+#uploadr-complete-messages li.all-failed img {
+ /*display:inline-block;*/
+ display:inline;
+ margin:0px 0.5em 0px 0px;
+ vertical-align:middle;
+}
+
+#uploadr-complete-messages li a {
+ font-weight:bold;
+}
+
+.step1-error .message p {
+ font-size:1.6em;
+ color:#a7a7a7;
+}
+				
+#Main {
+ /* Note: Wider page template. */
+ width:788px;
+}
+
+#uploadr {
+ position:relative;
+}
+
+#uploadr.pro .ad {
+ /* no ads for pro users! */
+ display:none;
+}
+
+#uploadr.pro .uploadr-messages .upgrade {
+ display:none;
+}
+				
+#uploadr .step1,
+#uploadr .step2,
+#uploadr .step1-error {
+ display:none;
+}
+				
+#uploadr.step1 .step1,
+#uploadr.step1-error .step1-error,
+#uploadr.step2 .step2 {
+ display:block;
+}
+				
+#yuploadcontrol {
+ position:absolute;
+ position:fixed;
+ top:0px;
+ right:0px;
+ width:1px;
+ height:1px;
+ overflow:hidden;
+}
+
+#yuploadcontrol object,
+#yuploadcontrol embed {
+ margin-left:1px;
+ margin-top:1px;
+}
+				
+#tmpl-upload-item {
+ /* template node within upload table */
+ display:none;
+}
+				
+.upload-container {
+ position:relative;
+ background:#f7f7f7;
+ padding:32px 16px 16px 24px; /* slight extra on top */
+ margin-top:1.3em;
+}
+
+.upload-container,
+.upload-container .upload-table-wrapper {
+ min-height:270px;
+ _height:270px; /* ensure min-height for IE <7 */
+}
+
+#upload-table {
+ position:relative;
+ margin-top: -7px;
+ margin-top:-22px;
+ z-index:2;
+ margin-left: 46px;
+ margin-right: auto;
+}
+
+#upload-table .head,
+#upload-table .head * {
+ *zoom:1; /* Blasted IE. */
+}
+
+#upload-table .head div {
+ color:#999;
+}
+
+#upload-table .head div,
+#upload-table .foot div {
+ white-space:nowrap;
+ font-size: 12px;
+}
+
+#upload-table .head div {
+ font-size:11px; /* oh no you di'int! */
+}
+
+#upload-total-files {
+ float:left;
+ display:inline;
+}
+
+#upload-total-files .plural,
+#upload-total-files .single {
+ display:none;
+}
+
+#upload-total-files.plural .plural,
+#upload-total-files.single .single {
+ display:inline;
+}
+
+#upload-total-bytes {
+ float:right;
+ display:inline;
+ margin-right:13px;
+}
+
+#upload-table.overlimit #upload-total-bytes {
+ /* oversize warning case */
+ color:#dd5f5f;
+}
+
+#upload-table.overlimit #upload-remove-files {
+ background:#0075e2;
+}
+
+#upload-table.overlimit #upload-remove-files:hover {
+ background:#999;
+}
+
+#upload-table.overlimit #moderation_container,
+#upload-table.overlimit #upload-buttons {
+ /* hide while user fixes over-limit case */
+ display:none;
+}
+
+#upload-table.overlimit .upload-add-more {
+ /* hide "add more" while oversize */
+ visibility:hidden;
+}
+
+#upload-table ul {
+ list-style-type:none;
+ margin:0px;
+ padding:0px;
+}
+			
+.upload-container .ad {
+ /* bringeth the LREC. */
+ position:absolute;
+ /* display:none; */
+ right:0px;
+ top:0px;
+ margin:21px 32px 0px 0px;
+ *margin-top:19px;
+ width:300px;
+ height:270px; /* 250px for ad, 20 for bottom text strip. */
+ z-index:3;
+}
+
+.upload-container .ad .ad-content,
+.upload-container .ad .ad-iframe {
+ position:relative;
+ width:300px;
+ height:270px;
+}
+
+.upload-container .ad .ad-content {
+}
+
+.upload-container .ad .ad-note {
+ height:20px;
+ font-size:11px;
+ line-height:20px;
+ text-align:center;
+ color:#bbb;
+}
+
+.upload-container ul.upload {
+ position:relative;
+ /* display:none; */ /* hide by default */
+ margin-top:-1em; /* pull up above ad, and so on */
+ margin-top:0px;
+}
+
+.uploadr-bg {
+ position:relative;
+ background:#fff url(http://l.yimg.com/g/images/upload/uploader_list_background.png) 0px 0px repeat-x; /* 99px; bottom left; */
+}
+
+.uploadr-scroll {
+ position:relative;
+ height:216px;
+ overflow:auto;
+ overflow-x:hidden;
+ border:1px solid #ccc;
+}
+
+#uploadr-list {
+ /* scrollable area */
+ position:relative;
+ list-style-type:none;
+ margin:0px;
+ padding:0px;
+}
+
+.uploadr-scroll,
+.upload-container .upload .foot,
+.uploadr-bg {
+ width:650px;
+}
+
+#upload-container.pro .uploadr-scroll,
+#upload-container.pro .upload .foot,
+#upload-container.pro .uploadr-bg {
+ /* pro account layout variant */
+ width:736px;
+}
+
+#upload-container.pro .uploadr-status {
+ width:734px;
+}
+
+#upload-container .upload .body li,
+#upload-container.pro .uploadr-status {
+ *width:100%;
+}
+
+#upload-container.firefox .upload .body li {
+ width:650px !important; /* Firefox trash can alignment fix */
+}
+
+#upload-container.pro.firefox .upload .body li {
+ width:736px !important; /* Firefox trash can alignment fix */
+}
+
+.upload-container .upload .foot {
+ border:1px solid #ccc;
+ border-top:none;
+ background: #F1F1F1;
+ z-index:2;
+}
+
+.upload-container .uploadr-status,
+.upload-container .uploadr-status div {
+ height:14px;
+ *height:20px;
+}
+
+.upload-container .uploadr-status {
+ position:relative;
+ margin-top:1.5em;
+ width:398px;
+ border:2px inset #fff;
+ background:#fff;
+ overflow:hidden;
+}
+
+.upload-container .uploadr-status div {
+ position:relative;
+ width:0px;
+ overflow:hidden;
+ background:#CF1A1A;
+}
+
+#upload-container .uploadr-status {
+ display:none;
+}
+
+#upload-container.uploading .uploadr-status {
+ display:block;
+}
+
+#upload-container.active .upload-add-more,
+#upload-container.active .head .select,
+#upload-container.active .body .select .remove,
+#upload-container.active .foot .select {
+ /* hide during active upload, onward */
+ visibility:hidden !important;
+}
+		
+#upload-container.active .default-only {
+ /* generic "hide when active" rule */
+ display:none;
+}
+	
+.upload-container .upload ul,
+.upload-container .upload li {
+ clear:both;
+ *zoom:1;
+}
+
+.upload-container .upload .body li {
+ border-bottom:1px solid #e4e4e4;
+ line-height:22px;
+ font-size:12px;
+ *margin-top:-2px; /* IE fix */
+}
+
+.upload-container .upload .body:last-child li {
+ /* safari messes this up. ? */
+ /*
+ border-bottom:none;
+ */
+}
+
+.upload-container .upload .body li.selected {
+ /* highlight for over-limit files */
+ background:#ffffdb;
+}
+
+.upload-container .upload .body li div.select .remove {
+ display:block;
+ width:10px;
+ margin-left:15px;
+ *margin-left:0px;
+ background:transparent url(http://l.yimg.com/g/images/upload/trash_can.gif.v2) 0px 50% no-repeat;
+ background-color:transparent !important;
+ text-decoration:none;
+}
+
+.upload-container .upload .body li div.select .remove:hover {
+ background-position:-10px 50%;
+}
+
+.upload-container .upload .body li div.select .remove:focus {
+ outline:none;
+}
+			
+.upload-container .upload .body li.uploading {
+ background:#fff url(http://l.yimg.com/g/images/upload/file_upload_progress.gif) -800px 0px no-repeat;
+}
+
+.upload-container .upload .body li.ok,
+.upload-container .upload .body li.processing,
+.upload-container .upload .body li.error {
+ background-color:#fff;
+ background-image:url(http://l.yimg.com/g/images/upload/file_upload_progress.gif);
+ background-repeat:no-repeat;
+}
+
+.upload-container .upload .body li div {
+ overflow:hidden;
+}
+
+.upload-container .upload .body li.processing div.select {
+/*
+ background:transparent url(http://l.yimg.com/g/images/upload/balls-16x8-trans.gif) 50% 24px no-repeat;
+*/
+}
+
+.upload-container .upload .body li.oversize div {
+ color:#999;
+}
+
+.upload-container .upload .body li.oversize div.select {
+ /*background-color:#f0f0f0;*/
+ background-color:#ffffd4;
+}
+
+#upload-container.active .upload .body li.oversize {
+ display:none; /* hide oversize when uploading */
+}
+
+#upload-container.active .upload .body li.oversize div {
+ color:#999;
+}
+
+#upload-container.active .upload .body li.oversize div.select {
+ background-color:transparent;
+}
+			
+.upload-container .upload .body li.ok div {
+ /* grey out once complete */
+ /* scripted
+ color:#999;
+ */
+}
+
+.upload-container .upload .body li.ok div.select {
+ background:transparent url(http://l.yimg.com/g/images/upload/icon_checkmark.gif) 50% 6px no-repeat; /* 50% 50% */
+ background-position:50% 6px;
+}
+			
+.upload-container .upload .body li.ok div.select .remove {
+ visibility:hidden;
+}
+
+.upload-container .upload .body li.error div {
+ /* scripted
+ color:#cc3333;
+ */
+}
+
+#upload-container.complete .body li.error {
+ /* after complete, highlight errors */
+ background-color:#ffffd4;
+}
+
+.upload-container .upload .body li.error div.select {
+ background-image:url(http://l.yimg.com/g/images/upload/icon-error-exclamation.gif);
+ background-position:50% 32px;
+ background-repeat:no-repeat;
+}
+
+/* General minefield warning: numerous layout tweaks to get columns lining up, cross-browser. */
+
+.upload-container .upload div.name,
+.upload-container .upload div.size,
+.upload-container .upload div.select {
+ display:table-cell;
+ /* _ie6, *ie7 */
+ _float:left;
+ *display:inline-block;
+ _display:inline;
+}
+
+.upload-container .upload .foot div.name,
+.upload-container .upload .foot div.size,
+.upload-container .upload .foot div.select {
+ float:left;
+ display:inline;
+ line-height:30px;
+ font-weight:bold;
+}
+
+.upload-container .upload div.name {
+ width:260px;
+ text-indent:1em;
+}
+
+#upload-container.pro .upload div.name {
+ width:596px;
+}
+
+.upload-container .upload .foot div.name {
+ width:573px;
+}
+
+#upload-container.pro .upload .foot div.name {
+ width:669px;
+}
+
+.upload-container .upload div.size {
+ width:60px;
+ padding-right:20px;
+ margin-right:20px;
+ *width:90px;
+ *padding-right:30px;
+ text-align:right;
+}
+
+.upload-container .upload .head div.size {
+ *padding-right:23px;
+ _width:82px; /* IE 7 tweak */
+}
+
+.upload-container .upload div.select {
+ width:50px;
+}
+
+.upload-container .upload .head div.select {
+ *text-indent:5px;
+}
+
+.upload-container .upload .foot div.select {
+ width:65px;
+}
+
+.upload-container .upload .body div.select {
+ width:50px;
+ *width:30px; /* (30px?) IE due to scrollbar width. Boo urns. */
+ text-align:center;
+}
+
+.upload-container .cancel-upload {
+ color:#999;
+}
+
+#upload-total-files .divider {
+ margin:0px 6px;
+ color:#d7d7d7;
+}
+
+#upload-remove-files {
+ line-height:30px;
+ padding:3px 8px;
+ background:#bbb;
+ margin-left:-5px; /* positioning tweak */
+ *margin-left:0px; /* ie messes this up. */
+ color:#fff;
+ font-size:11px;
+ font-weight:normal;
+ text-decoration:none;
+}
+
+#upload-remove-files:hover {
+ background:#999;
+}
+
+#upload-options {
+ zoom:1;
+}
+
+#upload-options label,
+#upload-options .remove {
+ font-weight:normal;
+ font-size:12px;
+}
+
+#photos,
+#screenshots,
+#other,
+#hidden {
+ margin-left:-1em; /* override default */
+}
+
+p.cancel-upload {
+ /* IE and Firefox/ubuntu refuses to fit this within the proper space. */
+ text-indent:7px;
+ padding-top:8px;
+ /* smaller size */
+/*
+ font-size:11px;
+ padding-top:10px;
+*/
+}
+
+#upload-buttons {
+ position:relative;
+ z-index:3; /* ensure buttons on top */
+}
+
+#upload-buttons .bab {
+ /* ensure stuff shows up to the right */
+ float:left;
+ display:inline;
+}
+
+#upload-controls {
+ *margin-top:1em;
+ width:420px; /* bottom left - prevent wrap over to right column */
+}
+
+#uploadr.pro #upload-controls {
+ /* more space for pro */
+ width:700px;
+}
+
+
+#upload-buttons p {
+ display:none;
+}
+
+#upload-buttons.default p.default,
+#upload-buttons.uploading p.uploading {
+ display:block;
+}
+
+#upload-buttons .not-allowed {
+ cursor:default;
+}
+
+#upload-buttons .not-allowed strong {
+ color:#aaa;
+}
+
+#upload-options h4 a {
+ font-weight:normal;
+ font-size:11px;
+}
+
+/*
+#upload-options {
+ display:none;
+
+*/
+
+#upload-templates {
+ display:none;
+}
+
+#moderation .content-type {
+ float:right;
+ display:inline;
+ width:334px;
+ margin-right:-18px;
+}
+		
+#moderation .safety {
+ float:left;
+ display:inline;
+ width:170px;
+}
+
+#moderation_container .safety,
+#moderation_container .content-type,
+#moderation_container .privacy {
+ *padding-top:12px;
+}
+
+#moderation_container .privacy {
+ float:left;
+ display:inline;
+ width:230px;
+}
+
+#moderation_container {
+ margin-top:0.5em;
+}
+		
+#moderation_header {
+ /* "set privacy" */
+ float:left;
+ display:inline;
+}
+
+#moderation_container h4 {
+ /* privacy/safety/content spacing */
+}
+
+#moderation_toggle {
+ /* sit next to "set privacy" */
+ float:left;
+ display:inline;
+ margin-left:0.5em;
+ clear:right;
+}
+
+#moderation_toggle .moderation_hide,
+#moderation_toggle .moderation_show {
+ /* hide by default */
+ display:none;
+ margin:0px;
+ padding:0px;
+}
+
+#moderation_toggle .moderation_show {
+ /* show "show" by default */
+ display:inline;
+}
+
+#moderation_toggle.open .moderation_show {
+ display:none !important;
+}
+
+#moderation_toggle.open .moderation_hide {
+ display:inline;
+}
+
+#moderation_header span.divider {
+ font-size:11px;
+ font-weight:normal;
+ color:#999;
+}
+
+#privacy-controls span.note {
+ /* eg. "only you see them" note, on privacy controls */
+ color:#999;
+ font-size:11px;
+}
+
+#uploadr .feature-note {
+ color:#999;
+ font-size:12px;
+ margin-top:0.5em;
+}
+
+/* video-related items */
+
+#uploadr .uploadr-debug {
+ display:block;
+ font-size:x-small;
+ font-family:"lucida console",lucida,terminal,system,arial,verdana;
+ font-weight:normal;
+ color:#000;
+}
+
+#video_restricted {
+ position:relative;
+ width:734px;
+ *width:738px;
+ background:#fdf3d8;
+ border:2px solid #f1e8ce;
+ *margin-bottom:8px;
+ display:none;
+}
+
+#video_restricted.open {
+ /* show contents (other classnames affect sub-content) */
+ display:block;
+}
+
+#video_restricted .video-only,
+#video_restricted .mixed-content,
+#video_restricted .default,
+#video_restricted .non-default {
+ /* hide by default */
+ display:none;
+}
+
+#video_restricted.video-only .video-only,
+#video_restricted.video-only.default .video-only .default,
+#video_restricted.video-only.non-default .video-only .non-default,
+#video_restricted.mixed-content .mixed-content,
+#video_restricted.mixed-content.default .mixed-content .default, 
+#video_restricted.mixed-content.non-default .mixed-content .non-default {
+ display:block;
+}
+
+#video_restricted .content {
+ position:relative;
+ padding:0px 8px 8px 8px;
+ margin-left:40px;
+ zoom:1;
+ *margin-top:16px;
+ *margin-bottom:8px;
+}
+
+#video_restricted .content h3 {
+ font-size:14px;
+ font-weight:bold;
+}
+
+#video_restricted .content .icon {
+ position:absolute;
+ left:0.5em;
+ top:0px;
+ margin:-5px 0px 0px -40px;
+}
+
+#video_restricted h3 {
+ color:#000;
+}
+
+div.system-message {
+ background:#dce8f6;
+}
+
+div.system-message p {
+ padding:8px;
+ font-size:13px;
+}
+
+div.system-message img {
+ margin-right:5px;
+ margin-top:-2px;
+ *margin-top:0px;
+ vertical-align:middle;
+}
+
+#upload-flash-box {
+ /* container for flash movie */
+ position:absolute;
+ left:0px;
+ top:0px;
+ width:1px;
+ height:1px;
+ z-index:999;
+}
+
+div.enabled {
+ position:relative; /* flash absolutely left/top in this box */
+}

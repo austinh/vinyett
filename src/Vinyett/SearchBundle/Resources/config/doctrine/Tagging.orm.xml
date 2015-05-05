@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Vinyett\SearchBundle\Entity\Tagging" table="Tagging">
+
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <many-to-one field="metadata_tag_user" target-entity="Vinyett\UserBundle\Entity\User">
+            <join-columns>
+                <join-column name="metadata_tag_user_id" referenced-column-name="id" />
+            </join-columns>
+        </many-to-one>        
+
+        <many-to-one field="tag" target-entity="Vinyett\SearchBundle\Entity\Tag">
+            <join-columns>
+                <join-column name="tag_id" referenced-column-name="id" />
+            </join-columns>
+        </many-to-one>
+
+        <unique-constraints>
+            <unique-constraint columns="tag_id,resource_type,resource_id" name="tagging_idx" />
+        </unique-constraints>
+
+    </entity>
+
+</doctrine-mapping>

@@ -1,0 +1,12 @@
+{% for comment in comments %}
+<div class="comment">
+    <img src="{{ asset(avatar_path(comment.getOwner)) }}" class="icon" />
+    <a href="{{ path("photostream", { 'username': comment.getOwner.getUrlUsername }) }}">{{ comment.getOwner.getUsername }}</a>  
+    <div class="date">
+        <abbr class="timeago" title="{{ comment.getCreatedAt|render_isodate }}"> {{ comment.getCreatedAt|render_nice_date }}</abbr>
+    </div>
+    <div class="comment_dialog">
+        {{ comment.getContent|raw|nl2br }}
+    </div>  
+</div>
+{% endfor %}

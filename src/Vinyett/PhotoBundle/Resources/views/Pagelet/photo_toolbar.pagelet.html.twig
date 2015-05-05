@@ -1,0 +1,40 @@
+{% raw %}
+<a href="/photo/{{photo.id}}" class="photo_page_link">{{#if photo.title }}{{ photo.title }}{{else}}See photo{{/if}}</a>
+        
+<div class="icons_left">
+    <a href="#" class="starred">
+        <img src="/images/profile/starred{{#if photo.is_favorited}}_full{{else}}_white{{/if}}.png" class="info_pop favorited" data-title_card="{{#if photo.is_favorited}}Unstar{{else}}Star{{/if}}" />
+    </a>
+    <!--
+    <a href="#" class="share">
+        <img src="/images/share_icon_white.png" class="favorited" />
+    </a>
+    -->
+    <a href="#" class="options">
+        <img src="/images/gear_icon_white.png" class="info_pop options_button" data-title_card="Options" />
+    </a>
+</div>
+
+<div class="toolbar_menu" style="display:none;">
+    <div class="follow_list_options"> 
+        <ul>
+            {{#editable photo}}
+            <li class="edit_details_menu_item">
+                Edit details
+            </li>
+            {{#deletable photo}}
+            <li class="delete_menu_item">
+                Delete photo
+            </li>
+            {{/deletable}}
+        </ul>
+            <div class="follow_list_breaker"></div>
+        <ul>
+            {{/editable}}
+            <li>
+                Report photo
+            </li>
+        </ul>
+    </div>
+</div>
+{% endraw %}

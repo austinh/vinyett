@@ -1,0 +1,61 @@
+{# If the profile is yours, we don't need any of this #}
+{% if profile is not sameas(app.user) %}
+    <button class="button follow{% if follow is not null %} are_following{% endif %}" id="follow_button">
+        {% if follow is null %}
+            <img src="{{ asset('images/follow-arrow.png') }}" /> Follow
+        {% else %}
+            <img src="{{ asset('images/list_check.png') }}" /> Following
+        {% endif %}
+    </button>
+
+    <script id="follow_button_handlebar" type="text/x-handlebars-template">
+        {% raw %}
+            {{#if follow}}
+                <img src="/images/list_check.png" /> Following
+            {{else}}
+                <img src="/images/follow-arrow.png" /> Follow
+            {{/if}}
+        {% endraw %}
+    </script>
+    
+    {# while this exists for everyone, the data in it for a nonexistent relationship is fake #}
+    <script id="follow_popover_handlebar" type="text/x-handlebars-template">
+    {% raw %}
+        <div class="title_bar">
+            {{following.username}}
+        </div>
+        
+        <div class="follow_list_options"> 
+            <ul>
+                <li class="tab_over{{#unless is_friend}} unselected{{/unless}} friend_selector">
+                    {{#if is_friend}}Friend <img src="/images/list_check.png" class="check" />{{else}}...is a friend?{{/if}}
+                </li>
+                <li class="tab_over{{#unless is_family}} unselected{{/unless}} family_selector">
+                    {{#if is_family}}Family <img src="/images/list_check.png" class="check" />{{else}}...is family?{{/if}}
+                </li>
+            </ul>
+            
+            <div class="follow_list_breaker"></div>
+            
+            <ul>
+                <li>
+                    Add to list...
+                </li>
+                <li class="photofeed_selector{{#unless is_in_photofeed}} unselected{{/unless}}">
+                    {{#if is_in_photofeed}}Shown in photofeed <img src="/images/list_check.png" class="check" />{{else}}Hidden from photofeed{{/if}}
+                </li>
+            </ul>
+            
+            <div class="follow_list_breaker"></div>
+            {% endraw %}
+            <ul>
+                <li class="unfollow">
+                    Unfollow
+                </li>
+            </ul>
+            {% raw %}
+        </div>
+    {% endraw %}
+    </script>
+
+{% endif %}

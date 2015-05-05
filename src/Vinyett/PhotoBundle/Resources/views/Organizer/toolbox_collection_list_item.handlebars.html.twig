@@ -1,0 +1,13 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+
+{% raw %}
+        <img src="http://photos.vinyett.com/{{collection.cover_photo.photo_path_square_50}}" class="collection_cover" />
+        <div class="option_space">
+            <div class="quick_delete uc"><img src="/images/organizer/toolbox_remove.png" class="uc" /></div>
+        </div>
+        <div class="title">{{collection.title}}</div>
+{% endraw %}
+
+{% endblock %}

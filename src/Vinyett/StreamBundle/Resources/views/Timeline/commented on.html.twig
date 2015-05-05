@@ -1,0 +1,13 @@
+{% extends "StreamBundle:Timeline:base.html.twig" %}
+{% block title %}
+    {% if timeline_has_component_collection(timeline, 'subject') == true %}
+        {{ timeline_component_collection_render(timeline, 'subject') }}
+    {% else %}
+        {{ timeline_component_render(timeline, 'subject') }}
+    {% endif %}
+        commented on 
+        {{ timeline_component_render(timeline, 'directComplement') }}
+{% endblock %}
+{% block content %}
+    {{ timeline_component_render(timeline, 'directComplement', { stats: true }) }}
+{% endblock %}

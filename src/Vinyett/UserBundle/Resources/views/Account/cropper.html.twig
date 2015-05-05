@@ -1,0 +1,42 @@
+{% extends "::body.html.twig" %}
+
+{% block title %}Crop your photo{% endblock %}
+
+{% block require %}
+    require(["user/cropper"], function(Cropper) 
+    {
+        var cropperapp = new Cropper;
+    });
+{% endblock %}
+
+{% block content %}
+    <style>
+        body { 
+            background-color: #eee !important;
+        }
+    </style>
+
+    <div class="body cropper_body">
+    <form action="{{ path('account_photo_crop') }}" method="post" {{ form_enctype(form) }}>
+    
+        {{ form_widget(form) }}
+    
+        <h2>Crop your icon</h2>
+        <div class="croppor_descriptor">
+            <p>
+                Drag the box around to pick and area of the photo to crop.
+            </p>
+            <button type="submit" class="button">I'm ready to crop it!</button>
+        </div>
+        <br />
+        <div class="cropping_block">
+            
+            <img src="http://photos.vinyett.com/temporary_icon_farm/{{ app.user.getId }}_uncropped_icon.jpg" class="crop_photo"/>
+        
+        </div>
+        
+    </form>
+    </div>
+    
+{% endblock %}
+

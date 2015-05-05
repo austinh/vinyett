@@ -1,0 +1,78 @@
+{% extends "::body.html.twig" %}
+
+{% block require %}
+    require(["stream/home"], function(StreamApp) 
+    {
+        $(document).ready(function() {
+            var stream = new StreamApp;
+        });
+    });
+{% endblock %}
+
+{% block content %}
+<style>
+    body { 
+        background-color: #eee !important;
+    }
+</style>
+<div class="homepage">
+    <div class="homepage_header">
+        <div class="body">
+            Welcome back, {{ app.user.getUsername }}!
+            
+            <div class="icon_pool">
+                <ul>
+                    <li><a href="#" class="following_button">{{ following_count }} Following</a></li>
+                    <li><a href="#" class="followedby_button">{{ followed_count }} {{ pluralize(followed_count, "Follower") }}</a></li>
+                    <li><a href="{{ path("photostream", { 'username': app.user.getUrlUsername }) }}">{{ app.user.getPhotoCount }} {{ pluralize(app.user.getPhotoCount, "Photo") }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div> 
+    
+    <div class="photo_stream_columns body">
+        <div class="photo_stream" id="photo_stream">
+            {%if following_count == 0 %}
+                <div class="empty_following_photos"><h2>No photos to see?</h2><p>Start following some friends and we'll show you their photos here!</p></div>
+            {% endif %}
+            <div class="photostream_double_space" style="height:0px;">
+                {# Because of a last minute change... #}
+            </div>
+        
+        </div>
+        
+        <div class="sidebar">
+            {% if app.user.getTotalInvites > 0 %}
+            <div class="sidebar_widget">
+                <strong class="title">Well look at that!</strong>
+                <p>
+                    You still have <strong>{{ app.user.getTotalInvites }} invites left</strong> to send to your friends! Use them sparringly!
+                </p>
+                <p>
+                    <button class="button invite_button" type="submit">I'm ready to invite!</button>
+                </p>
+            </div>
+            {% endif %}
+            <div class="sidebar_widget">
+                <strong class="title">Hello all!</strong>
+                <p>
+                    Welcome to the Vinyett! We know things are kind of rocky, but don't worry, we're fast on the track to 
+                    making things work at their best!
+                </p>
+            </div>
+            
+            <div class="sidebar_ad">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{# Handlebars templates #}
+{% block handlebars %}
+    {{ parent() }}
+    {% include "StreamBundle:Home:action.handlebars.html.twig" with { name: "action_handlebar" } %}
+    {% include "StreamBundle:Home:commentbox.handlebars.html.twig" with { name: "commentbox_handlebar" } %}
+{% endblock %}

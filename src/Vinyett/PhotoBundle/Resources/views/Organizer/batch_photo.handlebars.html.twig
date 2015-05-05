@@ -1,0 +1,13 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+
+{% raw %}
+
+    <div class="organizer_sortable_photo batch_photo" data-photo="{{id}}">
+        <img src="http://photos.vinyett.com/{{photo_path_square_120}}" />
+    </div>
+
+{% endraw %}
+
+{% endblock %}

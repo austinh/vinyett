@@ -1,0 +1,23 @@
+<li class="photo_comment">
+    <div class="notification_fold photobox_link" data-photo="{{ references.photo.getId }}">
+
+        <div class="notification_actor">
+            <div class="global_icon_small baseboard_icon" {%if notify_object.getSender.getPhotoSquare %}style="background-image:url({{ asset(avatar_path(notify_object.getSender)) }})"{%endif%}></div>
+        </div>
+        
+        <div class="notification_title">
+            <strong><a href="{{ path("photostream", { 'username': notify_object.getSender.getUrlUsername }) }}">{{ notify_object.getSender.getUsername }}</a></strong> commented on a photo by <strong>{% if app.user.getUsername == references.photo.getOwner %}<a href="{{ path("photostream", { 'username': app.user.getUrlUsername }) }}">you</a></strong>{% else %}<a href="{{ path("photostream", { 'username': notify_object.getRecipient.getUrlUsername }) }}">{{ notify_object.getRecipient.getUsername }}</a></strong> that you commented on{% endif %}.
+            
+            <div class="comment_box">
+                <div class="notification_photo_icon">
+                    <img src="{{ references.photo.getPhotoPathSquare50 }}">
+                </div>
+                <div class="quote">
+                    <img src="{{ asset('images/notifications/open_quote.png') }}"> {{ references.comment.content|slice(0,50) }} {% if references.comment.content|length > 50 %}...{% endif %} <img src="{{ asset('images/notifications/close_quote.png') }}">
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</li>

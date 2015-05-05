@@ -1,0 +1,101 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+<div class="organizer_modal_header">
+    Edit Photo
+</div>
+
+<div class="organizer_modal_content">
+<div class="photo">
+    <img src="http://photos.vinyett.com/{{photo_path_width_500}}" alt="{{title}}" />
+</div>
+<form id="detail_form">
+    <div class="details">
+        <div class="editor">
+            <ul class="detail_tabs">
+                <li data-panel="details" class="selected"><img src="/images/organizer/details/details.png" /></li>
+                <li data-panel="privacy" class=""><img src="/images/organizer/details/view.png" /></li>
+                <li data-panel="more" class=""><img src="/images/organizer/details/more.png" /></li>
+            </ul>
+        
+            <div class="grouping">
+                <div class="panel-details panel">
+                    <div>
+                        Title <br />
+                        <input type="text" value="{{title}}" name="title" class="text_input" style="width:90%;" placeholder="Add a title" />
+                    </div>
+                    <div>
+                        Description <br />
+                        <textarea class="text_input" name="description" style="width:90%; height:100px;" placeholder="Add a description">{{description}}</textarea>
+                    </div>
+                </div>
+                <div class="panel-privacy panel" style="display:none;">
+                    <div class="privacy_panel_option">
+                        Who can see this photo?
+                        <ul class="privacy_choices">
+                            <li><input type="radio" class="subprivacy_level" name="privacy_level" value="0" id="everyone_button" {{#if everyone_checked}}checked="checked" {{/if}}/><label for="everyone_button">Everyone</label></li>
+                            <li>
+                                <input type="radio" class="subprivacy_level" name="privacy_level" value="1" id="private_button" {{#if private_checked}}checked="checked" {{/if}}/><label for="private_button">Private (only me)</label>
+                                <!--<ul>
+                                    <li><input type="checkbox" class="subprivacy_level" value="2"> ...but friends can see it, too.</li>
+                                    <li><input type="checkbox" class="subprivacy_level" value="3"> ...but family can see it, too.</li>
+                                </ul>-->
+                            </li>
+                        </ul>
+                    </div>
+                    <!--{{#if geo_has_location}}
+                        <div class="privacy_panel_option">
+                            <div class="icon">
+                                <img src="/images/map_pin.png" />
+                            </div>
+                            <div class="description">
+                                Show Location on a map? <input type="checkbox" name="geo_show_location" value="true"{{#if geo_show_location}} checked="checked"{{/if}} />
+                                <p class="sub_text">
+                                    The location will only be visible to people who can see the photo.
+                                </p>
+                            </div>
+                        </div>
+                    {{/if}}-->
+                    <div class="privacy_panel_option">
+                        <div class="description">
+                            <label for="is_searchable">Allow photo to be searchable?</label> <input type="checkbox" name="is_searchable" id="is_searchable" value="1"{{#if is_searchable}} checked="checked"{{/if}} />
+                            <p class="sub_text">
+                                Only people are able to see a photo search for it.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                    
+                <div class="panel-more panel" style="display:none;">
+                    <div class="privacy_panel_option">
+                        <div class="description">
+                            <label for="publishing">Reviewed photo</label> <input class="publish_checkbox" type="checkbox" name="published" id="publishing" value="1"{{#if published}} checked="checked"{{/if}} />
+                            <p class="sub_text">
+                                Unpublishing this will not remove it from the site, but will move it into your pending reviewed photos.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="privacy_panel_option">                    
+                        <div class="description" style="text-align:center;">
+                            <button class="button delete_photo_button" type="submit">Delete this photo</button>
+                            <p class="sub_text">
+                                Deleting this photo will remove it from the entire site
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="clearfix"></div>
+</form>
+</div>
+
+<div class="organizer_modal_footer">
+    <div class="button_holder">
+        <button type="cancel" class="cancel_button button">Cancel</button> <button type="submit" class="save_button button">Save</button>
+    </div>
+</div>
+{% endraw %}
+{% endblock %}

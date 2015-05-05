@@ -1,0 +1,56 @@
+imports:
+    - { resource: config.yml }
+
+#doctrine:
+#    orm:
+#        metadata_cache_driver: apc
+#        result_cache_driver: apc
+#        query_cache_driver: apc
+
+monolog:
+#    handlers:
+#        main:
+#            type:         fingers_crossed
+#            action_level: error
+#            handler:      nested
+#        nested:
+#            type:  stream
+#            path:  %kernel.logs_dir%/%kernel.environment%.log
+#            level: debug
+#    handlers:
+#        mail:
+#            type:         fingers_crossed
+#            action_level: critical
+#            handler:      buffered
+#        buffered:
+#            type:    buffer
+#            handler: swift
+#        swift:
+#            type:       swift_mailer
+#            from_email: robo@vinyett.com
+#            to_email:   error@vinyett.com
+#            subject:    An Error Occurred on Vinyett
+#            level:      debug
+
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: critical
+            handler:      grouped
+        grouped:
+            type:    group
+            members: [streamed, buffered]
+        streamed:
+            type:  stream
+            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+        buffered:
+            type:    buffer
+            handler: swift
+        swift:
+            type:       swift_mailer
+            from_email: robo@vinyett.com
+            to_email:   error@vinyett.com
+            subject:    An Error Occurred!
+            level:      debug

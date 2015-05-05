@@ -1,0 +1,17 @@
+<div class="{{ classes|default("primary_photo") }}">
+    <a href="{{ path('view_photo', { username: photo.getOwner.getUrlUsername, photo_id: photo.getId }) }}" class="photobox_link" data-photo="{{ photo.getId }}">
+        <img src="{{ asset(photo.getPhotoPathWidth500) }}" style="width:500px;" />
+    </a>
+</div>
+{% if comments|default(null) != null %}
+<div class="feed_comments">
+    {% include "StreamBundle:Feed:comments.block.html.twig" %}
+</div>
+{% endif %}
+<!--
+<div class="interaction" data-photo="{{ photo.getId }}">
+    <input class="feed_comment_input" type="text" name="t" value="" placeholder="{{ comment_text_holder|default("Comment on this photo...") }}" />
+    {% if hide_favorite_icon|default(false) == false %}
+        <input type="button" class="favorite_button" />
+    {% endif %}
+</div>-->

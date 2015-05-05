@@ -1,0 +1,11 @@
+homepage:
+    pattern:  /
+    defaults: { _controller: StaticBundle:Static:homepage }
+
+about:
+    pattern: /about
+    defaults: { _controller: StaticBundle:Static:about }
+    
+faq:
+    pattern: /faq
+    defaults: { _controller: StaticBundle:Static:about }

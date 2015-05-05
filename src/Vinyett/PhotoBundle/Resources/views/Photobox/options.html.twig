@@ -1,0 +1,92 @@
+            
+<div class="follow_list_options"> 
+    {% if is_granted('EDIT', photo) %}
+        <!--<ul>
+            <li onclick="bump_to_tag_add();">
+                <img src="{{ asset('images/photopopover/tag.png') }}" class="share" /> 
+                <span class="label">Add new tags</span>
+            </li>
+            
+            <li>
+                <img src="{{ asset('images/photopopover/tag_person.png') }}" class="share" /> 
+                <span class="label">Tag a person</span>
+            </li>
+            
+            <li id="open_mapper">
+                <img src="{{ asset('images/photopopover/compass.png') }}" class="share" /> 
+                <span class="label">Place on the map</span>
+            </li>
+        </ul>
+        
+        <div class="follow_list_breaker"></div>
+        -->
+        <ul>
+            <li class="add_collection">
+                <img src="{{ asset('images/photopopover/add_collection.png') }}" class="share" /> 
+                <span class="label">Add to collection</span>
+            </li>
+            <!--<li>
+                <img src="{{ asset('images/photopopover/group.png') }}" class="share" /> 
+                <span class="label">Add to group</span>
+            </li>-->
+        </ul>
+        <div class="follow_list_breaker"></div>
+    {% endif %}
+    
+    <!--
+    <ul>
+        <li>
+            <img src="{{ asset('images/photopopover/view_fs.png') }}" class="share" /> 
+            <span class="label">View full size</span>
+        </li>
+    </ul>-->
+    
+    {% if is_granted('OPERATOR', photo) %} 
+        <ul>
+            <li onclick="window.location='{{ path("photo_to_profile", { photo_id: photo.getId }) }}'">
+                <img src="{{ asset('images/photopopover/profile_photo.png') }}" class="share" /> 
+                <span class="label">Use as profile photo</span>
+            </li>
+        </ul>
+        
+        
+        <div class="follow_list_breaker"></div>
+    {% endif %}
+    
+    {% if is_granted('EDIT', photo) or is_granted('DELETE', photo) %}
+    
+    <ul>
+        {% if is_granted('EDIT', photo) %}
+        <!--
+        <li>
+            <img src="{{ asset('images/photopopover/rotate.png') }}" class="share" /> 
+            <span class="label">Rotate photo</span>
+        </li>-->
+        <li>
+            <img src="{{ asset('images/photopopover/edit_details.png') }}" class="share" /> 
+            <span class="label">Edit photo details</span>
+        </li>
+        {% endif %}
+        {% if is_granted('DELETE', photo) %}
+        <li>
+            <img src="{{ asset('images/photopopover/remove.png') }}" class="share" /> 
+            <span class="label">Remove this photo</span>
+        </li>
+        {% endif %}
+    </ul>
+    {% endif %}
+    
+    <ul>
+        <li>
+            <img src="{{ asset('images/photopopover/view_fs.png') }}" class="share" /> 
+            <span class="label">View full size</span>
+        </li>
+        {% if not is_granted('OPERATOR', photo) %} 
+        <li>
+            <img src="{{ asset('images/photopopover/remove.png') }}" class="share" /> 
+            <span class="label">Report photo</span>
+        </li>
+        {% endif %}
+    </ul>
+    
+</div>

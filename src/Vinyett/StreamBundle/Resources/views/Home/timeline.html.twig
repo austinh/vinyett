@@ -1,0 +1,111 @@
+{% extends "::body.html.twig" %}
+
+{% block require %}
+    require(["stream/feed"], function(StreamApp) 
+    {
+        $(document).ready(function() {
+            var stream = new StreamApp;
+        });
+    });
+{% endblock %}
+
+{% block content %}
+<style xmlns="http://www.w3.org/1999/html">
+    body { 
+        background-color: #eee !important;
+    }
+</style>
+<div class="home_steam">
+    <div class="homepage_header">
+        <div class="body">
+            Welcome back, {{ app.user.getUsername }}!
+            
+            <div class="icon_pool">
+                <ul>
+                    <li><a href="#" class="following_button">{{ following_count }} Following</a></li>
+                    <li><a href="#" class="followedby_button">{{ followed_count }} {{ pluralize(followed_count, "Follower") }}</a></li>
+                    <li><a href="{{ path("photostream", { 'username': app.user.getUrlUsername }) }}">{{ app.user.getPhotoCount }} {{ pluralize(app.user.getPhotoCount, "Photo") }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div> 
+    
+    <div class="timeline_stream_columns body">
+        <div class="timeline_stream" id="timeline_stream">
+            {# Intro #}
+            {% if app.user.getHasCompletedIntro == false %}
+            <div class="intro_header">
+                <h2>Welcome to Vinyett!</h2>
+                <p>
+                    <div class="description_start">
+                        Here are a couple of things to do to get yourself started:
+                    </div>
+                    <ul class="introduction_links">
+                        <li>
+                            <a href="{{ path('user_find') }}">Find people and friends to follow!</a>
+                        </li>
+                        <li>
+                            <a href="#" class="trigger_upload">Upload your first photos!</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="showClassicWidget(); return false;">After you familiar with the site, you can suggest things you'd like to see!</a>
+                        </li>
+                    </ul>
+                </p>
+                <div class="dismissable">
+                    <a href="#" class="dismiss_intro">Dismiss</a>
+                </div>
+            </div>
+            {% endif %}
+
+            {# stream #}
+            {% for action in timeline %}
+                {{ timeline_render(action) }}
+            {% endfor %}
+            
+            {% if timeline is empty %}
+                <div class="empty_following_photos"><h2>No photos to see?</h2><p>Start following some friends and we'll show you their photos here!</p></div>
+            {% endif %}
+        </div>
+        
+        <div class="timeline_sidebar">
+            {%  if blog_post %}
+            <div class="sidebar_widget timeline_widget blog_widget">
+                <strong class="title">{{ blog_post.getTitle }}</strong>
+                <p>
+                    {{ blog_post.getSlug }}
+                </p>
+                <p>
+                    <a href="{{ path("blog_homepage") }}">See more at the blog</a>
+                </p>
+            </div>
+            {%  endif %}
+            
+            {% if app.user.getTotalInvites > 0 %}
+            <div class="sidebar_widget">
+                <strong class="title">Want to share the fun?</strong>
+                <p>
+                    Share Vinyett with your friends and start helping to shape us together!
+                </p>
+                <p>
+                    <button class="button invite_button" type="submit">I'm ready to invite!</button>
+                </p>
+            </div>
+            {% endif %}
+            
+            <script type="text/javascript"><!--
+            google_ad_client = "ca-pub-5431552638142955";
+            /* Vinyett Homepage */
+            google_ad_slot = "8537079631";
+            google_ad_width = 234;
+            google_ad_height = 60;
+            //-->
+            </script>
+            <script type="text/javascript"
+            src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+            </script>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

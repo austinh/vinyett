@@ -1,0 +1,125 @@
+ajax_pagelet:
+    pattern: /ajax/pagelet/photos
+    defaults: { _controller: PhotoBundle:Photo:ajaxPagelet }
+    
+ajax_photobox_column:
+    pattern: /ajax/photos/photobox
+    defaults: { _controller: PhotoBundle:Photo:photoboxColumn }
+    requirements:
+        _method:  POST
+        
+ajax_photobox_options:
+    pattern: /ajax/photos/photobox/options
+    defaults: { _controller: PhotoBundle:Photo:photoboxOptions }
+    requirements:
+        _method:  GET
+
+uploader:
+    pattern:  /upload
+    defaults: { _controller: PhotoBundle:Upload:index }
+
+upload: 
+    pattern: /upload-temp
+    defaults: { _controller: PhotoBundle:Uploader:index }
+    
+process_image: 
+    pattern: /upload/process/image
+    defaults: { _controller: PhotoBundle:Uploader:processImage }
+    
+post_upload_editor:
+    pattern: /photos/batch/edit
+    defaults: { _controller: PhotoBundle:Upload:uploadEditor }
+    
+photo: 
+    pattern: /photo/{photo_id}
+    defaults: { _controller: PhotoBundle:Photo:view }
+    requirements:
+      photo_id:     \d+  
+      
+collection: 
+    pattern: /collection/{collection_id}
+    defaults: { _controller: PhotoBundle:Collection:show }
+    requirements:
+      collection_id:     \d+  
+
+edit_photo:
+    pattern: /photo/{username}/{photo_id}/edit-details
+    defaults: { _controller: PhotoBundle:Modify:edit }
+
+update_photo_title:
+    pattern: /ajax/photo/update-title
+    defaults: { _controller: PhotoBundle:Modify:updateTitle }
+    requirements:
+        _method:  POST
+      
+update_photo_description:
+    pattern: /ajax/photo/update-description
+    defaults: { _controller: PhotoBundle:Modify:updateDescription }
+    requirements:
+        _method:  POST
+        
+add_photo_tags:
+    pattern: /ajax/photo/{photo_id}/tags/add
+    defaults: { _controller: PhotoBundle:Modify:addTags }
+    requirements:
+        _method:  POST
+
+remove_photo_tags:
+    pattern: /ajax/photo/{photo_id}/tags/remove
+    defaults: { _controller: PhotoBundle:Modify:removeTag }
+    requirements:
+        _method:  POST
+        
+update_photo_geotags: 
+    pattern: /ajax/photo/{photo_id}/geotag
+    defaults: { _controller: PhotoBundle:Modify:geoTag }
+    requirements:
+        _method:  POST   
+                
+photo_to_profile: 
+    pattern: /profile/photo/add/{photo_id}
+    defaults: { _controller: PhotoBundle:Modify:addAsProfilePhoto }
+        
+photo_ajax:
+    pattern: /ajax/photo/{photo_id}
+    defaults: { _controller: PhotoBundle:Photo:ajax }
+    requirements:
+        photo_id: \d+
+        
+photo_ajax_add_comment:
+    pattern: /ajax/photo/{photo_id}/comment/add
+    defaults: { _controller: PhotoBundle:Photo:ajaxAddComment }
+    requirements:
+        photo_id: \d+
+        _method:  POST  
+        
+photo_ajax_delete_comment:
+    pattern: /ajax/photo/comment/{comment_id}/delete
+    defaults: { _controller: PhotoBundle:Photo:ajaxDeleteComment }
+    requirements:
+        comment_id: \d+
+        _method:  POST        
+        
+photo_favorite:
+    pattern: /ajax/photo/{photo_id}/favorite
+    defaults: { _controller: PhotoBundle:Photo:ajaxToggleFavorite }
+    requirements:
+        photo_id: \d+
+        _method: POST
+        
+organize: 
+    pattern: /organize
+    defaults: { _controller: PhotoBundle:Organizer:index }
+    
+organizer_grab_photos:
+    pattern: /organize/ajax/photos    
+    defaults: { _controller: PhotoBundle:Organizer:loadPhotos }
+    requirements:
+        _method: POST
+        
+organizer_sync_collection:
+    pattern: /organizer/ajax/collection/sync
+    defaults: { _controller: PhotoBundle:Organizer:syncCollection }
+    requirements:
+        _method: POST
+ 

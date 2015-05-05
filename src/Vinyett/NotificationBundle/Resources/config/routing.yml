@@ -1,0 +1,3 @@
+notifications_listing:
+    pattern:  /notifications/show
+    defaults: { _controller: NotificationBundle:Notifications:show }

@@ -1,0 +1,20 @@
+    <div class="activityitem comment chunk" id="photo_comment_{{resource.getId}}">
+        <div class="activity_header">
+            <div class="column_icon">
+                <img src="{{ asset(avatar_path(resource.getOwner)) }}" class="icon" />
+            </div>
+            
+            <div class="comment_column">
+                <strong><a href="{{ path('photostream', { username: resource.getOwner.getUrlUsername }) }}">{{ resource.getOwner.getUsername }}</a></strong> 
+                commented on <abbr class="timeago" title="{{ resource.getCreatedAt|render_isodate }}">{{ resource.getCreatedAt.format('F j, Y \\a\\t g:ia') }}</abbr>.
+                {% if is_granted('EDIT', resource) %}
+                    <a href="#" onclick="delete_comment({{ resource.getId }}); return false;">delete</a>
+                {% endif %}
+            </div>
+        </div>        
+        
+        <div class="commentbox">
+            {{ resource.getContent|raw|nl2br}}
+            
+        </div>
+    </div>

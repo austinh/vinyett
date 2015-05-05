@@ -1,0 +1,34 @@
+{% extends "::body.html.twig" %}
+
+{% block content %}
+    <style>
+        body {
+            background-color:#eee;
+        }
+    </style>
+    <div class="body">
+        <div class="search_header">
+            <form action="{{ path('user_find') }}" method="get">
+                <input type="text" name="term" class="search_field" value="{{ term }}" placeholder="Search for users...">
+                <button type="submit" class="search">Search</button>
+            </form>
+        </div>
+
+
+    {% for user in users %}
+        <div class="userblock">
+            <div class="inner" style="background-image: url({% if user.getProfilePhoto %}{{ user.getProfilePhoto.getPhotoPathWidth980 }}{% else %}{{ asset("images/linen_photoless_profile.png") }}{% endif %})"></div>
+            <div class="overlay_information">
+                <img src="{{ asset(avatar_path(user)) }}" class="search_profile_icon" />
+                <div class="profile_block">
+                    <h2><a href="{{ path('photostream', { username: user.getUrlUsername }) }}">{{ user.getUsername }}</a></h2>
+                    <div class="blurb_spot">{{ user.getBlurb }}</div>
+                    <div class="info_spot">
+                        {{ user.getPhotoCount }} Photos and {{ user.getCommentCount }} Comments.
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

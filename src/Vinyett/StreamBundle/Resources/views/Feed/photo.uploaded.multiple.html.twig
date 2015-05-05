@@ -1,0 +1,45 @@
+<div class="activity">
+    <div class="title_header no_baseheader">
+        <img src="{{ asset(avatar_path(app.user)) }}" />
+        <div class="title">
+            {% set actor_view = [] %}
+            {% for actor in actors %}
+                {% set actor_link %}<a href="{{ path('photostream', { username: actor.getUrlUsername }) }}">{{ actor }}</a>{% endset %}
+                {% set actor_view = actor_view|merge([actor_link]) %}
+            {% endfor %}
+            {{ implode_array_into_listphrase(actor_view) }}
+        </div>
+        <div class="by">
+            uploaded {{ photos|length }} photos.
+        </div>
+        <div class="date">
+            <abbr class="timeago" title="{{ photos.0.getDatePosted|render_isodate }}"> {{ photos.0.getDatePosted|render_nice_date }}</abbr>
+        </div>
+    </div>
+    <div class="photo_gridding" data-photos-collection="{% for photo in photos %}{{photo.getId}}|{% endfor %}">
+        {% if photos|length == 2 %}
+        <div class="photo_grid_two">
+            {% for photo in photos %}
+            <a href="#">
+                <img src="{{ photo.getPhotoPathWidth200 }}" /> 
+            </a>
+            {% endfor %}    
+        </div>
+        {% endif %}
+        
+        {% if photos|length >= 3 %}
+        <div class="photo_grid_three">
+            <a href="{{ path('view_photo', { username: photos.0.getOwner.getUrlUsername, photo_id: photos.0.getId }) }}" class="photobox_link" data-photo="{{ photos.0.getId }}">
+                <img src="{{ photos.0.getPhotoPathWidth500 }}" class="overhead" /> 
+            </a>
+            <div class="photo_grid_two">
+                {% for photo in photos|slice(1,2) %}
+                <a href="{{ path('view_photo', { username: photo.getOwner.getUrlUsername, photo_id: photo.getId }) }}" class="photobox_link" data-photo="{{ photo.getId }}">
+                    <img src="{{ photo.getPhotoPathWidth200 }}" /> 
+                </a>
+                {% endfor %}   
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>

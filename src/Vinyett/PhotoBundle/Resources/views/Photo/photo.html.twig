@@ -1,0 +1,56 @@
+{% extends "::body.html.twig" %}
+
+{% block global_variables %}
+    {{ parent() }}
+    
+    Global.photo = new Object();
+    Global.photo.id = {{ photo.getId }};
+    Global.photo.owner_id = {{ photo.getOwner.getId }};
+    Global.photo.owner_username = '{{ photo.getOwner.getUsername }}';
+    Global.photo.image_square = '{{ photo.getPhotoPathSquare50 }}';
+    
+    Global.photo.neighbors = new Object();
+    {# photo_previous_global_options(neighbors, photo) #}
+    
+    {# photo_next_global_options(neighbors, photo) #}
+{% endblock %}
+
+{% block content %}
+<style>
+    body { 
+        background-color:#eee;
+    }
+</style>
+<div class="homepage_header photo_topper" style="display:none;">
+    <div class="body">
+       <div class="">
+       
+       </div>
+    </div>
+</div>
+
+
+<div class="photo_stream body photo_extended_info">
+    <div class="photo_body photo_topper_header">
+        <div class="photo_header_toolbar">
+            <div class="icon">
+                <div class="global_icon_small baseboard_icon" style="background-image:url({{ asset(avatar_path(photo.getOwner)) }})"></div>
+            </div> 
+            <div class="username_title">
+                <h2><a href="{{ path('photostream', { username: photo.getOwner.getUrlUsername }) }}">{{ photo.getOwner.getUsername }}</a></h2>
+                {% if is_granted('ROLE_USER') %}
+                    {# include 'ProfileBundle:Profile:follow.profile.chunk.html.twig' with { 'profile': photo.getOwner, 'follow': follow } #}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="photo_content">
+        <div class="photo_main">
+            <img src="{{ photo.getPhotoPathWidth980 }}" class="photo" />
+        </div>
+    </div>
+    <div class="photo_body photo_base">
+        <br />
+    </div>
+</div>
+{% endblock %}

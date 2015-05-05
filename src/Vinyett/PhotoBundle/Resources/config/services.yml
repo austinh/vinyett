@@ -1,0 +1,37 @@
+parameters:
+    photo.cruncher.class: Vinyett\PhotoBundle\Services\PhotoCruncher
+    metadata.mapper.class: Vinyett\PhotoBundle\Services\MetadataMapper
+    photo.view.extension.class: Vinyett\PhotoBundle\Extension\PhotoViewTwigExtension
+    activity.streamer.class: Vinyett\PhotoBundle\Services\ActivityStreamer
+    activity.streamer.extensions.class: Vinyett\PhotoBundle\Extension\ActivityStreamerExtension
+
+services:
+    photo.cruncher:
+        class: %photo.cruncher.class%
+        arguments: [@image.handling, @service_container, @metadata.mapper]
+        
+    photo.cruncher.listener:
+        class: Vinyett\PhotoBundle\Listener\PhotoCruncherListener
+        arguments: [@photo.cruncher]
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: postPersist }
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: preRemove }
+            - { name: doctrine.event_listener, event: postRemove }
+            
+    metadata.mapper: 
+        class: %metadata.mapper.class%
+        
+    photo.view.extensions:
+        class: %photo.view.extension.class%
+        tags:
+            - { name: twig.extension }
+            
+    activity.streamer:
+        class: %activity.streamer.class%
+        
+    activity.streamer.extensions:
+        class: %activity.streamer.extensions.class%
+        tags:
+            - { name: twig.extension }

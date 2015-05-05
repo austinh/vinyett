@@ -1,0 +1,56 @@
+<div class="popover_header" style="height:22px;">
+    <div class="uploading_header">
+        Uploading...
+        <div class="global_progress_bar">
+            <div class="global_progress"></div>
+        </div>    
+    </div>
+    <a href="#" class="cancel_photo_uploads upload_cancel_link">Cancel</a> 
+</div>
+{% if app.user.getUploadedAmount / constant('Vinyett\\UserBundle\\Entity\\User::USER_FREE_ACCOUNT_MB_AMOUNT') * 100|number_format(1) < 100 %}
+<div class="popover_content full_list organizer_content no_edit_bar" id="upload_drop">
+
+    <div class="drop_text">
+            Drop photos here or 
+            <p>
+                <button class="button jump_button" type="submit" style="box-shadow: none;">Choose photos</button>
+                <form enctype="multipart/form-data">
+                    <input id="fallback_upload_field" class="fallback_upload_field" type="file" style="visibility:hidden; display:block; height:0px; width: 0px;" multiple="" />
+                </form>
+                {% if app.user.getAccountType == constant('Vinyett\\UserBundle\\Entity\\User::USER_FREE_ACCOUNT') %}
+                <div class="upload_overview">
+                    <span class="upload_amount">You have used {{ app.user.getUploadedAmount / constant('Vinyett\\UserBundle\\Entity\\User::USER_FREE_ACCOUNT_MB_AMOUNT') * 100|number_format(1) }}% of {{ constant('Vinyett\\UserBundle\\Entity\\User::USER_FREE_ACCOUNT_MB_AMOUNT') }}mb this month</span>
+                    <div class="global_progress_bar">
+                        <div class="global_progress" style="width:{{ app.user.getUploadedAmount / constant('Vinyett\\UserBundle\\Entity\\User::USER_FREE_ACCOUNT_MB_AMOUNT') * 100 }}%"></div>
+                    </div>
+                </div>
+                {% endif %}
+        </p>
+    </div>
+    <div class="upload_rows"></div>
+    <div class="finish_text pbody">
+        <h3>
+            Great!
+        </h3>
+        <p>
+            You've uploaded some great photos, now you can head over to the <a href="{{ path('organize') }}">organizer</a> to add more information!
+        </p>
+    </div>
+</div>
+{% else %} 
+<div class="popover_content full_list organizer_content no_edit_bar">
+    <div class="drop_text">
+        <div class="upload_overview">
+            <span class="upload_amount">You have used {{ app.user.getUploadedAmount / constant('Vinyett\\UserBundle\\Entity\\User::USER_FREE_ACCOUNT_MB_AMOUNT') * 100|number_format(1) }}% of {{ constant('Vinyett\\UserBundle\\Entity\\User::USER_FREE_ACCOUNT_MB_AMOUNT') }}mb this month</span>
+            <div class="global_progress_bar">
+                <div class="global_progress" style="width:{{ app.user.getUploadedAmount / constant('Vinyett\\UserBundle\\Entity\\User::USER_FREE_ACCOUNT_MB_AMOUNT') * 100 }}%"></div>
+            </div>
+        </div>
+        <p>Oh no, it looks like you've hit your usage maximum! Don't worry, it'll reset in a few days</p>
+    </div>
+</div>
+{% endif %}
+
+<div class="popover_footer" style="display:none;">
+    <button class="button upload_photos" type="submit" style="box-shadow: none;">Upload <span class="photo_count">1</span> <span class="photo_plural">photo</span></button> 
+</div>

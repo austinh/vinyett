@@ -1,0 +1,23 @@
+<div class="activity">
+    <div class="title_header">
+        <img src="{{ asset(avatar_path(activity.getActor)) }}" class="">
+        <div class="title">
+            <a href="{{ path('photostream', { username: activity.getActor.getUrlUsername }) }}">{{ activity.getActor }}</a>
+        </div>
+        <div class="by">
+            placed their <a href="{{ path('view_photo', { username: photo.getOwner.getUrlUsername, photo_id: photo.getId }) }}" class="photobox_link" data-photo="{{ photo.getId }}">photo</a> on <a href="{{ path('photostream', { username: photo.getOwner.getUrlUsername }) }}">their map</a>.
+        </div>
+        <div class="date">
+            <abbr class="timeago" title="{{ activity.getCreatedAt|render_isodate }}"> {{ activity.getCreatedAt|render_nice_date }}</abbr>
+        </div>
+    </div>
+    
+    <div id="feed_map_{{ activity.getId }}" class="feed_minimap minimap" style="height: 100px;" data-map-id="feed_map_{{ activity.getId }}" data-geo-long="{{ photo.getGeoLongitude }}" data-geo-lat="{{ photo.getGeoLatitude }}" data-geo-zoom="{{ photo.getGeoZoomLevel }}"></div>
+    
+    <div class="map_arrow_up"></div>
+    
+    <div class="primary_photo map_photo">
+        <img src="{{ asset(photo.getPhotoPathWidth500) }}"/>
+    </div>
+
+</div>

@@ -1,0 +1,68 @@
+{% extends "::body.html.twig" %}
+
+{% block require %}
+    require(["photo/organizer"], function(OrganizerApp) 
+    {
+        var organizer = new OrganizerApp;
+    });
+{% endblock %}
+
+
+{% block content %}
+<style>
+    body { 
+        background-color:#232323;
+    }
+    
+    .header { 
+        border-bottom-color: rgba(0,0,0,0.49);
+    }
+</style>
+
+<div id="organizer">
+
+    <div id="organizer_toolbox"></div>
+
+    <div class="photo_navigator">
+        <div class="reel_options_bar">
+            
+        </div>
+        
+        <div class="organizer_stage_wrap organizer_innertoolbar">
+            <div class="dumpster_zone">Drop here to remove</div>
+            <div class="organizer_reel">
+                <ul class="listed_photos">
+                    
+                </ul>
+            </div>  
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block footer %}
+    <!-- No content here, at lerast yet -->
+{% endblock %}
+
+{% block handlebars %}
+    {{ parent() }}
+    
+    {% include "PhotoBundle:Organizer:popup_dialog.handlebars.html.twig" with { "name": "organizer_dialog_handlebar" } %}
+    {% include "PhotoBundle:Organizer:toolbox.handlebars.html.twig" with { name: "toolbox_handlebar" } %}
+    {% include "PhotoBundle:Organizer:navigator_toolbar.handlebars.html.twig" with { name: "navigator_toolbar_handlebar" } %}
+    {% include "PhotoBundle:Organizer:photo.handlebars.html.twig" with { name: "photo_handlebar" } %}
+    {% include "PhotoBundle:Organizer:batch_photo.handlebars.html.twig" with { name: "batch_photo_handlebar" } %}
+    {% include "PhotoBundle:Organizer:batch_stage.handlebars.html.twig" with { name: "batch_stage_handlebar" } %}
+    {% include "PhotoBundle:Organizer:collection_stage.handlebars.html.twig" with { name: "collection_stage_handlebar" } %}
+    {% include "PhotoBundle:Organizer:toolbox_collection_list_item.handlebars.html.twig" with { name: "toolbox_collection_list_item_handlebar" } %}
+    {% include "PhotoBundle:Organizer:batch_stage_privacy_window.handlebars.html.twig" with { name: "batch_stage_privacy_window_handlebar" } %}
+    {% include "PhotoBundle:Organizer:batch_stage_move_window.handlebars.html.twig" with { name: "batch_stage_move_window_handlebar" } %}
+    {% include "PhotoBundle:Organizer:batch_stage_edit_window.handlebars.html.twig" with { name: "batch_stage_edit_window_handlebar" } %}
+    {% include "PhotoBundle:Organizer:batch_stage_edit_row.handlebars.html.twig" with { name: "batch_stage_edit_row_handlebar" } %}
+    {% include "PhotoBundle:Organizer:toolbar_photo_import_item.handlebars.html.twig" with { name: "toolbar_photo_import_item_handlebar" } %}
+    {% include "PhotoBundle:Organizer:photo_publisher.handlebars.html.twig" with { name: "photo_publisher_handlebar" } %}
+    {% include "PhotoBundle:Organizer:photo_publisher_unpublished.handlebars.html.twig" with { name: "photo_publisher_unpublished_handlebar" } %}
+    {% include "PhotoBundle:Organizer:details_editor.handlebars.html.twig" with { name: "detail_view_handlebar" } %}
+{% endblock %}

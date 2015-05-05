@@ -1,0 +1,15 @@
+<div class="activity">
+    <div class="title_header">
+        <img src="{{ asset(avatar_path(activity.getActor)) }}" />
+        <div class="title">
+            <a href="{{ path('photostream', { username: activity.getActor.getUrlUsername }) }}">{{ activity.getActor }}</a>
+        </div>
+        <div class="by">
+            added <a href="{{ path('view_photo', { username: photo.getOwner.getUrlUsername, photo_id: photo.getId }) }}" class="photobox_link" data-photo="{{ photo.getId }}">a photo</a> to <a href="{{ path('photostream', { username: photo.getOwner.getUrlUsername }) }}">their favorites.</a>
+        </div>
+        <div class="date">
+            <abbr class="timeago" title="{{ activity.getCreatedAt|render_isodate }}"> {{ activity.getCreatedAt|render_nice_date }}</abbr>
+        </div>
+    </div>
+    {% include "StreamBundle:feed:photo.primary.html.twig" %}   
+</div>

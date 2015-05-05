@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %}Vinyett{% endblock %}</title>
+        
+          {% stylesheets 
+              '../app/Resources/public/css/*'
+              '@StaticBundle/Resources/public/css/*'
+              '@StreamBundle/Resources/public/css/*'
+              '@ProfileBundle/Resources/public/css/*'
+              '@PhotoBundle/Resources/public/css/*'
+              '@UserBundle/Resources/public/css/*'
+              '@ConnectBundle/Resources/public/css/*'
+              output='css/stylescripts.css'
+          %}
+          <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        {% block _stylesheets %}{% endblock %}
+        <link href="http://fonts.googleapis.com/css?family=Lobster+Two:700" rel="stylesheet" type="text/css"> <!-- Always loaded, thanks Google -->
+        
+        {{ require_js_initialize({ 'main' : 'main' }) }}
+        
+        <script type="text/javascript">
+        	var Global = new Object();
+        	Global.settings = new Object();
+        	{% if app.debug %}
+        	Global.settings.rurl = "/app_dev.php/";
+        	{% else %}
+        	Global.settings.rurl = "/";
+        	{% endif %}
+        	Global.settings.image_farm = "http://photos.vinyett.com";
+        	{% block global_variables %} {# MAKE SURE TO CALL parent() WHEN EXTENDING THIS BLOCK OR YOU'LL BREAK A LOT OF SHIT #}
+        	{% if app.user %}Global.user = {{ app.user|serialize|raw }};{% endif %}
+        	{% endblock %}
+        	
+        	/* Ugly hack */
+        	var L_ROOT_URL = "/";
+        	
+        	{% block require %}{% endblock %}
+        </script>
+        <!-- UserVoice JavaScript SDK (only needed once on a page) -->
+        <script>(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/UJ4Y5uuQdeiQbFpGVa4Drw.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})()</script>
+        
+        <!-- A function to launch the Classic Widget -->
+        <script>
+        UserVoice = window.UserVoice || [];
+        function showClassicWidget() {
+          UserVoice.push(['showLightbox', 'classic_widget', {
+            mode: 'full',
+            primary_color: '#323232',
+            link_color: '#007dbf',
+            default_mode: 'feedback',
+            forum_id: 200720
+          }]);
+        }
+        </script>
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block toolbar %}{% endblock %}
+      
+        {% block body %}{% endblock %}
+        
+        {% block handlebars %}
+            {% include "PhotoBundle:Organizer:basic_dialog.handlebars.html.twig" with { "name": "dialog_handlebar" } %}
+        {% endblock %}
+    </body>
+    <script type="text/javascript">
+    
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-41316639-1']);
+      _gaq.push(['_trackPageview']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    
+    </script>
+</html>

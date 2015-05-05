@@ -1,0 +1,38 @@
+{% extends "::body.html.twig" %}
+
+{% block content %}
+
+    <div class="body">
+        <h2>
+            Batch editor
+        </h2>
+    
+    
+        <div class="template single">
+        
+            <div class="template_head">
+                Use this template editor to add changes to all of your uploaded photos.
+            </div>
+        
+            <div class="edit_head">
+                Title: <input type="text" class="edit_field" name="psuedo_title" placeholder="Add a title to add to all other photos" />
+            </div>
+            
+            <div class="edit_description">
+                Description 
+                <br /><textarea placeholder="Add a description to add to all other photos"></textarea>
+            </div>
+            
+            <div class="edit_tagline">
+                Tags: <input type="text" class="edit_field" name="psuedo_tagline" placeholder="California, USA, 'San Francisco' " />
+            </div>
+            
+            <div class="edit_photo">
+            
+            </div>
+        
+        </div>
+    
+    </div>
+    
+{% endblock %}

@@ -1,0 +1,3 @@
+StreamBundle:
+    resource: "@StreamBundle/Controller"
+    type:     annotation

@@ -1,0 +1,29 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+    <div style="margin-bottom: 40px; padding-bottom: 31px; border-bottom: 1px solid #333;">
+        <div class="editing_info">
+            <form class="photo_form">    
+                <ul class="details">
+                    <li>
+                        Title <br />
+                        <input type="text" value="{{photo.title}}" name="title" class="text_input" style="width:90%;" placeholder="Add a title" />
+                    </li>
+                    <li>
+                        
+                        Description <br />
+                        <textarea class="text_input" name="description" style="width:90%; height:100px;" placeholder="Add a description">{{photo.description}}</textarea>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        
+        <div class="editing_photo">
+            <div class="photo">
+                <img src="http://photos.vinyett.com/{{photo.photo_path_width_500}}" alt="{{photo.title}}" />
+            </div>
+        </div> 
+    </div>       
+{% endraw %}
+{% endblock %}

@@ -1,0 +1,38 @@
+photostream:
+    pattern:  /photos/{username}/{page}
+    defaults: { _controller: ProfileBundle:Profile:photos, page: 1 }
+    requirements:
+        page:  \d+
+
+set_blurb:
+    pattern: /profile/update/blurb
+    defaults: { _controller: ProfileBundle:Profile:setBlurb }
+    requirements:
+        _method: POST
+        
+update_photo_banner_position:
+    pattern: /profile/update/banner/position
+    defaults: { _controller: ProfileBundle:Profile:bannerPosition }
+    requirements:
+        _method: POST
+        
+set_banner_photo:
+    pattern: /profile/update/banner
+    defaults: { _controller: ProfileBundle:Profile:setBanner }
+    requirements:
+        _method: POST
+        
+admin_reset_user_usage: 
+    pattern: /profile/{username}/admin/resetUsage
+    defaults: { _controller: ProfileBundle:Profile:adminResetUserUsage }
+    requirements:
+        _method: POST
+
+following_pagelet:
+    pattern: /profile/{username}/pagelet/following
+    defaults: { _controller: ProfileBundle:Profile:fetchFollowingPagelet }
+    
+    
+followed_pagelet:
+    pattern: /profile/{username}/pagelet/followed
+    defaults: { _controller: ProfileBundle:Profile:fetchFollowedPagelet }

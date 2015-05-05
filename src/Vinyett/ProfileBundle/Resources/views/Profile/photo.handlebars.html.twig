@@ -1,0 +1,43 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+<div class="photo_single{{#if photo.highlighted}} photo_highlighted{{/if}}">
+    <div class="photo_wrap">
+            <div class="borders">
+                <div class="borders2"></div>
+            </div>
+            <div class="photo_image" style="background-image: url({{#if photo.highlighted}}{{photo_path}}/{{photo.photo_path_width_980}}{{else}}{{photo_path}}/{{photo.photo_path_width_500}}{{/if}})">
+            </div>
+            <div class="title">
+                {{photo.title}}
+            </div>
+    </div>
+    <div class="photo_details">
+        <div class="icon_bar">
+            <ul>
+                <li>
+                    <a href="#" class="profile_favorite_button">
+                            <img src="/images/profile/starred{{#if photo.is_favorited}}_full{{/if}}.png" class="favorited" />
+                        {{#if photo.total_favorites}}
+                            {{photo.total_favorites}}
+                        {{/if}}
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="popover_comment_number">
+                        <img src="/images/profile/comments.png" />
+                        {{#if photo.total_comments}}
+                            {{photo.total_comments}}
+                        {{/if}}
+                    </a>
+                </li>
+                <li>
+                    <img src="/images/profile/more.png" class="more" /> 
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endraw %}
+{% endblock %}

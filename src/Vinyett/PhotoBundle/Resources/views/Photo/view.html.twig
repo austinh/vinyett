@@ -1,0 +1,454 @@
+{% extends "::body.html.twig" %}
+
+{% block global_variables %}
+    {{ parent() }}
+    
+    Global.photo = new Object();
+    Global.photo.id = {{ photo.getId }};
+    Global.photo.owner_id = {{ photo.getOwner.getId }};
+    Global.photo.owner_username = '{{ photo.getOwner.getUsername }}';
+    Global.photo.image_square = '{{ photo.getPhotoPathSquare50 }}';
+    
+    Global.photo.neighbors = new Object();
+    {{ photo_previous_global_options(neighbors, photo) }}
+    
+    {{ photo_next_global_options(neighbors, photo) }}
+{% endblock %}
+
+{% block content %}
+<style>
+    body { 
+        background-color:#eee;
+    }
+</style>
+<div class="homepage_header photo_topper">
+    <div class="body">
+        
+        <div class="photo_title{% if is_granted('EDIT', photo) %}{% if photo.getTitle is empty%} empty_click_to_edit{% endif %} clickable_edit{% endif %}"{% if is_granted('EDIT', photo) %} id="editable_title"{% endif %}>{{ photo.getTitle }}</div>
+                
+        <div class="photo_section">
+            <div class="photo_container">
+
+                <div class="hover_arrow left" data-direction="-1"><img src="{{ asset('images/photo_hover_arrow_left.png')}}" alt="Previous" /></div>
+
+                <img src="{{ photo.getPhotoPathWidth980 }}" class="photo" />
+            
+                <div class="toolbar" style="display:none;">
+                    <a href="#" onclick="return false;">
+                        <img src="{{ asset('images/gear_icon_white.png') }}" id="actions_menu_popover_button" style="float:left; margin-left:3px; margin-right:15px;" />
+                    </a>
+                    <a href="#" onclick="return false;">
+                        <img src="{{ asset('images/share_icon_white.png') }}" id="share_menu_popover_button" style="float:left; margin-left:3px; margin-right:15px;" />
+                    </a>
+                    {# if not is_granted('EDIT', photo) #}
+                    <a href="#" onclick="return false;">
+                        <img src="{% if favorite is not empty %}{{ asset('images/fav_is.png') }}{% else %}{{ asset('images/fav.png') }}{% endif %}" id="like_button" data-is-liked="{% if favorite is not empty %}true{% else %}false{% endif %}" style="float:left; margin-left:3px; margin-right:15px;" />
+                    </a>
+                    {# endif #}
+                    <a href="#" onclick="do_resize_image(); return false;">
+                        <img src="{{ asset('images/photo_fullscreen.png') }}" class="fullscreen_arrows" style="float:right; margin-right:3px;" />
+                    </a>
+                </div>
+
+                <div class="hover_arrow right" data-direction="1"><img src="{{ asset('images/photo_hover_arrow_right.png')}}" alt="Next" /></div>
+            </div>
+       
+            <div id="actions_menu_popover" style="display:none;">
+                {% if is_granted('EDIT', photo) %}
+                <div class="follow_list_options"> 
+                    <ul>
+                        <li onclick="bump_to_tag_add();">
+                            <img src="{{ asset('images/photopopover/tag.png') }}" class="share" /> 
+                            <span class="label">Add new tags</span>
+                        </li>
+                        
+                        <li>
+                            <img src="{{ asset('images/photopopover/tag_person.png') }}" class="share" /> 
+                            <span class="label">Tag a person</span>
+                        </li>
+                        
+                        <li id="open_mapper">
+                            <img src="{{ asset('images/photopopover/compass.png') }}" class="share" /> 
+                            <span class="label">Place on the map</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="follow_list_breaker"></div>
+                    
+                    <ul>
+                        <li>
+                            <img src="{{ asset('images/photopopover/add_collection.png') }}" class="share" /> 
+                            <span class="label">Add to collection</span>
+                        </li>
+                        <li>
+                            <img src="{{ asset('images/photopopover/group.png') }}" class="share" /> 
+                            <span class="label">Add to group</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="follow_list_breaker"></div>
+                    {% endif %}
+                    
+                    <ul>
+                        <li>
+                            <img src="{{ asset('images/photopopover/view_fs.png') }}" class="share" /> 
+                            <span class="label">View full size</span>
+                        </li>
+                    </ul>
+                    
+                    {% if is_granted('OPERATOR', photo) %}
+                    <div class="follow_list_breaker"></div>    
+                    <ul>
+                        <li onclick="window.location='{{ path("photo_to_profile", { photo_id: photo.getId }) }}'">
+                            <img src="{{ asset('images/photopopover/profile_photo.png') }}" class="share" /> 
+                            <span class="label">Use as profile photo</span>
+                        </li>
+                        
+                        <li>
+                            <img src="{{ asset('images/photopopover/icon_photo.png') }}" class="share" /> 
+                            <span class="label">Use as icon photo</span>
+                        </li>
+                    </ul>
+                    
+                    {% endif %}
+                    
+                    {% if is_granted('EDIT', photo) or is_granted('DELETE', photo) %}
+                    <div class="follow_list_breaker"></div>
+                    
+                    <ul>
+                        {% if is_granted('EDIT', photo) %}
+                        <li>
+                            <img src="{{ asset('images/photopopover/rotate.png') }}" class="share" /> 
+                            <span class="label">Rotate photo</span>
+                        </li>
+                        <li>
+                            <img src="{{ asset('images/photopopover/edit_details.png') }}" class="share" /> 
+                            <span class="label">Edit photo details</span>
+                        </li>
+                        {% endif %}
+                        {% if is_granted('DELETE', photo) %}
+                        <li>
+                            <img src="{{ asset('images/photopopover/remove.png') }}" class="share" /> 
+                            <span class="label">Remove this photo</span>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    {% endif %}
+                    
+                </div>
+            </div>
+            
+            <div id="share_menu_popover" style="display:none;">
+                <div class="title_bar">
+                    Share this photo
+                </div>
+                
+                <div class="follow_list_options"> 
+                    <div class="photo_preview"><img src="{{ photo.getPhotoPathSquare50 }}" class="sphoto" /><img src="{{ asset('images/pin_up.png') }}" class="pin" /></div>
+                    
+                    <ul>
+                        <li>
+                            <img src="{{ asset('images/services/facebook_16.png') }}" class="share" /> 
+                            <span class="label">Share on Facebook</span>
+                        </li>
+                        <li>
+                            <img src="{{ asset('images/services/twitter_16.png') }}" class="share" /> 
+                            <span class="label">Tweet to Twitter</span>
+                        </li>
+                        <li>
+                            <img src="{{ asset('images/services/pinterest_16.png') }}" class="share" /> 
+                            <span class="label">Pin to Pinterest</span>
+                        </li>
+                        <li>
+                            <img src="{{ asset('images/services/tumblr_16.png') }}" class="share" /> 
+                            <span class="label">Post to Tumblr</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="follow_list_breaker"></div>
+                    
+                    <ul>
+                        <li>
+                            Share in an email
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+            
+            <div class="column_header">
+                <img src="{{ asset(avatar_path(photo.getOwner)) }} " class="photo_owner_icon" />
+                
+                <strong>By <a href="{{ path('photostream', { 'username': photo.getOwner.getUrlUsername }) }}">{{ photo.getOwner.getUsername }}</a></strong>
+                <br /> <span class="names">{{ photo.getOwner.getFirstName }} {{ photo.getOwner.getLastName }}</span>
+            </div>
+            <div class="description clickable_edit{% if photo.getDescription is empty %} empty_click_to_edit{% endif %}"{% if is_granted('EDIT', photo) %} id="editable_description"{% endif %}>{{ photo.getDescription|raw|nl2br }}</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="photo_stream body photo_extended_info">
+
+    <div class="interactions royal_column">
+    
+    <!--<div class="photo_people_tags">
+        <div class="people_tag_description">
+            In this photo:
+        </div>
+        <div class="people_tag_listing">
+            <ul class="people_tags">
+                <li><a href="#">Nemesisprime <img src="{{ asset(avatar_path(photo.getOwner)) }}" /></a></li>
+                <li><a href="#">Austin <img src="{{ asset(avatar_path(photo.getOwner)) }}" /></a></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+        <br />
+    </div>-->
+    
+    
+        <h3>Activity</h3>
+        
+        <div class="photo_activity">
+            <div class="streamlined">
+                {# You MUST bind templates to the activity streamer helpers BEFORE rendering it (i.e., calling "activity_stream") #}
+                {{ activity_bind_templates({ "favorite" : "PhotoBundle:Photo:favorite.activity.html.twig",
+                                             "favorite.multiple" : "PhotoBundle:Photo:favorite.multiple.activity.html.twig", 
+                                             "comment" : "PhotoBundle:Photo:comment.activity.html.twig" 
+                                          }) }}
+                {{ activity_stream(activities, true, ["comment"]) }}
+            </div>
+            
+            
+            <div class="activityitem comment chunk special">
+                <div class="column_icon">
+                    <img src="{{ asset('images/example_thumbnail.png') }}" />
+                </div>
+                
+                <div class="comment_column">
+                    <strong>Post a comment</strong>
+                    <div class="commentbox">
+                        <div class="description">
+                            <form action="#" class="click-to-edit-buttons" id="commentable">
+                                {{ form_widget(comment_form.content) }} <br />
+                                <button type="submit">Save</button>
+                                {{ form_rest(comment_form) }}
+                            </form>
+                        </div>
+                    </div>
+                    <div class="commentbox-arrow-border"></div>
+                    <div class="commentbox-arrow"></div>
+                </div>
+            </div>
+        
+        </div>
+        
+        
+    </div>
+    
+    <div class="information royal_column">
+        
+        <div class="photo_selector block">
+            <div class="photo_arrow_shadow"></div>
+            <div class="photo_arrow"></div>
+            <div class="photo_neighbors">
+                {{ photo_neighbors(neighbors, photo) }}
+            </div>
+        </div>
+    
+        <div class="block">
+            This photo was 
+            <span id="taken_on_date">
+                {% if photo.getDateTaken is not empty %}
+                taken on <a href="#">{{ photo.getDateTaken|date('F j, Y') }}</a>
+                {% endif %} 
+            </span>
+            {% if photo.getDateTaken is not empty and photo.getDatePosted is not empty and photo.getDateTaken != photo.getDatePosted %}
+            and 
+            {% endif %}
+            <span id="posted_on_date">
+                {% if photo.getDatePosted  is not empty and photo.getDateTaken != photo.getDatePosted %}
+                posted on <a href="#">{{ photo.getDatePosted|date('F j, Y') }}</a>
+                {% endif %}
+            </span>
+            <span id="location_display_name">
+                {% if photo.getGeoHasLocation == true %}
+                in <a href="#">{{ photo.getGeoDisplayName }}</a>
+                {% endif %} 
+            </span>
+            <span id="camera_build">
+                {% if photo.getExifCameraModel  is not empty %}
+                using a <a href="#">{{ photo.getExifCameraMake }} {{ photo.getExifCameraModel }}</a>
+                {% endif  %}
+            </span>
+            <p>
+            <div id="minimap" style="height: 100px;"></div>
+            </p>
+            <input type="hidden" id="geo_lat" name="geo_lat" value="{{ photo.getGeoLatitude }}" />
+            <input type="hidden" id="geo_long" name="geo_long" value="{{ photo.getGeoLongitude }}" />
+            <input type="hidden" id="geo_zoom" name="geo_zoom" value="{{ photo.getGeoZoomLevel }}" />
+            <input type="hidden" id="geo_name" name="geo_name" value="{{ photo.getGeoDisplayName }}" />
+        </div>
+        {% if is_granted('OPERATOR', photo) %}
+            <div class="block">
+                Detailed analytics will go here.
+            </div>
+        {% endif %}
+        
+        <div class="block" id="tag_block">
+            <ul class="tags">
+                {% for photo_tag in photo.getTags %}
+                <li><a href="#" data-tag-tagger-id="{{ photo_tag.getMetadata('TagUser').getId }}" data-tag-tagger-url_username="{{ photo_tag.getTagging.current.getMetadataTagUser.getUrlUsername }}" data-tag-tagger-username="{{ photo_tag.getTagging.current.getMetadataTagUser.getUsername }}" data-tag-name="{{ photo_tag.getName }}">{{ photo_tag.getName }}</a></li>
+                {% endfor %}
+            </ul>
+            {% if photo.getTags|length > 0 %}
+            <div class="add_tags_attachment">
+                <a href="#" onclick="$('#add_tags_block').toggle(); return false;">Add tags</a>
+            </div>
+            {% endif %}
+            {% if photo.getTags|length == 0 %}
+            <div class="empty_tags">
+                No tags here... {% if is_granted('EDIT', photo) %}<a href="#" onclick="$('#add_tags_block').toggle(); return false;">but you can add some!</a>{% endif %}
+            </div>
+            {% endif %}
+            <div class="clearfix"></div>
+            {% if is_granted('EDIT', photo) %}
+            <div class="edit_block" id="add_tags_block" style="display:none;">
+                {%
+                    set tag_previews = [
+                        'Music Rap &quot;Sam Adams&quot;',
+                        'Travel Dubai geo:lon=55.3095',
+                        'Instagram &quot;Still live&quot;'
+                    ]
+                %}
+                <input type="input" name="tags" id="add_tags_field" placeholder="{{ random(tag_previews)|raw }}" class="text_input tag_input" />
+                <button type="submit" class="button" id="add_tags_button">
+                    Add
+                </button>
+                <div class="tag_description" >
+                    Multiple tags should be separated by a space (boat ocean) and multiworded tags should be encased in quotes ("Captain Hook").
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="block">
+            This photo is <a href="#">visible for everyone</a> and licensed as <a href="#">All Rights Reserved</a>.
+        </div>
+        
+        <div class="block-clear">
+            <ul>
+                <li><a href="#">Flag this photo</a></li>
+            </ul>
+        </div>
+    </div> 
+    
+</div>
+
+{% include 'PhotoBundle:Photo:map_tagging.chunk.html.twig' %}
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> <!-- Temporarily here... possibly -->
+<script type="text/javascript">
+
+    {% if is_granted('EDIT', photo) %}
+    
+    $('#editable_title').editable('{{ url('update_photo_title') }}', {
+         cancel    : 'Cancel',
+         submit    : 'Save',
+         indicator : 'Saving...',
+         placeholder: 'Click to add a title...',
+         width: 600,
+         cssclass   : 'title_field',
+         submitdata : { photo_id: "{{ photo.getId }}" },
+         name : 'title',
+         onblur: 'ignore',
+         select: true,
+         callback : function(value, settings) {
+             if(value) 
+             { 
+                $('#editable_title').removeClass('empty_click_to_edit');
+             } else { 
+                $('#editable_title').addClass('empty_click_to_edit');
+             }
+         }
+    });
+    
+    $('#editable_description').editable('{{ url('update_photo_description') }}', { 
+         type      : 'textarea',
+         cancel    : 'Cancel',
+         submit    : 'Save',
+         placeholder: 'Click to add a description...',      
+         submitdata : { photo_id: "{{ photo.getId }}" },
+         name : 'description',
+         onblur: 'ignore',
+         select: true,
+         cssclass: 'click-to-edit-buttons',
+         callback : function(value, settings) {
+             if(value) 
+             { 
+                $('#editable_description').removeClass('empty_click_to_edit');
+             } else { 
+                $('#editable_description').addClass('empty_click_to_edit');
+             }
+         }
+    });
+
+    {% endif %}
+    
+
+    /*
+     * .photo loaded
+     *
+     */
+     $(".photo").load(function() {
+        resize_photo();
+     });
+    
+    
+    /*
+     * On Document Ready
+     *
+     */
+    $(document).ready(function(){
+
+        observe_toolbar();
+        enable_share_menu();
+        enable_actions_menu();
+        enable_tag_popover();
+        init_minimap();
+        watch_photo_comment();
+        
+        {# if not is_granted('EDIT', photo) #}
+            watch_fav_clicks();
+        {# endif #}
+        
+        {% if is_granted('EDIT', photo) %}
+            watch_tag_field();
+            open_mapper();
+        {% endif %}
+    
+        // Key downs for left and right arrow keys
+        $("body").keydown(function(e) {
+    
+            if(e.keyCode == 37) { // left
+                navigate_photos(Global.PREV);
+            }
+            else if(e.keyCode == 39) { // right
+                navigate_photos(Global.NEXT);
+            }
+    
+        });
+    
+    });
+
+</script>
+    
+{% endblock %}
+
+
+{# Handlebars templates! #}
+{% block handlebars %}
+    {{ parent() }}
+    {% include "PhotoBundle:Photo:comment.handlebars.html.twig" with { name: "comment_handlebar" } %}
+
+{% endblock %}

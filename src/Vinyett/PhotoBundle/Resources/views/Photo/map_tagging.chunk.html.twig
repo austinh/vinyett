@@ -1,0 +1,19 @@
+<div class="mapper" style="display:none">
+    <div class="map_titlebar">
+        <div class="left_options header_options">
+            <button type="submit" class="button map_button" onclick="finish_location();">Save</button>
+            <a href="#" data-map-tool="Find your location." id="location_finder" onclick="return false;"><img src="{{ asset('images/maps_location.png') }}" /></a> 
+            <a href="#" data-map-tool="Replace pin" onclick="reset_marker(); return false;"><img src="{{ asset('images/maps_drop_pin.png') }}" /></a> 
+        </div>
+        <div class="right_options header_options">
+            <input type="text" name="location_search" id="geo_finder" placeholder="Start typing a place..." />  
+            <!--<img src="{{ asset('images/maps_saved_locations.png') }}" class="map_bookmarks" />-->
+        </div>
+    </div>
+    
+    <div id="photo_mapper" class="themap"></div>
+            <input type="hidden" id="temp_geo_lat" name="temp_geo_lat" value="" />
+            <input type="hidden" id="temp_geo_long" name="temp_geo_long" value="" />
+            <input type="hidden" id="temp_geo_zoom" name="temp_geo_zoom" value="" />
+            <input type="hidden" id="temp_geo_name" name="temp_geo_name" value="" />
+</div>

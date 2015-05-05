@@ -1,0 +1,52 @@
+.follow_options_tooltip { 
+    width:175px;
+    background-color: #fff;
+    border: 1px solid #aaa;
+    border-radius: 2px;
+    font-size: 12px;
+    padding: 0px;
+    margin: 0px;
+    margin-top: 3px;
+}
+
+.title_bar { 
+    padding: 2px 0px;
+    text-align: center;
+    color: #7e7e7e;
+    font-weight: bold;
+    border-bottom: 1px solid #c5c5c5;
+}
+
+.follow_list_options ul { 
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.follow_list_options ul li .check { 
+    vertical-align: text-top;
+    float: right;
+}
+
+.follow_list_options ul li { 
+    padding: 4px 5px;
+    margin: 2px 0px;
+}
+
+.follow_list_options ul li:hover { 
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.follow_list_options .tab_over { 
+    padding: 8px 5px 8px 20px;;
+}
+
+.follow_list_options .unselected { 
+    color: #bbb;
+}
+
+.follow_list_options .follow_list_breaker { 
+    border-bottom: 1px solid #eee;
+    height: 1px;
+}

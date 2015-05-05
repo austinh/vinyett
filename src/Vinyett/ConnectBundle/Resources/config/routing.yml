@@ -1,0 +1,19 @@
+user_find: 
+    pattern: /users/search
+    defaults: { _controller: ConnectBundle:Search:find }
+
+edit_connection_details:
+    pattern:  /ajax/follow/{connection}/edit/{detail}/{value}
+    defaults: { _controller: ConnectBundle:Follow:ajaxUpdateFollowDetails }
+    requirements:
+        _method:  POST
+
+add_connection_follow:
+    pattern:  /ajax/follow/add/{with}
+    defaults: { _controller: ConnectBundle:Follow:ajaxCreateFollow }
+    requirements:
+        _method:  POST
+
+remove_connection_follow:
+    pattern:  /follow/remove/{with}
+    defaults: { _controller: ConnectBundle:Follow:removeFollow }

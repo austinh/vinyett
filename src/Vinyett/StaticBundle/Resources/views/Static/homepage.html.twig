@@ -1,0 +1,55 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+    <div class="logged_out_head">
+      <div class="body" style="position:relative;">  
+        <div class="toplinks">
+          <a href="{{ path('fos_user_security_login') }}">Already have an account? Sign in!</a>
+        </div>
+      
+        <div class="hello_logo">
+          <img src="{{ asset('images/vin_intro_logo.png') }}" alt="Welcome to Vinyett!" />
+        </div>
+        
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    
+    <div class="body">
+      <div class="slogan">
+        Certainly the best photo sharing, storage, and discovery service ever.
+      </div>
+      
+      <div class="construction_unit">
+        <h2>Sorry about the mess, we're in alpha!</h2>
+        <p>
+            Welcome to the alpha preview of Vinyett. While we're wrapping things up, we're only opening the site up to a few people who can invite their friends. 
+        </p>
+        <p>
+            Soon we'll let more people in. Enter your email below to get in on the next set of invites sent out!
+        </p>
+        <div class="required_invite_row">
+            {% form_theme form 'StaticBundle:Form:request_invite_field.html.twig' %}
+            <form action="{{ path('homepage') }}" method="post">
+            {% if was_successful == false %}
+            {{ form_row(form.email) }}
+            {{ form_rest(form) }}
+            <br />
+            <button type="submit" class="button">Request an invite!</button>
+            {% else %}
+                <h3>As soon as we release a new set of invites, we'll let you know!</h3>
+            {% endif %}
+            </form>
+        </div>
+      </div>
+      
+      <div class="homepage-details-info">
+        We've got some goodies cooking inside.
+      </div>
+    </div>
+  
+    
+    <div class="footer">
+    <a href="#">Vinyett</a> <a href="{{ path('homepage') }}">About</a> <a href="{{ path('homepage') }}">FAQ</a>
+    </div>
+
+{% endblock %}

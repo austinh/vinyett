@@ -1,0 +1,12 @@
+[submodule "vendor/doctrine-extensions-taggable"]
+	path = vendor/doctrine-extensions-taggable
+	url = https://Nemesisprime@github.com/Nemesisprime/DoctrineExtensions-Taggable.git
+[submodule "vendor/pel"]
+	path = vendor/pel
+	url = git://github.com/Nemesisprime/pel.git
+[submodule "git_vendor/nemesisprime/TimelineBundle"]
+	path = git_vendor/nemesisprime/TimelineBundle
+	url = https://nemesisprime@github.com/Nemesisprime/TimelineBundle.git
+[submodule "git_vendor/nemesisprime/Timeline"]
+	path = git_vendor/nemesisprime/Timeline
+	url = https://nemesisprime@github.com/Nemesisprime/timeline.git

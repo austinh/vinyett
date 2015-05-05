@@ -1,0 +1,31 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+    <div class="popover_header" style="height:22px;">
+        Organizer        
+    </div>
+    <div class="popover_content full_list organizer_content no_edit_bar">  
+        
+        <div class="organizer_actions">
+        
+            <ul class="organizer_toolbox_group">
+                <li class="batch_button batch_organizer_button">Batch Organize</li>
+                <!--<li>Photo Editor</li>-->
+            </ul>
+            
+            <div class="pending_imports"></div>
+        
+            <ul class="organizer_toolbox_group collections_group">
+                <li class="new_collection">Create a new set</li>
+            </ul>
+            <!--
+            <ul class="organizer_toolbox_group">
+                <li>About</li>
+            </ul>
+            -->
+        </div>
+        
+    </div>
+{% endraw %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+    <strong>Collections</strong> <span class="info">{{total_collections}} total</span>
+    <span class="options">
+        <!--View as: {{#if options.list}}<strong>Grid</strong> or <a href="#" class="view_switch">List</a>{{else}}<a href="#" class="view_switch">Grid</a> or <strong>List</strong>{{/if}}-->
+    </span>
+{% endraw %}
+{% endblock %}

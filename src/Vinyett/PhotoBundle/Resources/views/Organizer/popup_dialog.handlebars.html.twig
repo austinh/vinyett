@@ -1,0 +1,19 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+<div class="organizer_modal_header">
+    {{modal.title}}
+</div>
+
+<div class="organizer_modal_content">
+    {{modal.content}}
+</div>
+
+<div class="organizer_modal_basebar">
+    {{#each modal.buttons}}
+        <button {{#each this.attributes}}{{this.name}}="{{this.value}}"{{/each}} type="submit" onclick="{{this.callback}}">{{this.title}}</button>
+    {{/each}}
+</div>
+{% endraw %}
+{% endblock %}

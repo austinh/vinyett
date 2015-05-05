@@ -1,0 +1,25 @@
+{# extends "StreamBundle:Timeline:base.html.twig" %}
+
+{% block _vinyett_photobundle_entity_photo_default_component %}
+    {% if display|default(false) == true %}
+        <img src="{{ value.getPhotoPathWidth980 }}" class="photobox_link photo_image" data-photo="{{ value.getId }}" />
+    {% else %}
+        <a href="{{ path('photo', { username: value.getOwner.getUrlUsername, photo_id: value.getId }) }}" class="photobox_link" data-photo="{{ value.getId }}">photo</a>
+    {% endif %}
+{% endblock %}
+
+{% timeline_action_theme timeline _self %}
+
+{% block title %}
+    {{ timeline_component_render(timeline, 'subject') }}
+    updated their 
+    {{ timeline_component_render(timeline, 'directComplement') }}
+{% endblock %}
+
+{% block photo %}
+        {{ timeline_component_render(timeline, 'directComplement', { display: true }) }}
+{% endblock %}
+
+{% block content %}
+    {{ timeline_component_render(timeline, 'directComplement', { stats: true }) }}
+{% endblock #}

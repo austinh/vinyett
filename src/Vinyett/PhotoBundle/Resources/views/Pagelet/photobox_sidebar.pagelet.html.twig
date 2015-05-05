@@ -1,0 +1,98 @@
+{% raw %}
+    <div class="sidebar_header">
+        <div class="user_information">
+            <div class="icon">
+                <div class="global_icon_small"{{#if photo.owner.photo_square}} style="background-image:url({{photo.owner.photo_square}})"{{/if}}></div>
+            </div>
+            <div class="textual_info">
+                <h3><a href="/photos/{{photo.owner.url_username}}">{{photo.owner.username}}</a></h3>
+                <span class="under_date timestamp" data-livestamp="{{photo.date_posted}}">{{photo.date_posted}}</span>
+            </div>
+        </div>
+        
+        <div class="comment photo_information">
+            {{#unlessAnd photo.title photo.description}}
+                {{#editable photo}}
+                    Click to add a title or description.
+                {{/editable}}
+            {{else}}
+                {{#if photo.title}}<strong>{{photo.title}}</strong>.{{/if}}
+                {{photo.description}}
+            {{/unlessAnd}}
+        </div>
+        {{#editable photo}}
+        <div class="edit_dialog" style="display:none;">
+            <div class="edit_header">
+                Edit photo details
+            </div>
+            <div class="edit_content">
+                <form class="edit_details_form">
+                    <ul>
+                        <li>
+                            <label for="title">Title</label>
+                            <input type="text" name="title" id="title" placeholder="Type a title..." value="{{photo.title}}" class="text_input title_input" />
+                        </li>
+                        <li> 
+                            <label for="desc">Description</label>
+                            <textarea id="desc" name="description" placeholder="Type a description" class="text_input title_input">{{photo.description}}</textarea>
+                        </li>
+                    </ul>
+                    
+                    <div class="save_buttons">
+                        {{#deletable photo}}
+                            <button class="delete_photo button" style="float:left;" type="cancel">Delete</button>
+                        {{/deletable}}
+                        <button class="cancel_photo_changes button" type="cancel">Nevermind</button>
+                        <button class="save_photo_changes button" type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {{/editable}}
+    </div>
+    
+    <!--<div class="options_bar">
+        <ul class="options">
+            <li>Like</li>
+            <li>Comment</li>
+            <li>Edit</li>
+        </ul>
+    </div>-->
+    
+    <div class="uib popover_uib">
+        <div class="likebar">
+                <a href="#" class="stream_favorite_button"><img src="/images/profile/starred{{#if photo.is_favorited}}_full{{/if}}.png" class="favorited" /></a>
+                {{#unless photo.favorites}}
+                    Be the first to like this photo
+                {{/unless}}
+                
+                {{#limitedeach photo.favorites}}<a href="{{this.owner.url}}">{{this.owner.username}}</a>{{/limitedeach}}
+                {{#extraeach photo.favorites}}
+                    and {{this}} other{{#morethanone this}}s{{/morethanone}}
+                {{/extraeach}}
+                {{#if photo.favorites}} like{{#morethanone photo.favorites}}s{{/morethanone}} this photo{{/if}}
+        </div>
+        <div class="comment_case comment_list"></div>
+        <div class="comment_case">
+            <div class="comment">
+                <div class="comment_adder_container ready_comment_container">
+                    <span class="waiting_text">Write a comment...</span>
+                    <div class="commentbox_interact" style="display:none;"> 
+                        <div class="comment_icon_column">
+                            <div class="global_icon_mini" {{#if user.photo_square}}style="background-image:url({{user.photo_square}})"{{/if}}></div>
+                        </div>
+                        <div class="comment_comment_column">
+                            <textarea placeholder="Press enter to post your comment" class="comment_textbox"></textarea>
+                            <p>
+                                <button class="button post_comment_button" type="submit">Post</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="option_links">
+        <a href="">Report photo</a>
+    </div>
+{% endraw %}

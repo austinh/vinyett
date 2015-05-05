@@ -1,0 +1,88 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+
+    <div class="primary_photo" style="cursor: pointer; background-image:url({{photo_path}}/{{photo.photo_path_width_500}});">
+        <a href="#" class="photobox_link" data-photo="{{ photo.id }}">
+            <img src="{{photo_path}}/{{photo.photo_path_width_500}}" style="width:500px; visibility:hidden;" />
+        </a>
+    </div>
+    
+    <div class="baseboard">
+    
+        <div class="base_header">
+            <div class="floating_icon">
+                <div class="global_icon_small baseboard_icon" {{#if photo.owner.photo_square}}style="background-image:url({{photo.owner.photo_square}})"{{/if}}></div>
+            </div>
+            
+            <div class="photo_information title_header">
+                <div class="title">
+                    <a href="{{Global.settings.rurl}}photos/{{photo.owner.url}}">{{photo.owner.username}}</a>
+                </div>
+                <div class="by">
+                     added photo
+                </div>
+                <div class="date">
+                    <abbr class="timeago" title="{{photo.date_posted}}">{{photo.date_posted}}</abbr>
+                </div>
+            </div>
+        </div>
+    
+        <div class="uib">
+            <div class="likebar">
+                <a href="#" class="stream_favorite_button"><img src="/images/profile/starred{{#if photo.is_favorited}}_full{{/if}}.png" class="favorited" /></a>
+                {{#unless photo.favorites}}
+                    Be the first to like this photo
+                {{/unless}}
+                
+                {{#limitedeach photo.favorites}}<a href="{{Global.settings.rurl}}photos/{{this.owner.url}}">{{this.owner.username}}</a>{{/limitedeach}}
+                {{#extraeach photo.favorites}}
+                    and {{this}} other{{#morethanone this}}s{{/morethanone}}
+                {{/extraeach}}
+                {{#if photo.favorites}} like{{#morethanone photo.favorites}}s{{/morethanone}} this photo{{/if}}
+            </div>
+            <div class="comment_case">
+                {{#each comments}}
+                <div class="comment">
+                    <div class="comment_icon_column">
+                        <div class="global_icon_mini" {{#if this.owner.photo_square}}style="background-image:url({{this.owner.photo_square}})"{{/if}}></div>
+                    </div>
+                    <div class="comment_comment_column">
+                        <div class="commenter_overview">
+                            <strong><a href="{{Global.settings.rurl}}photos/{{this.owner.url}}">{{this.owner.username}}</a></strong> 
+                            <abbr class="timeago" title="{{this.created_at}}">{{this.created_at}}</abbr>
+                            {{#deletable this.options this}}
+                                <span class="comment_options">
+                                        &bull; <a href="#" class="remove_comment" data-comment="{{this.id}}">Remove</a>
+                                </span>
+                            {{/deletable}}
+                        </div>
+                        {{this.content}}
+                    </div>
+                </div>
+                {{/each}}
+                <div class="comment">
+                    <div class="comment_adder_container ready_comment_container">
+                        <span class="waiting_text">Write a comment...</span>
+                        <div class="commentbox_interact" style="display:none;"> 
+                            <div class="comment_icon_column">
+                                <div class="global_icon_mini" {{#if user.photo_square}}style="background-image:url({{user.photo_square}})"{{/if}}></div>
+                            </div>
+                            <div class="comment_comment_column">
+                                <textarea placeholder="Press enter to post your comment" class="comment_textbox"></textarea>
+                                <p>
+                                    <button class="button post_comment_button" type="submit">Post</button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+    
+
+{% endraw %}
+{% endblock %}

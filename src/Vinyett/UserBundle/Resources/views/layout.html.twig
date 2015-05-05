@@ -1,0 +1,33 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+    <style type="text/css">
+        body { 
+            background-color: #eee;
+        }
+    </style>
+
+    <div class="logged_out_head">
+      <div class="body" style="position:relative;">  
+        <div class="toplinks">
+          {% block navigation_links %}{% endblock %}
+        </div>
+      
+        <div class="hello_logo">
+            <a href="{{ path('homepage') }}">
+                <img src="{{ asset('images/vin_logo.png') }}" alt="Welcome to Vinyett!" />
+            </a>
+        </div>
+        
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <div class="pbody">
+        {% block content %}
+            {% block fos_user_content %}{% endblock %}
+        {% endblock %}
+    </div>    
+    
+    {% block footer %}
+        {% include "::footer.html.twig" %}
+    {% endblock %}
+{% endblock %}

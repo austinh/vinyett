@@ -1,0 +1,330 @@
+<?php
+
+namespace Vinyett\UserBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Entity\User as BaseUser;
+
+/**
+ * Vinyett\UserBundle\Entity\User
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Vinyett\UserBundle\Entity\UserRepository")
+ */
+class User extends BaseUser
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var string $first_name
+     *
+     * @ORM\Column(name="first_name", type="string", length=50, nullable=true)
+     */
+    private $first_name;
+
+    /**
+     * @var string $last_name
+     *
+     * @ORM\Column(name="last_name", type="string", length=50, nullable=true)
+     */
+    private $last_name;
+    
+    /**
+     * @var string $photo_square
+     *
+     * @ORM\Column(name="photo_square", type="string", length=255, nullable=true)
+     */
+    private $photo_square; 
+    
+    /**
+     * @var string $photo_square_full
+     *
+     * @ORM\Column(name="photo_square_full", type="string", length=255, nullable=true)
+     */
+    private $photo_square_full;    
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="\Vinyett\PhotoBundle\Entity\Photo")
+     * @ORM\JoinColumn(referencedColumnName="id")
+     */
+    private $profile_photo;    
+    
+    /**
+     * @var integer $popularity
+     *
+     * @ORM\Column(name="popularity", type="integer")
+     */
+    private $popularity = 0;
+
+    /**
+     * @var integer $photo_count
+     *
+     * @ORM\Column(name="photo_count", type="integer")
+     */
+    private $photo_count = 0;
+
+    /**
+     * @var integer $comment_count
+     *
+     * @ORM\Column(name="comment_count", type="integer")
+     */
+    private $comment_count = 0;
+
+    /**
+     * @var integer $favorite_count
+     *
+     * @ORM\Column(name="favorite_count", type="integer")
+     */
+    private $favorite_count = 0;
+
+    /**
+     * @var boolean $has_completed_intro
+     *
+     * @ORM\Column(name="has_completed_intro", type="boolean")
+     */
+    private $has_completed_intro = false;
+    
+
+    /**
+     * @var datetime $password_updated_last
+     *
+     * @ORM\Column(name="password_updated_last", type="datetime")
+     */
+    private $password_updated_last;
+    
+
+    public function __construct()
+    {
+        parent::__construct();
+        
+        $this->password_updated_last = new \DateTime();
+        
+    }
+
+    /**
+     * Get a URL friendly version of username
+     *
+     * @return string
+     */
+    public function getUrlUsername() 
+    {
+        return strtolower($this->getUsername());
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set first_name
+     *
+     * @param string $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->first_name = $firstName;
+    }
+
+    /**
+     * Get first_name
+     *
+     * @return string 
+     */
+    public function getFirstName()
+    {
+        return $this->first_name;
+    }
+
+    /**
+     * Set last_name
+     *
+     * @param string $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->last_name = $lastName;
+    }
+
+    /**
+     * Get last_name
+     *
+     * @return string 
+     */
+    public function getLastName()
+    {
+        return $this->last_name;
+    }
+
+    /**
+     * Set popularity
+     *
+     * @param integer $popularity
+     */
+    public function setPopularity($popularity)
+    {
+        $this->popularity = $popularity;
+    }
+
+    /**
+     * Get popularity
+     *
+     * @return integer 
+     */
+    public function getPopularity()
+    {
+        return $this->popularity;
+    }
+
+    /**
+     * Set photo_count
+     *
+     * @param integer $photoCount
+     */
+    public function setPhotoCount($photoCount)
+    {
+        $this->photo_count = $photoCount;
+    }
+
+    /**
+     * Get photo_count
+     *
+     * @return integer 
+     */
+    public function getPhotoCount()
+    {
+        return $this->photo_count;
+    }
+
+    /**
+     * Set comment_count
+     *
+     * @param integer $commentCount
+     */
+    public function setCommentCount($commentCount)
+    {
+        $this->comment_count = $commentCount;
+    }
+
+    /**
+     * Get comment_count
+     *
+     * @return integer 
+     */
+    public function getCommentCount()
+    {
+        return $this->comment_count;
+    }
+
+    /**
+     * Set favorite_count
+     *
+     * @param integer $favoriteCount
+     */
+    public function setFavoriteCount($favoriteCount)
+    {
+        $this->favorite_count = $favoriteCount;
+    }
+
+    /**
+     * Get favorite_count
+     *
+     * @return integer 
+     */
+    public function getFavoriteCount()
+    {
+        return $this->favorite_count;
+    }
+
+    /**
+     * Set has_completed_intro
+     *
+     * @param boolean $hasCompletedIntro
+     */
+    public function setHasCompletedIntro($hasCompletedIntro)
+    {
+        $this->has_completed_intro = $hasCompletedIntro;
+    }
+
+    /**
+     * Get has_completed_intro
+     *
+     * @return boolean 
+     */
+    public function getHasCompletedIntro()
+    {
+        return $this->has_completed_intro;
+    }
+
+    /**
+     * Set photo_square
+     *
+     * @param string $photoSquare
+     */
+    public function setPhotoSquare($photoSquare)
+    {
+        $this->photo_square = $photoSquare;
+    }
+
+    /**
+     * Get photo_square
+     *
+     * @return string 
+     */
+    public function getPhotoSquare()
+    {
+        return $this->photo_square;
+    }
+
+    /**
+     * Set photo_square_full
+     *
+     * @param string $photoSquareFull
+     */
+    public function setPhotoSquareFull($photoSquareFull)
+    {
+        $this->photo_square_full = $photoSquareFull;
+    }
+
+    /**
+     * Get photo_square_full
+     *
+     * @return string 
+     */
+    public function getPhotoSquareFull()
+    {
+        return $this->photo_square_full;
+    }
+
+    /**
+     * Set profile_photo
+     *
+     * @param Vinyett\PhotoBundle\Entity\Photo $profilePhoto
+     */
+    public function setProfilePhoto(\Vinyett\PhotoBundle\Entity\Photo $profilePhoto)
+    {
+        $this->profile_photo = $profilePhoto;
+    }
+
+    /**
+     * Get profile_photo
+     *
+     * @return Vinyett\PhotoBundle\Entity\Photo 
+     */
+    public function getProfilePhoto()
+    {
+        return $this->profile_photo;
+    }
+}

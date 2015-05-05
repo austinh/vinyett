@@ -1,0 +1,3 @@
+blog_homepage:
+    pattern:  /blog
+    defaults: { _controller: BlogBundle:Blog:index }

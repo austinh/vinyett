@@ -1,0 +1,7 @@
+parameters:
+#    profile.example.class: Vinyett\ProfileBundle\Example
+
+services:
+#    profile.example:
+#        class: %profile.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

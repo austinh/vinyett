@@ -1,0 +1,38 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+<div id="privacy_batch_edit">
+    <div class="popover_header">
+        Batch change privacy
+    </div>
+    <div class="popover_content">
+        <div class="privacy_panel_option">
+            Who can see these photos? ({{batch_num}} in batch)
+            <ul class="privacy_choices">
+                <li><input type="radio" class="subprivacy_level" name="privacy_bubble" value="0" checked="checked" id="choice_everyone" /><label for="choice_everyone">Everyone</label></li>
+                <li>
+                    <input type="radio" class="subprivacy_level" name="privacy_bubble" value="1" id="choice_private" /><label for="choice_private">Private (only me)</label>
+                    <!--<ul>
+                        <li><input type="checkbox" class="subprivacy_level" value="2"> ...but friends can see it, too.</li>
+                        <li><input type="checkbox" class="subprivacy_level" value="3"> ...but family can see it, too.</li>
+                    </ul>-->
+                </li>
+            </ul>
+            <input type="hidden" class="privacy_level" name="privacy_level" value="0" />
+        </div>
+        <div class="privacy_panel_option">
+            <div class="description">
+                <label for="is_searchable">Allow photos to be searchable?</label> <input type="checkbox" id="is_searchable" name="is_searchable" value="true" checked="checked" />
+                <p class="sub_text">
+                    Only people who can see a photo can search for it.
+                </p>
+            </div>
+        </div>
+        <div class="button_bar">
+            <button class="button save_button" type="submit">Change Privacy</button>
+        </div>
+    </div>
+</div>
+{% endraw %}
+{% endblock %}

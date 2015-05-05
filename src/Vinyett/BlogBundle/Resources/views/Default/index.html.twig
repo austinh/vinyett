@@ -1,0 +1,39 @@
+{% extends "::body.html.twig" %}
+
+{% block content %}
+    <style>
+        body {
+            background-color:#eee;
+        }
+    </style>
+
+    <div class="blog_header">
+        <span class="blog_title">
+            The Vinyett Blog
+        </span>
+        <div class="slug">
+            Keeping you up to date every step of the way
+        </div>
+    </div>
+
+    <div class="body">
+        <div class="spacer_ordered">
+            Most recent
+        </div>
+
+        {% for post in posts %}
+            <div class="blog_post">
+                <div class="blog_post_header">
+                    {{ post.getTitle }}
+                </div>
+                <div class="blog_post_body">
+                    {{ post.getBody }}
+                </div>
+                <div class="blog_post_details">
+                    Posted on {{ post.getCreatedAt|date("l, F jS Y") }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

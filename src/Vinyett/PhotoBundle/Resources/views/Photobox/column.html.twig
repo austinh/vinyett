@@ -1,0 +1,56 @@
+<div class="view_column pbody">
+    <div class="photo_user_topper">
+        <div class="photo_user_header">
+            <div class="photo_icon">
+                <div class="borders">
+                    <div class="borders2"></div>
+                </div>
+                <img src="{{ asset(avatar_path(photo.getOwner)) }}" />
+            </div>
+            <div class="photo_user_info">
+                <h2 class="photo_user_title">
+                    <a href="{{ path('photostream', { 'username': photo.getOwner.getUrlUsername }) }}">{{ photo.getOwner.getUsername }}</a>
+                </h2>
+                <div class="photo_user_description">
+                    <ul>
+                        <li>Photos: {{ photo.owner.getPhotoCount }}</li>
+                        <li>Comments: {{ photo.owner.getcommentCount }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> 
+      
+    <div class="inner_stream"> 
+        <div class="posts"> 
+            <div class="activityitem action chunk introduction">
+                Posted on {{ photo.getDatePosted|date('F j, Y') }}
+            </div>
+            
+            {# You MUST bind templates to the activity streamer helpers BEFORE rendering it (i.e., calling "activity_stream") #}
+            {{ activity_bind_templates({ "favorite":            "PhotoBundle:Photo:favorite.activity.html.twig",
+                                         "favorite.multiple":   "PhotoBundle:Photo:favorite.multiple.activity.html.twig", 
+                                         "comment":             "PhotoBundle:Photobox:comment.activity.html.twig" 
+                                      }) }}
+            {{ activity_stream(activities, true, ["comment"]) }}
+        </div>
+        <div class="activityitem action chunk comment_action">
+            <div class="add_comment_field">
+                <div class="user_icon">
+                    <img src="{{ asset(avatar_path(app.user)) }}" />
+                </div>
+                <div class="mock_field_cell">
+                    <div class="mock_field">
+                        Post a comment...
+                    </div>
+                    <div class="real_field"  style="display:none;">
+                        <textarea class="photobox_comment text_field" placeholder="Start typing a comment..."></textarea>
+                        <div class="button_row">
+                            <button type="submit" class="button comment_button">Post</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

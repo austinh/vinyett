@@ -1,0 +1,177 @@
+<?php
+
+namespace Vinyett\PhotoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Vinyett\PhotoBundle\Entity\PhotoComment
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Vinyett\PhotoBundle\Entity\PhotoCommentRepository")
+ * @ORM\HasLifecycleCallbacks
+ */
+class PhotoComment
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="\Vinyett\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
+     */
+    private $owner;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="\Vinyett\PhotoBundle\Entity\Photo")
+     * @ORM\JoinColumn(name="photo_id", referencedColumnName="id")
+     */
+    private $photo;
+
+    /**
+     * @var string $ip_address
+     *
+     * @ORM\Column(name="ip_address", type="string", length=50, nullable=true)
+     */
+    private $ip_address;
+
+    /**
+     * @var text $content
+     *
+     * @ORM\Column(name="content", type="text")
+     */
+    private $content;
+
+    /**
+     * @var datetime $created_at
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $created_at;
+
+    /**
+     * @var datetime $updated_at
+     *
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updated_at;
+
+    /**
+     * Constructor
+	 *
+     * @return null
+     */
+    public function __construct() 
+    { 
+        $this->created_at = new \DateTime();
+        $this->updated_at = new \DateTime();
+    }
+    
+    /**
+     * Sets the current time for the updated_at field when updated.
+     *  
+     * @ORM\PreUpdate
+     *
+     * @return null
+     */
+    public function onUpdate() 
+    { 
+        $this->updated_at = new \DateTime();
+    }    
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    /**
+     * Set ip_address
+     *
+     * @param string $ipAddress
+     */
+    public function setIpAddress($ipAddress)
+    {
+        $this->ip_address = $ipAddress;
+    }
+
+    /**
+     * Get ip_address
+     *
+     * @return string 
+     */
+    public function getIpAddress()
+    {
+        return $this->ip_address;
+    }
+
+    /**
+     * Set content
+     *
+     * @param text $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * Get content
+     *
+     * @return text 
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param datetime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return datetime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param datetime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return datetime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+}

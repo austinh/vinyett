@@ -1,0 +1,8 @@
+parameters:
+    affinity.manager.class: Vinyett\ConnectBundle\Services\AffinityManager
+
+services:
+
+    affinity.manager:
+        class: %affinity.manager.class%
+        arguments: [@doctrine.orm.entity_manager, @security.context]

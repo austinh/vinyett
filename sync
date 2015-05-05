@@ -1,0 +1,15 @@
+#! /bin/bash
+
+cd /usr/share/nginx/www/vinyett 
+git pull
+git submodule update --recursive
+php composer.phar install
+sudo chown -R ubuntu ../vinyett
+sudo chmod -R 777 app/cache
+chmod -R 777 app/logs
+chmod -R 777 app/sessions
+app/console cache:clear --no-debug --env=prod
+app/console assetic:dump --env=prod --no-debug
+app/console doctrine:schema:update --force
+sudo chown -R ubuntu ../vinyett
+sudo chmod -R 777 app/cache

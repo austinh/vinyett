@@ -1,0 +1,19 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+<div id="collection_settings_popover">
+    <div class="popover_header">
+        Delete collection
+    </div>
+    <div class="popover_content">
+        <div class="privacy_panel_option prompt_box">
+            <div class="description">
+                Removing this collection will not affect any of your photos.
+            </div>
+        </div>
+        <div class="button_bar"><button class="button delete" type="submit">Delete</button></div>
+    </div>
+</div>
+{% endraw %}
+{% endblock %}

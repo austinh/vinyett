@@ -1,0 +1,24 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+        <div class="image_preview">
+            <img src="http://photos.vinyett.com/{{ photo.photo_path_width_500 }}" class="photo_preview" alt="A lil preview!" />
+        </div>
+        <div class="descriptive_info">
+            <div class="title_spot">
+                {{#if photo.title}}{{photo.title}}{{else}}Click to add a title{{/if}}
+            </div>
+            <div class="title_edit" style="display:none;">
+                <input type="text" class="text_input title_change" placeholder="Enter a title" />
+            </div>
+            
+            <div class="description_spot">
+               {{#if photo.description}}{{photo.description}}{{else}}Click to add a description{{/if}}
+            </div>
+            <div class="description_edit" style="display:none;">
+                <textarea type="text" class="text_input description_change" placeholder="Enter a description"></textarea>
+            </div>
+        </div>
+{% endraw %}
+{% endblock %}

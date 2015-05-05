@@ -1,0 +1,45 @@
+<div class="invite pbody">
+<form class="invite_form">
+    <div class="card_title_header">
+    
+        <button class="card_button cancel_button" type="cancel">Cancel</button>
+    
+        <button class="card_button send_invite_button" type="submit">Send Invites</button>
+        
+    </div>
+    
+    <div class="card_body">
+    
+        <div class="column1">
+            
+            <div class="important">
+                You only have <strong>{{ app.user.getTotalInvites }} invites</strong> left! <br />Better use them wisely!
+            </div>
+            
+            <div class="mock_message">
+                <img src="{{ asset('images/stamp.jpg') }}" style="float:right;" />
+                <p>
+                    Hello there!
+                </p>
+                <p>
+                    Your friend {{ app.user.getFirstName }} (or {{app.user.getUsername}} here) has invited you to join <a href="#">Vinyett</a>, a growing community for taking, sharing, and discovering photos across the world.
+                </p>
+                <p> 
+                    Just click <a href="#">here</a> and we'll get started. See you on Vinyett!
+                </p>
+            </div>
+        </div>
+        
+         <div class="column2">
+            <h3>Who do you want to make these invitations out to?</h3>
+            <ul>
+            {% for emailField in form.emails %}
+                <li>
+                    {{ form_widget(emailField) }}
+                </li>
+            {% endfor %}
+            </ul>
+         </div>
+    </div>
+</form>
+</div>

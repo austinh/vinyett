@@ -1,0 +1,29 @@
+{% extends "StreamBundle:Timeline:base.html.twig" %}
+
+{# timeline_action_theme timeline _self %}
+
+{% block _vinyett_photobundle_entity_photo_directComplement_component_collection %}
+    {% if display|default(false) == true %}
+        {% for photo in value %}
+                <img class="grouped_photo_image" src="{{ photo.getPhotoPathSquare120 }}" />
+        {% endfor %}
+    {% else %}
+        {{ value|length }} photos.
+    {% endif %}
+{% endblock %}
+
+{% block _vinyett_photobundle_entity_photo_directComplement_component %}
+    {% if display|default(false) == true %}
+        <div class="photo_space">
+            <div class="activity_photo_head" style="background-image:url({{ value.getPhotoPathWidth980 }})">
+                <img src="{{ value.getPhotoPathWidth980 }}" style="visibility: hidden" />
+            </div>
+        </div>
+    {% else %}
+        a <a href="{{ path('photo', { username: value.getOwner.getUrlUsername, photo_id: value.getId }) }}" class="photobox_link" data-photo="{{ value.getId }}">photo</a>.
+    {% endif %}
+{% endblock #}
+
+{% block content %}
+    {{ timeline_component_render(timeline, 'directComplement', { stats: true }) }}
+{% endblock %}

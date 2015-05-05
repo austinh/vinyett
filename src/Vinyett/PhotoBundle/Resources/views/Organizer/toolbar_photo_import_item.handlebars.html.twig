@@ -1,0 +1,13 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+
+{% raw %}
+    {{#if total}}
+            <ul class="organizer_toolbox_group collections_group">
+                <li class="pending_import_button">Pending review <span class="organizer_bubble">{{total}}</span></li>
+            </ul>
+    {{/if}}
+{% endraw %}
+
+{% endblock %}

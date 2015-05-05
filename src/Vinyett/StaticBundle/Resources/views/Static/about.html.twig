@@ -1,0 +1,36 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+    <div class="logged_out_head">
+      <div class="body" style="position:relative;">  
+        <div class="toplinks">
+          <a href="{{ path('homepage') }}">Go back home</a>
+        </div>
+      
+        <div class="hello_logo">
+                <img src="{{ asset('images/vin_logo.png') }}" alt="Welcome to Vinyett!" />
+        </div>
+        
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    
+    <style type="text/css">
+        body { 
+            background-color: #eee;
+        }
+    </style>
+    
+    <div class="body">
+      <div class="slogan">
+        We're here to help discover the color in the world.
+      </div>
+      
+      <p style="width: 400px; margin: 10px auto;">
+        We've got more to say, just give us some time to spell it out.
+      </p>
+    </div>
+  
+    
+    {% include "::footer.html.twig" %}
+
+{% endblock %}

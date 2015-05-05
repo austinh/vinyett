@@ -1,0 +1,15 @@
+<div class="activity">
+    <div class="title_header">
+        <img src="{{ asset(avatar_path(activity.getActor)) }}" />
+        <div class="title">
+            <a href="{{ path('photostream', { username: photo.getOwner.getUrlUsername }) }}">{{ photo.getOwner.getUsername }}</a>
+        </div>
+        <div class="by">
+             made <a href="{{ path('view_photo', { username: photo.getOwner.getUrlUsername, photo_id: photo.getId }) }}" class="photobox_link" data-photo="{{ photo.getId }}">{% if photo.getTitle is not empty %}{{ photo.getTitle }}{% else %}a photo{% endif%}</a> their profile image.
+        </div>
+        <div class="date">
+            <abbr class="timeago" title="{{ activity.getCreatedAt|render_isodate }}"> {{ activity.getCreatedAt|render_nice_date }}</abbr>
+        </div>
+    </div>
+    {% include "StreamBundle:feed:photo.primary.html.twig" %}
+</div>

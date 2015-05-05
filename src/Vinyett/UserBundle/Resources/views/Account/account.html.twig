@@ -1,0 +1,52 @@
+{% extends "::body.html.twig" %}
+
+{% block title %}Modify Account Settings{% endblock %}
+
+{% block content %}
+    <style>
+        body { 
+            background-color: #eee !important;
+        }
+    </style>
+
+    <div class="body">
+        
+        
+        <div class="floating_two_column account">
+        
+        
+            <div class="navigation_column">
+                <h2>Settings</h2>
+                
+                <ul class="column_list">
+                    <li class="selected"><img src="{{ asset("images/account_settings/settings.png") }}" /> General</li>
+                    <li><img src="{{ asset("images/account_settings/security.png") }}" /> Security</li>
+                    <li><img src="{{ asset("images/account_settings/notifications.png") }}" /> Notifications</li>
+                    <li><img src="{{ asset("images/account_settings/privacy.png") }}" /> Privacy</li>
+                </ul>
+            </div>
+        
+            
+            <div class="main_column">
+            
+                <h3>General</h3>
+                            
+                        <form action="{{ path('account_update_photo_icon') }}" method="post" enctype="multipart/form-data">
+                            <input type="file" name="picture" id="picture" />
+                            <button type="submit">Upload!</button>
+                        </form>
+                            
+            </div>
+        
+        </div>
+        
+        
+    </div>
+    
+{% endblock %}
+
+{% block handlebars %}
+    {{ parent() }}
+{% endblock %}
+
+

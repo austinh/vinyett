@@ -1,0 +1,44 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+<div class="organizer_modal_header">
+    Edit photo details
+</div>
+
+<div class="organizer_modal_content">
+
+    <div class="batch_details_photos">
+    
+        {{#each photos}}
+            <div class="batch_photo_block" data-photo-block="{{this.id}}">
+            
+                <div class="batch_photo">
+                    <img src="http://photos.vinyett.com/{{this.photo_path_width_200}}" />
+                </div>
+                
+                <div class="batch_information">
+                    <div class="inner_subform">
+                        <div class="field">
+                            <input type="text" name="title" value="{{this.title}}" placeholder="Type a title here..." class="text_input batch_text_input" />
+                        </div>
+                        <div class="field">
+                            <textarea name="description" value="{{this.description}}" placeholder="Type a description here..." class="text_input batch_text_area" />
+                        </div>
+                    </div>                
+                </div>
+
+            </div>
+        {{/each}}
+        
+    </div>
+
+</div>
+
+<div class="organizer_modal_footer">
+    <div class="button_holder">
+        <button type="cancel" class="cancel_button button">Cancel</button> <button type="submit" class="save_button button">Save</button>
+    </div>
+</div>
+{% endraw %}
+{% endblock %}

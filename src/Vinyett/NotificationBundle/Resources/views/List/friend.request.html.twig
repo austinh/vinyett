@@ -1,0 +1,15 @@
+<li>
+  <div class="notification" id="friend_request_{{ notification.getId }}">
+    <img src="{{ asset(avatar(friend)) }}" class="avatar" />
+    <span class="title">
+      <span id="friend_request_{{ notification.getId }}_name"><a {{ link_to_profile(friend) }}>{{ render_name(friend) }}</a></span> wants to be your friend!
+    </span>
+    <span class="time">
+      {{ notification.getCreatedAt|render_ago }}
+    </span>
+    <div class="button_row">
+      <input type="button" name="add" value="Add Friend" onclick="accept_notification_friend_request({{ notification.getId }}, {{ friend.getId }});" />
+      <input type="button" name="remove" value="Now now" />
+    </div>
+    <div class="clearfix"></div>
+</li>

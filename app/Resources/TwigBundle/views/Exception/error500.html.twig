@@ -1,0 +1,38 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+    <div class="logged_out_head">
+      <div class="body" style="position:relative;">  
+        <div class="toplinks">
+          <a href="{{ path('homepage') }}">Go back home</a>
+        </div>
+      
+        <div class="hello_logo">
+                <img src="{{ asset('images/vin_logo.png') }}" alt="Vinyett!" />
+        </div>
+        
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    
+    <style type="text/css">
+        body { 
+            background-color: #eee;
+        }
+    </style>
+    
+    <div class="body" style="width: 500px; margin: 50px auto;">
+        <h2>
+            It's not you, it's me.
+        </h2>
+        <p>
+            We've had a hiccup, but now we know about it and will be after it shortly!
+        </p>
+        <h3>
+        <a href="{{ path('homepage') }}">Go back home</a>.
+        </h3>
+    </div>
+  
+    
+    {% include "::footer.html.twig" %}
+
+{% endblock %}

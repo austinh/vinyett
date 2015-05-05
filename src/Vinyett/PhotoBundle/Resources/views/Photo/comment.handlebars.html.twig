@@ -1,0 +1,19 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+    <div class="activityitem comment chunk" id="photo_comment_{{photo_comment.id}}">
+        <div class="column_icon">
+            <img src="{{owner.avatar}}" class="icon" />
+        </div>
+        
+        <div class="comment_column">
+            <strong><a href="{{owner.url}}">{{owner.username}}</a></strong> commented about <abbr class="timeago" title="{{photo_comment.iso_time}}">a few moments ago</abbr>.
+            <a href="#" onclick="delete_comment({{photo_comment.id}}); return false;">delete</a>
+            <div class="commentbox">
+                {{{photo_comment.content}}}
+            </div>
+        </div>
+    </div>
+{% endraw %}
+{% endblock %}

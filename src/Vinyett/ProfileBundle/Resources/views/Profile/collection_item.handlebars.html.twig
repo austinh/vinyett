@@ -1,0 +1,32 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+    <div class="collection_item">
+        {{#if list}} 
+            <div class="collection_list_item">
+               List view
+            </div>
+        {{else}}
+            {{#with collection}}
+            <div>
+                <div class="collection_block">
+                    <div class="collection_border">
+                        <div class="collection_collection">
+                            <div class="borders">
+                                <div class="borders2"></div>
+                            </div>
+                            <img src="http://photos.vinyett.com/{{cover_photo.photo_path_square_120 }}" />
+                        </div>
+                    </div>
+                    <div class="information">
+                        <a href="{{../root_path}}collection/{{id}}">{{ title }}</a> <br >
+                        {{ total_photos }} photos
+                    </div>
+                </div>
+            </div>
+            {{/with}}
+        {{/if}}
+    </div>
+{% endraw %}
+{% endblock %}

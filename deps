@@ -1,0 +1,140 @@
+[symfony]
+    git=git://github.com/symfony/symfony.git
+    version=v2.0.14
+
+[twig]
+    git=git://github.com/fabpot/Twig.git
+    version=v1.7.0
+
+[monolog]
+    git=git://github.com/Seldaek/monolog.git
+    version=1.0.2
+
+[doctrine-common]
+    git=git://github.com/doctrine/common.git
+    version=2.2.1
+
+[doctrine-dbal]
+    git=git://github.com/doctrine/dbal.git
+    version=2.2.1
+
+[doctrine]
+    git=git://github.com/doctrine/doctrine2.git
+    version=2.2.1
+    
+[doctrine-mongodb]
+    git=http://github.com/doctrine/mongodb.git
+    version=1.0.0-BETA1
+
+[doctrine-mongodb-odm]
+    git=http://github.com/doctrine/mongodb-odm.git
+    version=1.0.0-BETA5
+
+[DoctrineMongoDBBundle]
+    git=http://github.com/doctrine/DoctrineMongoDBBundle.git
+    target=/bundles/Symfony/Bundle/DoctrineMongoDBBundle
+    version=v2.2.0
+
+[swiftmailer]
+    git=git://github.com/swiftmailer/swiftmailer.git
+    version=v4.1.7
+
+[assetic]
+    git=git://github.com/kriswallsmith/assetic.git
+    version=v1.0.3
+
+[twig-extensions]
+    git=git://github.com/fabpot/Twig-extensions.git
+
+[SensioFrameworkExtraBundle]
+    git=git://github.com/sensio/SensioFrameworkExtraBundle.git
+    target=/bundles/Sensio/Bundle/FrameworkExtraBundle
+    version=origin/2.0
+
+[JMSSecurityExtraBundle]
+    git=git://github.com/schmittjoh/JMSSecurityExtraBundle.git
+    target=/bundles/JMS/SecurityExtraBundle
+    version=origin/1.0.x  
+      
+[JMSSerializerBundle]
+    git=git://github.com/schmittjoh/JMSSerializerBundle.git
+    target=bundles/JMS/SerializerBundle
+    version=0.9.0
+
+[SensioDistributionBundle]
+    git=git://github.com/sensio/SensioDistributionBundle.git
+    target=/bundles/Sensio/Bundle/DistributionBundle
+    version=origin/2.0
+
+[SensioGeneratorBundle]
+    git=git://github.com/sensio/SensioGeneratorBundle.git
+    target=/bundles/Sensio/Bundle/GeneratorBundle
+    version=origin/2.0
+
+[metadata]
+    git=http://github.com/schmittjoh/metadata.git
+    version=1.1.0
+
+[AsseticBundle]
+    git=git://github.com/symfony/AsseticBundle.git
+    target=/bundles/Symfony/Bundle/AsseticBundle
+    version=v1.0.1
+
+[FOSUserBundle]
+    git=git://github.com/FriendsOfSymfony/FOSUserBundle.git
+    target=bundles/FOS/UserBundle
+    version=1.2.0
+
+[SonataAdminBundle]
+    git=git://github.com/sonata-project/SonataAdminBundle.git
+    target=/bundles/Sonata/AdminBundle
+    version=origin/2.0
+
+[FPNTagBundle]
+    git=git://github.com/FabienPennequin/FPNTagBundle.git
+    target=bundles/FPN/TagBundle
+
+[GregwarImageBundle]
+    git=git://github.com/Gregwar/ImageBundle.git
+    target=/bundles/Gregwar/ImageBundle
+
+[aws-sdk-for-php]
+    git=git://github.com/amazonwebservices/aws-sdk-for-php.git
+    target=/amazonwebservices/aws-sdk-for-php
+
+[AmazonWebServicesBundle]
+    git=git://github.com/Cybernox/AmazonWebServicesBundle.git
+    target=/bundles/Cybernox/AmazonWebServicesBundle
+
+[PHPExifLibrary]
+    git=git://github.com/austinh/pel.git
+    target=/pel
+
+[HTMLPurifierBundle]
+    git=git://github.com/Exercise/HTMLPurifierBundle.git
+    target=/bundles/Exercise/HTMLPurifierBundle
+
+[htmlpurifier]
+    git=git://github.com/ezyang/htmlpurifier.git
+
+[gedmo-doctrine-extensions]
+    git=git://github.com/l3pp4rd/DoctrineExtensions.git
+    target=/gedmo-doctrine-extensions
+
+[StofDoctrineExtensionsBundle]
+    git=git://github.com/stof/StofDoctrineExtensionsBundle.git
+    target=/bundles/Stof/DoctrineExtensionsBundle
+
+[doctrine-extensions-taggable]
+    git=git://github.com/Nemesisprime/DoctrineExtensions-Taggable.git
+    
+[Pagerfanta]
+    git=git://github.com/whiteoctober/Pagerfanta.git
+    
+[FOSRest]
+    git=git://github.com/FriendsOfSymfony/FOSRest.git
+    target=fos/FOS/Rest
+
+[FOSRestBundle]
+    git=git://github.com/FriendsOfSymfony/FOSRestBundle.git
+    target=bundles/FOS/RestBundle

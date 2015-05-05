@@ -1,0 +1,24 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+<div class="organizer_modal_header">
+    Make changes to photos
+</div>
+
+<div class="organizer_modal_content">
+    <div class="content_editor">
+        <div class="photo_editing">
+        
+        </div>
+    </div>
+</div>
+
+<div class="organizer_modal_basebar">
+    <button class="button delete_all" type="cancel" style="box-shadow: none; float:left;">Delete all photos</button>
+    <button class="button dismiss_button" type="cancel" style="box-shadow: none;">Cancel</button>
+    <button class="button save_changes" type="submit" style="box-shadow: none;">Save Changes</button>
+</div>
+
+{% endraw %}
+{% endblock %}

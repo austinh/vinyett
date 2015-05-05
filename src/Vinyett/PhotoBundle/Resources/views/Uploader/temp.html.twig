@@ -1,0 +1,15 @@
+{% extends '::body.html.twig' %}
+
+{% block content %}
+
+    <form action="{{ path("post_photo") }}" method="post" {{ form_enctype(form) }}>
+    
+        <div id="form">
+            <div><label for="form_file">File</label><input type="file" id="form_file" name="file" /></div>
+            <div><label for="form_file">Title</label><input type="input" id="form_file" name="title" /></div>
+        </div>
+    
+        <input type="submit" value="Upload Document" />
+    </form>
+
+{% endblock %}

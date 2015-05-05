@@ -1,0 +1,32 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+    <div class="popover_header collection_header" style="height:22px;">
+        Add to collection <button class="button new_button" type="submit">New</button>
+    </div>
+    <div class="popover_content full_list no_edit_bar">  
+        
+        <table class="collection_list">
+        {{#each collections}}
+            <tr class="collection" data-id="{{this.id}}">
+            
+                <td class="icon">
+                    <img src="http://photos.vinyett.com/{{this.cover_photo.photo_path_square_120}}" />
+                </td>
+                
+                <td class="title">
+                    {{this.title}}
+                </td>
+                
+                <td class="options">
+                    <img src="{% endraw %}{{ asset("images/organizer/check.png") }}{% raw %}" alt="check" class="checkmark" style="display: none;" />
+                </td>
+            
+            </tr>
+        {{/each}}
+        </table>
+        
+    </div>
+{% endraw %}
+{% endblock %}

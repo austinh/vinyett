@@ -1,0 +1,17 @@
+parameters:
+    notification.manager.class: Vinyett\NotificationBundle\Services\NotificationManager
+    notification.publisher.class: Vinyett\NotificationBundle\Notification\NotificationPublisher
+    notification.templater.class: Vinyett\NotificationBundle\Notification\NotificationTemplating
+
+services:
+    notification.manager:
+        class: %notification.manager.class%
+        arguments: [@doctrine.orm.entity_manager, @templating]
+
+    notification.publisher:
+        class: %notification.publisher.class%
+        arguments: [@doctrine.orm.entity_manager, @templating, @service_container, @logger, @serializer]
+        
+    notification.templating:
+        class: %notification.templater.class%
+        arguments: [@doctrine.orm.entity_manager, @templating, @security.context, @logger]

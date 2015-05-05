@@ -1,0 +1,21 @@
+<div class="popover_header" style="height:22px;">
+    People following {{ profile.getUsername }}
+</div>
+<div class="popover_content full_list no_edit_bar">  
+    
+    <table class="collection_list">
+    {% for follow in follows %}
+        <tr class="collection" onclick="window.location='{{ path("photostream", { username: follow.actor.getUrlUsername }) }}'">
+        
+            <td class="icon">
+                <img src="{{ asset(avatar_path(follow.actor)) }}" />
+            </td>            
+            <td class="title">
+                {{follow.actor.getUsername}} <br />
+                <span class="follow_subtext">{{follow.actor.getPhotoCount}} photos and {{follow.actor.getCommentCount}} comments</span>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    
+</div>

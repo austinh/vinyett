@@ -1,0 +1,184 @@
+{% extends "::body.html.twig" %}
+
+{% block global_variables %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+<style>
+    body { 
+        background-color:#eee;
+    }
+</style>
+<div class="organizer_header">
+
+    <ul class="organizer_tabs " id="organizer_tabs"> 
+        <li id="tab_batch_organize" class="selected_organizer_tab" data-organizer-tab-type="stock">
+            Batch Organize
+        </li>
+        <li id="tab_collections" data-organizer-tab-type="stock">
+            Collections
+        </li>
+        <li data-organizer-tab-type="stock">
+            Groups
+        </li>
+        <li data-organizer-tab-type="stock">
+            Map
+        </li>
+    </ul>
+    
+</div>
+<div class="organizer_toolbar">
+    <ul class="toolbar_options" data-toolbar-type="batch">
+    
+        <li>Edit photos <img src="{{ asset('images/organizer_toolbar_more.png') }}" data-menu-id="edit_photos_popover" class="more" /></li>
+    
+        <li>Edit permissions <img src="{{ asset('images/organizer_toolbar_more.png') }}" data-menu-id="edit_permissions_popover" class="more" /></li>
+    
+        <li>Edit dates</li>
+        
+        <li>Add tags</li>
+        
+        <li><span onclick="create_new_set();">Add to collection</span> <img src="{{ asset('images/organizer_toolbar_more.png') }}" data-menu-id="add_to_collection_popover" class="more" /></li>
+        
+        <li>Add to group</li>
+        
+        <li>Location <img src="{{ asset('images/organizer_toolbar_more.png') }}" data-menu-id="location_popover" class="more" /></li>
+    </ul>
+    <ul class="toolbar_options" data-toolbar-type="new_collection" style="display:none;">
+        <li>Create a collection</li>
+    </ul>
+        <ul class="toolbar_options" data-toolbar-type="collection" style="display:none;">
+        <li>Remove Collection</li>
+    </ul>
+</div>
+
+<div class="organizer_batch_editor">
+    <ul class="batch_listing">
+    
+    </ul>
+</div>    
+
+    
+<div class="organizer_browser">
+
+    <div class="subbrowser_toolbar">
+        View content in: 
+        <select style="width:350px;" class="chzn-select" id="content_sort" tabindex="5">
+            <option>All of your photos</option>
+            <option>Photos without tags</option>
+            <option>Photos not in collections</option>
+            <option>Geotagged photos</option>
+            <option>Not geotagged photos</option>
+            <optgroup label="Sets">
+              <option>Instagram</option>
+              <option>Set something here</option>
+              <option>Me, Me, all me.</option>
+              <option>Tampa Bay Buccaneers</option>
+            </optgroup>
+            <optgroup label="Latest uploads">
+              <option>Last 5 uploads</option>
+            </optgroup>
+            <optgroup label="Groups">
+              <option>Any groups</option>
+            </optgroup>
+          </select>
+    </div>
+    
+    <div class="subbrowser_browse">
+        
+        <div id="photo_browser" class="jcarousel-skin-tango">
+            <ul>
+                <!-- The content will be dynamically loaded in here -->
+            </ul>
+        </div>
+    
+        <div id="ios-arrow-right">0 of 200 selected</div>
+    
+    </div>
+
+</div>
+
+<div class="destory_drop" style="display:none;">Drop here to remove from batch</div>
+    
+    
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> <!-- Temporarily here... possibly -->
+<script type="text/javascript"> 
+/*
+ * On Document Ready
+ *
+ */
+$(document).ready(function(){
+    
+    $(".chzn-select").chosen();
+    
+    in_batch = new Array();
+    
+    $('#photo_browser').jcarousel({
+        itemLoadCallback: photo_browser_itemLoadCallback,
+        scroll: 10
+    });
+
+    init_organizer();
+        
+});
+
+
+</script>
+    
+{% endblock %}
+
+
+{% block handlebars %}
+    {{ parent() }}
+    {% include "PhotoBundle:Organizer:loading.handlebars.html.twig" with { "name": "loading_handlebar" } %}
+    {% include "PhotoBundle:Organizer:details_editor.handlebars.html.twig" with { "name": "details_editor_handlebar" } %}
+    {% include "PhotoBundle:Organizer:collection_information.handlebars.html.twig" with { "name": "collection_information_handlebar" } %}
+{% endblock %}
+
+{% block footer %}
+<div id="loading_blob"></div> <!-- Exists to attach the loading object to -->    
+
+<div id="edit_photos_popover" style="display:none;">
+    <div class="follow_list_options"> 
+        <ul>
+            <li>Change details</li>
+            <li>Rotate</li>
+            <li>Delete</li>
+        </ul>
+    </div>
+</div>
+
+<div id="edit_permissions_popover" style="display:none;">
+    <div class="follow_list_options"> 
+        <ul>
+            <li>Views and comments</li>
+            <li>Change license</li>
+            <li>Change safe level</li>
+        </ul>
+    </div>
+</div>
+
+<div id="add_to_collection_popover" style="display:none;">
+    <div class="follow_list_options"> 
+        <ul>
+            <li onclick="create_new_set();">New collection</li>
+            <li>Add to existing</li>
+        </ul>
+    </div>
+</div>
+
+<div id="location_popover" style="display:none;">
+    <div class="follow_list_options"> 
+        <ul>
+            <li>Change location</li>
+            <li>Location privacy</li>
+            <li>Remove from map</li>
+        </ul>
+    </div>
+</div>
+
+
+
+{% endblock %}

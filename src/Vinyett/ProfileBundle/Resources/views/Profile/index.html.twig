@@ -1,0 +1,239 @@
+{% extends '::body.html.twig' %}
+
+{% block global_variables %}
+    {{ parent() }}
+    Global.profile = new Object();
+    Global.profile = {{ profile|serialize|raw }};
+    Global.profile.relationship = new Object();
+    Global.profile.relationship = {{ follow|serialize|raw }};
+    Global.profile.self = {% if profile is sameas(app.user) %}true{% else %}false{% endif %};
+{% endblock %}
+
+{% block require %}
+    require(["profile/stream"], function(ProfileApp) 
+    {
+        var profileapp = new ProfileApp;
+    });
+{% endblock %}
+
+{% block content %}
+<style>
+    body { 
+        background-color: #eee !important;
+    }
+</style>
+
+<div class="profile">
+    <div class="body profile_header">
+        <div class="profile_header_image" {% if profile is not sameas(app.user) and profile.getProfilePhoto is empty %}style="height:30px;"{% endif %}>
+            <div class="borders">
+                <div class="borders2"></div>
+            </div>
+            <img src="{% if profile.getProfilePhoto %}{{ profile.getProfilePhoto.getPhotoPathWidth980 }}{% else %}{{ asset("images/linen_photoless_profile.png") }}{% endif %}" style="top:{{ profile.getProfilePhotoOffset }}px; position:absolute;" class="profile_banner" id="profile_photo" />
+            {% if profile is sameas(app.user) %}
+            <button class="profile_edit_button profile_banner_button" style="display:none;">Modify Profile Banner</button>
+            <div class="reposition_options">
+                <button class="button cancel_reposition" type="cancel">Cancel</button>
+                <button class="button save_reposition" type="submit">Save</button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+        
+    <div class="body profile_content_header">
+        <div class="profile_intro_card">
+            <div class="profile_image">
+                {% if profile is sameas(app.user) %}
+                    <div class="edit_photo" style="display:none;"><button class="button change_profile_button" type="cancel">Change</button></div>
+                {% endif %}
+                <div class="borders">
+                    <div class="borders2"></div>
+                </div>
+                <img src="{{ asset(avatar_path(profile, true)) }}" class="photo_profile" />
+            </div>
+            
+            <div class="card_content">
+                <div class="h2">
+                    {{ profile.getUsername }}
+                    {% include 'ProfileBundle:Profile:follow.profile.chunk.html.twig' with { 'profile': profile, 'follow': follow } %}
+                    {% include 'ProfileBundle:Profile:admin.profile.chunk.html.twig' with { 'profile': profile } %}
+                </div> 
+                <p class="blurb">
+                    <span class="blurb_about">{{ profile.blurb }}</span> {% if profile is sameas(app.user) %}<a href="#" class="edit_blrub"><img src="{{ asset('images/pencil.png') }}" alt="edit" /></a>{% endif %}
+                </p>
+                <div class="profile_navigation_bar">
+                    <a name="tabbar"></a>
+                    {% spaceless %}
+                    <ul class="navigation">
+                        <li class="photostream_tab">
+                            <strong>Photostream</strong>
+                        </li>
+                        <li data-name="{{ profile.getUsername }}'s Collections" class="collectionstream_tab">
+                            <img src="{{ asset('images/profile/collections_button_image.png') }}" />
+                        </li>
+                        <!--<li class="profile_tab"> 
+                            <img src="{{ asset('images/profile/profile_button_image.png') }}" />
+                        </li>
+                        <li class="maps_tab">
+                            <img src="{{ asset('images/profile/map_button_image.png') }}" />
+                        </li>
+                        <li class="liked_tab">
+                            <img src="{{ asset('images/profile/favorites_button_image.png') }}" />
+                        </li>-->
+                        <li class="followers_tab">
+                            <strong>{{ followers }}</strong> followers
+                        </li>
+                        <li class="following_tab">
+                            <strong>{{ following|length }}</strong> following
+                        </li>
+                    </ul>
+                    {% endspaceless %}
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div class="profile_content body view_grid">
+    
+        <div class="photo_grid">
+            <div class="empty_following_photos"><h2>{{ profile.getUsername }} doesn't have any photos to share</h2><p>...yet ;)</p></div>
+        </div>
+        
+        <div class="collection_grid">
+            <div class="photo_single info_double info_block collection_toolbar"></div> 
+            <div class="empty_following_collection" style="display:none;"><h2>{{ profile.getUsername }} doesn't have any collections to share</h2></div>
+        </div>
+        
+        <div class="profile_grid">A little about you.</div>
+        
+        <div class="maps_grid"></div>
+        
+        <div class="liked_grid"></div>
+        
+        
+        <div class="blank_photos" style="display:none;">
+                {{ profile.getUsername }} has no photos to share, yet.
+        </div>
+    </div>
+
+    
+    
+</div>
+    
+<div id="profile_component_collections" style="display:none;">
+{% if collections|length >= 7 %}
+    <div class="photo_single info_double info_block">
+        <div class="info_wrap">
+                          
+            <div class="single_header">
+                Collections
+                <div class="expanded_link">
+                    <a href="#" class="collectionstream_tab">Show all</a>
+                </div>
+            </div>
+            
+            
+            <div class="single_body">
+                {% for collection in collections %}
+                    <div class="collection_block">
+                        <div class="collection_border">
+                            <div class="collection_collection">
+                                <div class="borders">
+                                    <div class="borders2"></div>
+                                </div>
+                                <img src="{{collection.getCoverPhoto.getPhotoPathSquare120 }}" />
+                                <div class="caption">
+                                    {{ collection.getTotalPhotos }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endif %}
+</div>    
+
+<div class="profile_photo_menu" style="display:none;">
+    <div class="follow_list_options photo_popover"> 
+        <ul>
+            <li class="upload"><img src="{{ asset("images/profile/pencil.png") }}" /> Upload a new photo</li>
+            <li class="remove"><img src="{{ asset("images/profile/banner_remove.png") }}" /> Remove photo</li>
+        </ul>
+    </div>
+    <div style="visibility:hidden; height:0px; width:0px;">
+        <form name="picture_form"
+              action="{{ path('account_update_photo_icon') }}" 
+              method="post" 
+              class="photo_upload_form" 
+              enctype="multipart/form-data">
+              
+            <input type="file" class="photo_upload_input" name="picture" />
+            
+        </form>
+    </div>
+</div>
+
+<div id="profile_edit_menu" style="display:none;">
+    <textarea name="blurblet" class="blurblet text_input" placeholder="Say something short about yourself?"></textarea>
+    <div class="button_row">
+        <button class="button save_button" type="submit">Save</button>
+        <button class="button cancel_button" type="cancel">Don't save</button>
+        <div class="counter">160 characters left</div>
+    </div>
+</div>
+
+<div class="profile_banner_menu" style="display:none;">
+    <div class="follow_list_options photo_popover"> 
+        <ul>
+            <!--<li class="select_photos">Select from photos</li>
+            <li class="upload">Upload image</li>-->
+            <li class="reposition"><img src="{{ asset("images/profile/banner_reposition.png") }}" /> Reposition banner</li>
+            <li class="remove"><img src="{{ asset("images/profile/banner_remove.png") }}" /> Remove banner</li>
+        </ul>
+    </div>
+</div>
+
+
+<div id="profile_component_follow" style="display:none;">
+    {% if following|length > 0 %}
+    <div class="photo_single info_single info_block">
+        <div class="info_wrap">
+                          
+            <div class="single_header">
+                Following
+            </div>
+            
+            
+            <div class="single_body">
+                <div class="follow_block">
+                    {% for follow in following|slice(0,9) %}
+                        <a href="{{ path("photostream", { username: follow.following.getUrlUsername }) }}" data-name="{{ follow.following.getUsername }}">
+                            <img src="{{ asset(avatar_path(follow.following)) }}" class="photo_icon" />
+                        </a>
+                    {% endfor %}
+                </div>
+                <div class="block_foot">
+                    <a href="#">See all</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}    
+</div>
+
+<div class="clearfix"></div>
+
+
+{% endblock %}
+
+{# Handlebars templates #}
+{% block handlebars %}
+    {{ parent() }}
+    {% include "ProfileBundle:Profile:photo.handlebars.html.twig" with { name: "photo_handlebar" } %}
+    {% include "ProfileBundle:Profile:photo_menu.handlebars.html.twig" with { name: "photo_menu_handlebar" } %}
+    {% include "ProfileBundle:Profile:collection_template.handlebars.html.twig" with { name: "collection_template_handlebar" } %}
+    {% include "ProfileBundle:Profile:collection_item.handlebars.html.twig" with { name: "collection_item_handlebar" } %}
+{% endblock %}

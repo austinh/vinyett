@@ -1,0 +1,78 @@
+{# extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+{% if error %}
+    <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
+{% endif %}
+
+<form action="{{ path("fos_user_security_check") }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+    <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+
+    <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+    <input type="password" id="password" name="_password" required="required" />
+
+    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+    <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+
+    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+</form>
+{% endblock fos_user_content #}
+
+
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+<div class="outro_form">
+    
+    <h1>Sign into Vinyett</h1>
+    
+    {% if error %}
+        <div class="error-block">{{ error|trans }}</div>
+    {% endif %}
+    
+    <div class="form" id ="fos_user_registration_form">
+        <form action="{{ path('fos_user_security_check') }}" method="post" class="fos_user_registration_register">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            
+            <div class="register_row">
+                <div class="label_column">
+                    <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+                </div>
+                <div class="widget_column">
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="text_input" />
+                </div>
+            </div>
+            
+            <div class="register_row">
+                <div class="label_column">
+                    <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                </div>
+                <div class="widget_column">
+                    <input type="password" id="password" name="_password" required="required" class="text_input" />
+                </div>
+            </div>
+            
+            <div class="register_row">
+                <div class="label_column"></div>
+                <div class="widget_column">
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" style="width:10px;" />
+                    <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+                </div>
+            </div>
+        
+            <div style="text-align:center;">
+                <button type="submit" id="_submit" class="button" name="_submit">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+            </div>
+        </form>
+    </div>
+    
+</div>
+
+{% endblock fos_user_content %}
+
+{% block navigation_links %}
+    <a href="{{ path('fos_user_registration_register') }}">Got an invite? Register here!</a> or <a href="{{ path('homepage') }}">go home</a>
+{% endblock %}

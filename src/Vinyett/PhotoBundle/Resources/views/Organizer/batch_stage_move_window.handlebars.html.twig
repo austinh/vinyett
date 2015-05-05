@@ -1,0 +1,29 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+<div id="move_batch_edit">
+    <div class="popover_header" style="text-align:left;">
+        Add to collection <button class="button new_button" type="submit" style="float:right; margin-top: -2px;">New</button>
+    </div>
+    <div class="popover_content" style="max-height: 350px; overflow:auto;">
+        {{#each collections}}
+            <div class="collection_block" data-collection="{{this.id}}">
+                <div class="collection_border">
+                    <div class="collection_collection">
+                        <div class="borders">
+                            <div class="borders2"></div>
+                        </div>
+                        <img src="http://photos.vinyett.com/{{this.cover_photo.photo_path_square_120 }}" />
+                    </div>
+                </div>
+                <div class="information">
+                    <span style="font-size:12px;">{{ this.title }}</span> <br >
+                </div>
+            </div>
+        {{/each}}
+        <div class="clearfix"></div>
+    </div>
+</div>
+{% endraw %}
+{% endblock %}

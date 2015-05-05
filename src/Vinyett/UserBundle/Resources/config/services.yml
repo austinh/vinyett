@@ -1,0 +1,29 @@
+parameters:
+    user.twig.class: Vinyett\UserBundle\Extension\UserTwigExtensions
+    user.usage.meter.class: Vinyett\UserBundle\Listener\UploadUserResetListener
+
+services:
+    usage_meter_listener:
+        class: %user.usage.meter.class%
+        arguments: ['@security.context', '@doctrine']
+        tags:
+            - { name: 'kernel.event_listener', event: 'security.interactive_login' }
+
+    user.twig.extension:
+        class: %user.twig.class%
+        tags:
+            - { name: twig.extension }
+
+    vinyett.registration.form.type:
+        class: Vinyett\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags: [{ name: "form.type", alias: "vinyett_registration" }]
+
+    vinyett.invitation.form.type:
+        class: Vinyett\UserBundle\Form\Type\InvitationFormType
+        arguments: [@vinyett.invitation.form.data_transformer]
+        tags: [{ name: "form.type", alias: "invitation_type" }]
+
+    vinyett.invitation.form.data_transformer:
+        class: Vinyett\UserBundle\Form\DataTransformer\InvitationToCodeTransformer
+        arguments: [@doctrine.orm.entity_manager]

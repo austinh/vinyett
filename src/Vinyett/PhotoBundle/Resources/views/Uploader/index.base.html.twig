@@ -1,0 +1,20 @@
+{% extends '::body.html.twig' %}
+
+{% block content %}
+
+<script type="text/javascript">
+    var upload_Path = '{{ path('process_image') }}?{{ session.name }}={{ session.value }}';
+</script>
+
+<style type="text/css">
+body { 
+    background-image: url('/images/black-linen.png');
+    background-color: #eee;    
+}
+</style>
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

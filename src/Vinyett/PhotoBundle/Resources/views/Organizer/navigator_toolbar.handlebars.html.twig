@@ -1,0 +1,17 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+    <button class="skip_jump prev"><img src="/images/organizer/scroll_left.png" /></button><button class="skip_jump next"><img src="/images/organizer/scroll_right.png" /></button>
+    <div class="organizer_collection_info">
+        {{#if selected_photos }}
+            {{ selected_photos }} of {{ total_photos }} photos selected. (<a href="#" class="add_all_link toolbar_link" onclick="return false;">Select all</a> / <a href="#" class="remove_all_link toolbar_link" onclick="return false;">Select none</a>)
+        {{else}}
+            {{ total_photos }} total photos. (<a href="#" class="add_all_link toolbar_link" onclick="return false;">Select all</a>)
+        {{/if}}
+    </div>
+    <div class="organizer_collection_info" style="float:right">
+        Showing photos <span class="photo_location_adjective" data-pointing="library">from</span> <a href="#" class="toolbar_link"><span class="location">your entire library</span> <!--<img src="/images/organizer/more_info.png" style="vertical-align: middle;" />--></a>
+    </div>
+{% endraw %}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+<div class="organizer_stage organizer_stage_platform batch_stage_window">
+    <div class="organizer_innertoolbar">
+        <div class="batch_toolbar">
+            <span class="organizer_toolbox">
+                <button class="organizer_button organizer_toolbox_button">
+                    <img src="/images/organizer/editor_batch.png" class="collection_image" /> Batch Organize
+                </button>
+            </span>
+            
+            
+            <span class="organizer_toolbar_buttons organizer_buttons">
+                <button class="organizer_button icon_button button_clear" style="width:100px;">
+                    Empty
+                </button>   
+                         
+                <button class="organizer_button icon_button button_move">
+                    <img src="/images/organizer/editor_toolbar_move.png" />
+                </button>
+                
+                <button class="organizer_button icon_button button_privacy">
+                    <img src="/images/organizer/editor_toolbar_privacy.png" />
+                </button>
+                
+                <button class="organizer_button icon_button button_edit">
+                    <img src="/images/organizer/editor_toolbar_modify.png" />
+                </button>
+            </span>
+            
+            
+        </div>
+    </div>
+    <div class="batch_stage_empty">
+        Drop photos here to make changes to all of them at once.
+    </div>
+    <ul id="batch_stage" class="stage_window" style="height:100%;">
+    
+    </ul>
+</div>
+{% endraw %}
+{% endblock %}

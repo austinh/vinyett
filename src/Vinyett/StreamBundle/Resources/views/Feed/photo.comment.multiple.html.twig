@@ -1,0 +1,23 @@
+<div class="activity">
+    <div class="title_header no_baseheader">
+        <div class="title">
+            {% set actor_view = [] %}
+            {% for actor in actors %}
+                {% set actor_link %}<a href="{{ path('photostream', { username: actor.getUrlUsername }) }}">{{ actor }}</a>{% endset %}
+                {% set actor_view = actor_view|merge([actor_link]) %}
+            {% endfor %}
+            {{ implode_array_into_listphrase(actor_view) }}
+        </div>
+        <div class="by">
+            commented on <a href="{{ path('view_photo', { username: photo.getOwner.getUrlUsername, photo_id: photo.getId }) }}" class="photobox_link" data-photo="{{ photo.getId }}">
+                {% if photo.getTitle is not empty %}
+                    {{ photo.getTitle }}
+                {% else %} 
+                    a photo
+                {% endif%}</a> 
+                by  <a href="{{ path('photostream', { username: photo.getOwner.getUrlUsername }) }}">{{ photo.getOwner.getUsername|or_you }}</a>.
+        </div>
+    </div>
+    
+    {% include "StreamBundle:feed:photo.primary.html.twig" %}
+</div>

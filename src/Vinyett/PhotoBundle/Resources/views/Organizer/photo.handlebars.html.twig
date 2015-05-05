@@ -1,0 +1,13 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+
+{% raw %}
+
+    <div class="organizer_sortable_photo {{#if is_selected}}reel_selected{{/if}}" data-photo="{{id}}" {{#if hidden_view}}style="display:none;"{{/if}}>
+        <img src="http://photos.vinyett.com/{{photo_path_square_120}}" />
+    </div>
+
+{% endraw %}
+
+{% endblock %}

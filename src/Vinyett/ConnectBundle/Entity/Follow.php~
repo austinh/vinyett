@@ -1,0 +1,236 @@
+<?php
+
+namespace Vinyett\ConnectBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Vinyett\ConnectBundle\Entity\Follow
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Vinyett\ConnectBundle\Entity\FollowRepository")
+ */
+class Follow
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /** 
+     * @ORM\ManyToOne( targetEntity="\Vinyett\UserBundle\Entity\User" ) 
+     * @ORM\JoinColumn( name="actor_id", referencedColumnName="id" ) 
+     */
+    private $actor;
+    
+    
+		/**
+     * @ORM\ManyToOne(targetEntity="\Vinyett\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="following_id", referencedColumnName="id")
+     */
+    private $following;
+
+    /**
+     * @var boolean $is_friend
+     *
+     * @ORM\Column(name="is_friend", type="boolean")
+     */
+    private $is_friend = false;
+
+    /**
+     * @var boolean $is_family
+     *
+     * @ORM\Column(name="is_family", type="boolean")
+     */
+    private $is_family = false;
+    
+    /**
+     * @var boolean $is_in_photofeed
+     *
+     * @ORM\Column(name="is_in_photofeed", type="boolean")
+     */
+    private $is_in_photofeed = true;
+
+    /**
+     * @var datetime $created_at
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $created_at;
+
+    /**
+     * @var float $affinity
+     *
+     * @ORM\Column(name="affinity", type="float")
+     */
+    private $affinity;
+
+    /**
+     * @var boolean $is_phantom
+     *
+     * Used to determine if the Follow object is a real (persisted) object or 
+     * just a phantom object (which is used to hold the basic data for creating
+     * template nulls.
+     */
+    public $is_phantom = false;
+
+
+    public function __construct() 
+    { 
+        $this->created_at = new \DateTime();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set is_friend
+     *
+     * @param boolean $isFriend
+     */
+    public function setIsFriend($isFriend)
+    {
+        $this->is_friend = $isFriend;
+    }
+
+    /**
+     * Get is_friend
+     *
+     * @return boolean 
+     */
+    public function getIsFriend()
+    {
+        return $this->is_friend;
+    }
+
+    /**
+     * Set is_family
+     *
+     * @param boolean $isFamily
+     */
+    public function setIsFamily($isFamily)
+    {
+        $this->is_family = $isFamily;
+    }
+
+    /**
+     * Get is_family
+     *
+     * @return boolean 
+     */
+    public function getIsFamily()
+    {
+        return $this->is_family;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param datetime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return datetime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set affinity
+     *
+     * @param float $affinity
+     */
+    public function setAffinity($affinity)
+    {
+        $this->affinity = $affinity;
+    }
+
+    /**
+     * Get affinity
+     *
+     * @return float 
+     */
+    public function getAffinity()
+    {
+        return $this->affinity;
+    }
+
+    /**
+     * Set actor
+     *
+     * @param Vinyett\UserBundle\Entity\User $actor
+     */
+    public function setActor(\Vinyett\UserBundle\Entity\User $actor)
+    {
+        $this->actor = $actor;
+    }
+
+    /**
+     * Get actor
+     *
+     * @return Vinyett\UserBundle\Entity\User 
+     */
+    public function getActor()
+    {
+        return $this->actor;
+    }
+
+    /**
+     * Set following
+     *
+     * @param Vinyett\UserBundle\Entity\User $following
+     */
+    public function setFollowing(\Vinyett\UserBundle\Entity\User $following)
+    {
+        $this->following = $following;
+    }
+
+    /**
+     * Get following
+     *
+     * @return Vinyett\UserBundle\Entity\User 
+     */
+    public function getFollowing()
+    {
+        return $this->following;
+    }
+
+    /**
+     * Set is_in_photofeed
+     *
+     * @param boolean $isInPhotofeed
+     */
+    public function setIsInPhotofeed($isInPhotofeed)
+    {
+        $this->is_in_photofeed = $isInPhotofeed;
+    }
+
+    /**
+     * Get is_in_photofeed
+     *
+     * @return boolean 
+     */
+    public function getIsInPhotofeed()
+    {
+        return $this->is_in_photofeed;
+    }
+}

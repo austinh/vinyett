@@ -1,0 +1,12 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+    <div class="follow_list_options photo_popover"> 
+        <ul>
+            <li class="set_photo_banner"><img src="/images/profile/profile_banner.png"> Use as profile banner</li>
+            <li class="highlight_post">{{#if photo.highlighted}}<img src="/images/profile/starred.png"> Remove highlight{{else}}<img src="/images/profile/starred_full.png"> Highlight photo{{/if}}</li>
+        </ul>
+    </div>
+{% endraw %}
+{% endblock %}

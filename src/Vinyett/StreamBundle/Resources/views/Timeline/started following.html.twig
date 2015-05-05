@@ -1,0 +1,25 @@
+{% extends "StreamBundle:Timeline:base.html.twig" %}
+
+{% timeline_action_theme timeline _self %}
+
+{% block _vinyett_userbundle_entity_user_directComplement_component %}
+    {% if profile|default(false) == true %}
+        <div class="activity_header activity_solid photo_activity_bottom follow_content" style="background-image:url({{value.getProfilePhoto.getPhotoPathWidth980|default(asset('images/linen_photoless_profile.png'))}})">
+            <img src="{{ asset(avatar_path(value)) }}" class="follow_icon" />
+        </div>
+    {% else %}
+        <a href="{{ path("photostream", { username: value.username }) }}">{{ value.username }}</a>
+    {% endif %}
+{% endblock %}
+
+{% block title %}
+    {{ timeline_component_render(timeline, 'subject') }}
+    started following 
+    {{ timeline_component_render(timeline, 'directComplement') }}
+{% endblock %}
+{% block photo_space %}
+    <!-- -->
+{% endblock %}
+{% block content_space %}
+    {{ timeline_component_render(timeline, 'directComplement', { profile: true }) }}
+{% endblock %}

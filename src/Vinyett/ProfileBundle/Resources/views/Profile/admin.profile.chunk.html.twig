@@ -1,0 +1,36 @@
+{# If the profile is yours, we don't need any of this #}
+{% if is_granted('ROLE_ADMIN') %}
+    <button class="button follow" id="admin_button" style="margin-left:3px;"><img src="{{ asset('images/profile/hammer.png') }}" /> Admin</button>
+{% endif %}
+
+
+{# if profile is not sameas(app.user) #}
+{% if is_granted('ROLE_ADMIN') %}
+    <script id="admin_popover_handlebar" type="text/x-handlebars-template">
+    {% raw %}
+        <div class="title_bar">
+            Admin Tols
+        </div>
+        
+        <div class="follow_list_options"> 
+            
+            <ul>
+                <li class="become_selector">
+                    Become {{ user.username }}
+                </li>
+                <li class="reset_usage_selector">
+                    Reset usage meter
+                </li>
+            </ul>
+            
+            <div class="follow_list_breaker"></div>
+            <ul>
+                <li class="unfollow">
+                    Party Time
+                </li>
+            </ul>
+        </div>
+    {% endraw %}
+    </script>
+
+{% endif %}

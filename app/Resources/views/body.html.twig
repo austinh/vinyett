@@ -1,0 +1,14 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    {% use '::toolbar.html.twig' %}
+  
+    <div class="toolbar_chair"></div>
+  
+    {% block content %}{% endblock %}
+    
+    {% block footer %}
+        {% include "::footer.html.twig" %}
+    {% endblock %}
+
+{% endblock %}

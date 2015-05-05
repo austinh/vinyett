@@ -1,0 +1,17 @@
+{% extends "CoreServicesBundle:Handlebars:base.html.twig" %}
+
+{% block handlebars_body %}
+{% raw %}
+<div class="organizer_modal_header">
+    {{title}}
+</div>
+
+<div class="organizer_modal_content">
+    {{content}}
+</div>
+
+<div class="organizer_modal_basebar">
+    <button type="submit" class="button" onclick="kill_window_qtip();">Okay</button>
+</div>
+{% endraw %}
+{% endblock %}

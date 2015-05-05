@@ -1,0 +1,132 @@
+/* Add some nice box-shadow-ness to the modal tooltip */
+.ui-tooltip-map-modal{
+    max-width: 800px;
+    width: 800px !important;
+    max-height: 480px;
+    height: 480px !important;
+    -moz-box-shadow: 0 0 10px 1px rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 10px 1px rgba(0,0,0,.5);
+    box-shadow: 0 0 10px 1px rgba(0,0,0,.5);
+    border-radius: 2px;
+    background-color: transparent;
+}
+
+.map_button { 
+    vertical-align: middle;
+margin-top: -6px;
+}
+
+.ui-tooltip-map-modal .ui-tooltip-content{
+    padding: 0px;
+    margin: 0px;
+}
+
+.map_titlebar { 
+    height: 30px;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    border-radius: 2px 2px 0px 0px;
+    background: rgb(255,255,255); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(226,226,226,1) 100%, rgba(238,238,238,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(226,226,226,1)), color-stop(100%,rgba(238,238,238,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(226,226,226,1) 100%,rgba(238,238,238,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(226,226,226,1) 100%,rgba(238,238,238,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(226,226,226,1) 100%,rgba(238,238,238,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(226,226,226,1) 100%,rgba(238,238,238,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+    border-bottom: 1px solid #bdbdbd;
+}
+
+.map_titlebar .header_options { 
+    vertical-align: middle;
+    display: table-cell;
+    width: 50%;
+}
+
+.map_titlebar .left_options
+{ 
+    padding-top:4px;
+    padding-left: 10px;
+}
+
+.map_titlebar .left_options img 
+{
+    margin-right: 7px;
+    vertical-align: top;
+}
+
+.map_titlebar .right_options 
+{ 
+    text-align: right;
+    padding-right: 10px;
+}
+
+.map_titlebar .right_options img { 
+    
+}
+
+.map_titlebar input[name=location_search]
+{ 
+    padding: 2px 20px 2px 5px;
+    height: 16px;
+    border: 1px solid #cfcfcf;
+    border-radius: 10px;
+    width: 200px;
+    font-size: 11px;
+    outline: none;
+}
+
+.map_titlebar .map_bookmarks
+{ 
+    background-color: #cecece;
+    border-radius: 10px;
+    padding: 2px;
+    margin-left: -24px;
+    vertical-align: text-top;
+    width: 14px;
+    height: 14px;
+}
+
+.themap 
+{ 
+    height: 450px;
+    width: 800px;
+    border-radius: 2px;
+    background-image: url('/images/grey_checkboard.png');
+}
+
+.ui-autocomplete li { font-size:12px; }
+
+#locator { 
+    background-color: rgba(0,0,0,0.73);
+    padding: 4px;
+    border-radius: 3px;
+    color: #fff;
+    float: right;
+    margin-top: 20px;
+}
+
+.leaflet-popup-content {
+	margin: 10px !important;
+}
+
+
+.leaflet-popup-content-wrapper {
+	-moz-border-radius: 3px !important;
+	-webkit-border-radius: 3px !important;
+	border-radius: 3px !important;
+}
+
+
+#minimap 
+{ 
+    width: 300px;
+    background-image: url('/images/grey_checkboard.png');
+    border-radius: 5px;
+}
+
+
+
+
+
